@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
+  resources :results
+  resources :directors
+  resources :rosters
+  resources :cyclists
+  resources :segments
+  resources :courses
   resources :races  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  root 'statics#home'
   #root 'welcome#index'
 
   # Example of regular route:

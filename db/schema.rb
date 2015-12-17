@@ -14,10 +14,11 @@
 ActiveRecord::Schema.define(version: 20151217041915) do
 
   create_table "races", force: :cascade do |t|
-    t.string   "title"
-    t.string   "describe"
-    t.date     "start"
-    t.date     "end"
+    t.string   "name"
+    t.string   "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "hashtag"    
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

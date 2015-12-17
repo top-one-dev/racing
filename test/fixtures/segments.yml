@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  strava_url: MyString
+  description: MyString
+  length: 1.5
+
+two:
+  strava_url: MyString
+  description: MyString
+  length: 1.5

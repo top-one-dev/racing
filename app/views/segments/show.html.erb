@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Strava url:</strong>
+  <%= @segment.strava_url %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @segment.description %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @segment.length %>
+</p>
+
+<%= link_to 'Edit', edit_segment_path(@segment) %> |
+<%= link_to 'Back', segments_path %>

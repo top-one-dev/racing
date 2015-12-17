@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Cyclists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Gender</th>
+      <th>Join date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cyclists.each do |cyclist| %>
+      <tr>
+        <td><%= cyclist.name %></td>
+        <td><%= cyclist.description %></td>
+        <td><%= cyclist.gender %></td>
+        <td><%= cyclist.join_date %></td>
+        <td><%= link_to 'Show', cyclist %></td>
+        <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
+        <td><%= link_to 'Destroy', cyclist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cyclist', new_cyclist_path %>
