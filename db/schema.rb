@@ -13,47 +13,50 @@
 
 ActiveRecord::Schema.define(version: 20151217100659) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "courses", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.integer  "race_id",     limit: 4
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.integer  "race_id"
+    t.string   "description"
     t.date     "active_date"
     t.date     "close_date"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "courses", ["race_id"], name: "index_courses_on_race_id", using: :btree
 
   create_table "cyclists", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.integer  "strava_id",   limit: 4
-    t.string   "description", limit: 255
-    t.string   "gender",      limit: 255
-    t.string   "age_range",   limit: 255
+    t.string   "name"
+    t.integer  "strava_id"
+    t.string   "description"
+    t.string   "gender"
+    t.string   "age_range"
     t.date     "join_date"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "races", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "description"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "hashtag",     limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "hashtag"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "results", force: :cascade do |t|
     t.time     "time"
-    t.integer  "race_id",    limit: 4
-    t.integer  "course_id",  limit: 4
-    t.integer  "segment_id", limit: 4
-    t.integer  "cyclist_id", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "race_id"
+    t.integer  "course_id"
+    t.integer  "segment_id"
+    t.integer  "cyclist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "results", ["course_id"], name: "index_results_on_course_id", using: :btree
@@ -63,23 +66,23 @@ ActiveRecord::Schema.define(version: 20151217100659) do
 
   create_table "rosters", force: :cascade do |t|
     t.date     "join_date"
-    t.integer  "race_id",    limit: 4
-    t.integer  "cyclist_id", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "race_id"
+    t.integer  "cyclist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "rosters", ["cyclist_id"], name: "index_rosters_on_cyclist_id", using: :btree
   add_index "rosters", ["race_id"], name: "index_rosters_on_race_id", using: :btree
 
   create_table "segments", force: :cascade do |t|
-    t.string   "strava_url",  limit: 255
-    t.integer  "strava_id",   limit: 4
-    t.string   "description", limit: 255
-    t.float    "length",      limit: 24
-    t.integer  "course_id",   limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "strava_url"
+    t.integer  "strava_id"
+    t.string   "description"
+    t.float    "length"
+    t.integer  "course_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "segments", ["course_id"], name: "index_segments_on_course_id", using: :btree

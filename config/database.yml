@@ -1,7 +1,6 @@
 development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: gpsraceing
   pool: 5
   username: root
@@ -9,9 +8,8 @@ development:
   host: localhost
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: gpsraceing_test
   pool: 5
   username: root 
@@ -19,9 +17,8 @@ test:
   host: localhost
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: gpsraceing_production
   pool: 5
   username: root 
