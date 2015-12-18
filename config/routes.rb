@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #get 'statics/home'
   resources :results
   resources :directors
   resources :rosters

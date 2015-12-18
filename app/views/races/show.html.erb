@@ -1,23 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @race.title %>
+  <strong>Name:</strong>
+  <%= @race.name %>
 </p>
 
 <p>
-  <strong>Describe:</strong>
-  <%= @race.describe %>
+  <strong>Description:</strong>
+  <%= @race.description %>
 </p>
 
 <p>
-  <strong>Start:</strong>
-  <%= @race.start %>
+  <strong>Start Date:</strong>
+  <%= @race.start_date %>
 </p>
 
 <p>
-  <strong>End:</strong>
-  <%= @race.end %>
+  <strong>End Date:</strong>
+  <%= @race.end_date %>
+</p>
+
+<p>
+  <strong>Hash tag:</strong>
+  <%= @race.hashtag %>
 </p>
 
 <%= link_to 'Edit', edit_race_path(@race) %> |

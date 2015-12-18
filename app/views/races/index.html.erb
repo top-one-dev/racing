@@ -5,10 +5,10 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Describe</th>
-      <th>Start</th>
-      <th>End</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start Date</th>
+      <th>End Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +16,11 @@
   <tbody>
     <% @races.each do |race| %>
       <tr>
-        <td><%= race.title %></td>
-        <td><%= race.describe %></td>
-        <td><%= race.start %></td>
-        <td><%= race.end %></td>
+        <td><%= race.name %></td>
+        <td><%= race.description %></td>
+        <td><%= race.start_date %></td>
+        <td><%= race.end_date %></td>
+        <td><%= race.hashtag %></td>
         <td><%= link_to 'Show', race %></td>
         <td><%= link_to 'Edit', edit_race_path(race) %></td>
         <td><%= link_to 'Destroy', race, method: :delete, data: { confirm: 'Are you sure?' } %></td>

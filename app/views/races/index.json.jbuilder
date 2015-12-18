@@ -1,4 +1,4 @@
 json.array!(@races) do |race|
-  json.extract! race, :id, :title, :describe, :start, :end
+  json.extract! race, :id, :name, :description, :start_date, :end_date, :hashtag
   json.url race_url(race, format: :json)
 end
