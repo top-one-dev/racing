@@ -1,3 +1,3 @@
 class Cyclist < ActiveRecord::Base
-	has_many :participants	
+	has_many :rosters	
 end
