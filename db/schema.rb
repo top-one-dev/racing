@@ -11,16 +11,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217041915) do
+ActiveRecord::Schema.define(version: 20151217100659) do
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.date     "active_date"
+    t.date     "close_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "cyclists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "strava_id"
+    t.string   "description"
+    t.string   "gender"
+    t.string   "age_range"
+    t.date     "join_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "races", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "hashtag"    
+    t.string   "hashtag"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.time     "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rosters", force: :cascade do |t|
+    t.date     "join_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "segments", force: :cascade do |t|
+    t.string   "strava_url"
+    t.integer  "strava_id"
+    t.string   "description"
+    t.float    "length"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end
