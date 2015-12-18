@@ -3,6 +3,7 @@
 <p>
   <strong>Name:</strong>
   <%= @race.name %>
+  <%= @race.id %>
 </p>
 
 <p>
@@ -24,6 +25,56 @@
   <strong>Hash tag:</strong>
   <%= @race.hashtag %>
 </p>
+
+<br/>
+
+<p><strong>Listing Courses</strong></p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Active date</th>
+      <th>Close date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @race.courses.each do |course| %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.description %></td>
+        <td><%= course.active_date %></td>
+        <td><%= course.close_date %></td>        
+        <td><%= link_to 'Edit', edit_race_course_path(@race, course) %></td>
+        <td><%= link_to 'Destroy', race_course_path(@race, course), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h5>
+<strong>Add course: <strong>
+</h5>
+
+<%= simple_form_for([@race, @race.courses.build]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :active_date %>
+    <%= f.input :close_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_race_path(@race) %> |
 <%= link_to 'Back', races_path %>

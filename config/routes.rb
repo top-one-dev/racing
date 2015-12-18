@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  #get 'statics/home'
-  resources :results
-  resources :directors
+  
+  resources :results  
   resources :rosters
   resources :cyclists
   resources :segments
-  resources :courses
-  resources :races  
+  
+  resources :races do
+    resources :courses
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
