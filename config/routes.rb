@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   
   resources :results  
-  resources :rosters
   resources :cyclists
   resources :segments
+  resources :rosters
   
   resources :races do
-    resources :courses
+    resources :courses    
+    member do
+      get 'roster'
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,5 +1,15 @@
-<%= simple_form_for(@roster) do |f| %>
+<%= simple_form_for(Roster.new) do |f| %>
   <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.label :cyclist %>
+    <%= f.select :cyclist_id, Cyclist.all.map{|c| [c.name, c.id]} %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.label :race %>
+    <%= f.select :race_id, Race.all.map{|r| [r.name, r.id]} %>
+  </div>
 
   <div class="form-inputs">
     <%= f.input :join_date %>

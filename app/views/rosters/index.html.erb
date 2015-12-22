@@ -1,11 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Rosters</h1>
+<p><strong>Listing Rosters</strong></p>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Join date</th>
+      <th>Race</th>
+      <th>Cyclist</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,8 +16,8 @@
     <% @rosters.each do |roster| %>
       <tr>
         <td><%= roster.join_date %></td>
-        <td><%= link_to 'Show', roster %></td>
-        <td><%= link_to 'Edit', edit_roster_path(roster) %></td>
+        <td><%= roster.race.name %></td>
+        <td><%= roster.cyclist.name %></td>
         <td><%= link_to 'Destroy', roster, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

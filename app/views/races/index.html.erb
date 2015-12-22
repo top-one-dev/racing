@@ -22,6 +22,7 @@
         <td><%= race.end_date %></td>
         <td><%= race.hashtag %></td>
         <td><%= link_to 'Show', race %></td>
+        <td><%= link_to 'Roster', roster_race_path(race) %></td>
         <td><%= link_to 'Edit', edit_race_path(race) %></td>
         <td><%= link_to 'Destroy', race, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

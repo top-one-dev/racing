@@ -63,12 +63,14 @@ class RostersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_roster
+    def set_roster      
+      #@race = Race.find(params[:race_id])
+      #@roster = @race.rosters.find(params[:id])
       @roster = Roster.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roster_params
-      params.require(:roster).permit(:join_date)
+      params.require(:roster).permit(:join_date, :race_id, :cyclist_id)
     end
 end

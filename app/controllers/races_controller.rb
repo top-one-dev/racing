@@ -1,5 +1,5 @@
 class RacesController < ApplicationController
-  before_action :set_race, only: [:show, :edit, :update, :destroy]
+  before_action :set_race, only: [:show, :roster, :edit, :update, :destroy]
 
   # GET /races
   # GET /races.json
@@ -11,6 +11,9 @@ class RacesController < ApplicationController
   # GET /races/1.json
   def show
   end
+
+  def roster
+  end 
 
   # GET /races/new
   def new
