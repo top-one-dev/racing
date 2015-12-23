@@ -1,4 +1,4 @@
-<%= simple_form_for(Roster.new) do |f| %>
+<%= simple_form_for([@race, @roster]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -9,10 +9,6 @@
   <div class="form-inputs">
     <%= f.label :race %>
     <%= f.select :race_id, Race.all.map{|r| [r.name, r.id]} %>
-  </div>
-
-  <div class="form-inputs">
-    <%= f.input :join_date %>
   </div>
 
   <div class="form-actions">

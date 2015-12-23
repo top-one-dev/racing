@@ -3,6 +3,7 @@
 <p>
   <strong>Name:</strong>
   <%= @race.name %>
+  <%= @race.id %>
 </p>
 
 <p>
@@ -13,6 +14,9 @@
 <p>
   <strong>Start Date:</strong>
   <%= @race.start_date %>
+</p>
+
+<p>
   <strong>End Date:</strong>
   <%= @race.end_date %>
 </p>
@@ -22,13 +26,9 @@
   <%= @race.hashtag %>
 </p>
 
-<p>
-<%= link_to 'Edit', edit_race_path(@race) %> |
-<%= link_to 'Back', races_path %>
-</p>
-
 <br/>
-<p><strong>Listing Stages</strong></p>
+
+<p><strong>Listing stages</strong></p>
 
 <table class="table table-striped">
   <thead>
@@ -56,5 +56,10 @@
 </table>
 
 <p>
-<%= link_to 'Add Stage', new_race_stage_path(@race) %>
+<strong>Editing Stage<strong>
 </p>
+
+<%= render 'form' %>
+
+<br/>
+<%= link_to 'Back', race_path(@race) %>

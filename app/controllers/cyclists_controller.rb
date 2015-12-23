@@ -69,6 +69,6 @@ class CyclistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cyclist_params
-      params.require(:cyclist).permit(:name, :description, :gender, :join_date)
+      params.require(:cyclist).permit(:name, :description, :gender)
     end
 end

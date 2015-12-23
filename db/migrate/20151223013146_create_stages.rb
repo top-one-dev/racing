@@ -1,8 +1,8 @@
-class CreateCourses < ActiveRecord::Migration
+class CreateStages < ActiveRecord::Migration
   def change
-    create_table :courses do |t|
-      t.string :name
+    create_table :stages do |t|
       t.references :race, index: true, foreign_key: true
+      t.string :name
       t.string :description
       t.date :active_date
       t.date :close_date

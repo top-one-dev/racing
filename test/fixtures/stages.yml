@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  race_id: 
+  name: MyString
+  active_date: 
+  close_date: 2015-12-22
+
+two:
+  race_id: 
+  name: MyString
+  active_date: 
+  close_date: 2015-12-22

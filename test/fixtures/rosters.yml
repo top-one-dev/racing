@@ -1,7 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  join_date: 2015-12-17
 
 two:
-  join_date: 2015-12-17

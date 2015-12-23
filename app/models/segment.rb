@@ -1,3 +1,3 @@
 class Segment < ActiveRecord::Base
-	belongs_to :course	
+  belongs_to :stage
 end

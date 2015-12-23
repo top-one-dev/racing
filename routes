@@ -1,0 +1,37 @@
+  Prefix Verb   URI Pattern                               Controller#Action
+       cyclists GET    /cyclists(.:format)                       cyclists#index
+                POST   /cyclists(.:format)                       cyclists#create
+    new_cyclist GET    /cyclists/new(.:format)                   cyclists#new
+   edit_cyclist GET    /cyclists/:id/edit(.:format)              cyclists#edit
+        cyclist GET    /cyclists/:id(.:format)                   cyclists#show
+                PATCH  /cyclists/:id(.:format)                   cyclists#update
+                PUT    /cyclists/:id(.:format)                   cyclists#update
+                DELETE /cyclists/:id(.:format)                   cyclists#destroy
+       segments GET    /segments(.:format)                       segments#index
+                POST   /segments(.:format)                       segments#create
+    new_segment GET    /segments/new(.:format)                   segments#new
+   edit_segment GET    /segments/:id/edit(.:format)              segments#edit
+        segment GET    /segments/:id(.:format)                   segments#show
+                PATCH  /segments/:id(.:format)                   segments#update
+                PUT    /segments/:id(.:format)                   segments#update
+                DELETE /segments/:id(.:format)                   segments#destroy
+    race_stages GET    /races/:race_id/stages(.:format)          stages#index
+                POST   /races/:race_id/stages(.:format)          stages#create
+ new_race_stage GET    /races/:race_id/stages/new(.:format)      stages#new
+edit_race_stage GET    /races/:race_id/stages/:id/edit(.:format) stages#edit
+     race_stage GET    /races/:race_id/stages/:id(.:format)      stages#show
+                PATCH  /races/:race_id/stages/:id(.:format)      stages#update
+                PUT    /races/:race_id/stages/:id(.:format)      stages#update
+                DELETE /races/:race_id/stages/:id(.:format)      stages#destroy
+   race_rosters GET    /races/:race_id/rosters(.:format)         rosters#index
+                POST   /races/:race_id/rosters(.:format)         rosters#create
+    race_roster DELETE /races/:race_id/rosters/:id(.:format)     rosters#destroy
+          races GET    /races(.:format)                          races#index
+                POST   /races(.:format)                          races#create
+       new_race GET    /races/new(.:format)                      races#new
+      edit_race GET    /races/:id/edit(.:format)                 races#edit
+           race GET    /races/:id(.:format)                      races#show
+                PATCH  /races/:id(.:format)                      races#update
+                PUT    /races/:id(.:format)                      races#update
+                DELETE /races/:id(.:format)                      races#destroy
+           root GET    /                                         statics#home

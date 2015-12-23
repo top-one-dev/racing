@@ -1,40 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @race.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @race.description %>
-</p>
-
-<p>
-  <strong>Start Date:</strong>
-  <%= @race.start_date %>
-  <strong>End Date:</strong>
-  <%= @race.end_date %>
-</p>
-
-<p>
-  <strong>Hash tag:</strong>
-  <%= @race.hashtag %>
-</p>
-
-<p>
-<%= link_to 'Edit', edit_race_path(@race) %> |
-<%= link_to 'Back', races_path %>
-</p>
-
-<br/>
-<p><strong>Listing Stages</strong></p>
+<h1>Listing Stages</h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Race</th>
       <th>Name</th>
-      <th>Description</th>
       <th>Active date</th>
       <th>Close date</th>
       <th colspan="3"></th>
@@ -42,7 +14,7 @@
   </thead>
 
   <tbody>
-    <% @race.stages.each do |stage| %>
+    <% @stages.each do |stage| %>
       <tr>
         <td><%= stage.name %></td>
         <td><%= stage.description %></td>
@@ -55,6 +27,6 @@
   </tbody>
 </table>
 
-<p>
-<%= link_to 'Add Stage', new_race_stage_path(@race) %>
-</p>
+<br>
+
+<%= link_to 'New Stage', new_stage_path %>
