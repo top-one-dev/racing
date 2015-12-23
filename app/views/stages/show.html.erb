@@ -1,24 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Race:</strong>
-  <%= @stage.race %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @stage.name %>
-</p>
+<h3>
+  <span><%= link_to @stage.race.name, race_path(@race) %></span>
+  <span>-</span>
+  <span><%= @stage.name %></span>
+</h3>
 
 <p>
   <strong>Active date:</strong>
   <%= @stage.active_date %>
-</p>
-
-<p>
   <strong>Close date:</strong>
   <%= @stage.close_date %>
 </p>
 
-<%= link_to 'Edit', edit_stage_path(@stage) %> |
-<%= link_to 'Back', stages_path %>
+<br/>
+<p><strong>Listing Segments</strong></p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Segment#</th>
+      <th>Strava URL</th>
+      <th>Description</th>
+      <th>Length</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stage.segments.each_with_index do |segment, idx| %>
+      <tr>
+        <td><%= idx + 1 %></td>
+        <td><%= link_to segment.strava_segment_url, segment.strava_segment_url %></td>
+        <td><%= segment.description %></td>
+        <td><%= segment.length %></td>        
+        <td><%= link_to 'Update', edit_race_stage_segment_path(@race, @stage, segment) %></td>
+        <td><%= link_to 'Delete', race_stage_segment_path(@race, @stage, segment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+<%= link_to 'Add Segment', new_race_stage_segment_path(@race, @stage) %>
+</p>
+
+<br/>

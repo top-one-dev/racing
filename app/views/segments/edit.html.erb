@@ -1,6 +1,4 @@
-<h1>Editing Segment</h1>
-
+<%= render :template => 'stages/show' %>
+<p><strong>Editing Segment</strong></p>
 <%= render 'form' %>
-
-<%= link_to 'Show', @segment %> |
-<%= link_to 'Back', segments_path %>
+<%= link_to 'Back', race_stage_path(@race, @stage) %>

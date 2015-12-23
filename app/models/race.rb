@@ -1,4 +1,6 @@
-class Race < ActiveRecord::Base	
+class Race < ActiveRecord::Base
+	default_scope {order('id DESC')}
+
 	has_many :rosters
 	has_many :cyclists, through: :rosters
 	has_many :stages

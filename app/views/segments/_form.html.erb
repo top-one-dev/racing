@@ -1,10 +1,8 @@
-<%= simple_form_for(@segment) do |f| %>
+<%= simple_form_for([@race, @stage, @segment]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :strava_url %>
-    <%= f.input :description %>
-    <%= f.input :length %>
+    <%= f.input :strava_segment_url %>
   </div>
 
   <div class="form-actions">

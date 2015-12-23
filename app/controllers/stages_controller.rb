@@ -7,11 +7,6 @@ class StagesController < ApplicationController
     @stages = @race.stages
   end
 
-  # GET /stages/1
-  # GET /stages/1.json
-  def show
-  end
-
   # GET /stages/new
   def new
     @stage = Stage.new

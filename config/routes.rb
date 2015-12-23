@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
   resources :cyclists
-  resources :segments
   
   resources :races do
-    resources :stages
+    resources :stages do
+      resources :segments
+    end
     resources :rosters, only: [:index, :create, :destroy]
   end
 

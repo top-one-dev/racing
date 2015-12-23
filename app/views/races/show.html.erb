@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @race.name %>
-</p>
+<h3>
+  Name: <%= @race.name %>
+</h3>
 
 <p>
   <strong>Description:</strong>
@@ -24,7 +23,7 @@
 
 <p>
 <%= link_to 'Edit', edit_race_path(@race) %> |
-<%= link_to 'Back', races_path %>
+<%= link_to 'Races List', races_path %>
 </p>
 
 <br/>
@@ -44,7 +43,7 @@
   <tbody>
     <% @race.stages.each do |stage| %>
       <tr>
-        <td><%= stage.name %></td>
+        <td><%= link_to stage.name, race_stage_path(@race, stage) %></td>
         <td><%= stage.description %></td>
         <td><%= stage.active_date %></td>
         <td><%= stage.close_date %></td>        
@@ -58,3 +57,5 @@
 <p>
 <%= link_to 'Add Stage', new_race_stage_path(@race) %>
 </p>
+
+<br/>

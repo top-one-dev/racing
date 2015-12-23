@@ -1,10 +1,10 @@
 class SegmentsController < ApplicationController
-  before_action :set_segment, only: [:show, :edit, :update, :destroy]
+  before_action :set_segment
 
   # GET /segments
   # GET /segments.json
   def index
-    @segments = Segment.all
+    @segments = @stage.all
   end
 
   # GET /segments/1
@@ -24,11 +24,11 @@ class SegmentsController < ApplicationController
   # POST /segments
   # POST /segments.json
   def create
-    @segment = Segment.new(segment_params)
+    @segment = @stage.segments.build(segment_params)
 
     respond_to do |format|
       if @segment.save
-        format.html { redirect_to @segment, notice: 'Segment was successfully created.' }
+        format.html { redirect_to race_stage_path(@race, @stage), notice: 'Segment was successfully created.' }
         format.json { render :show, status: :created, location: @segment }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class SegmentsController < ApplicationController
   def update
     respond_to do |format|
       if @segment.update(segment_params)
-        format.html { redirect_to @segment, notice: 'Segment was successfully updated.' }
+        format.html { redirect_to race_stage_path(@race, @stage), notice: 'Segment was successfully updated.' }
         format.json { render :show, status: :ok, location: @segment }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class SegmentsController < ApplicationController
   def destroy
     @segment.destroy
     respond_to do |format|
-      format.html { redirect_to segments_url, notice: 'Segment was successfully destroyed.' }
+      format.html { redirect_to race_stage_path(@race, @stage), notice: 'Segment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,11 +64,17 @@ class SegmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_segment
-      @segment = Segment.find(params[:id])
+
+      @race = Race.find(params[:race_id])
+      @stage = @race.stages.find(params[:stage_id]) unless @race.nil?
+
+      if params[:id].present?
+        @segment = @stage.segments.find(params[:id]) unless @stage.nil?
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def segment_params
-      params.require(:segment).permit(:strava_url, :description, :length)
+      params.require(:segment).permit(:strava_segment_url)
     end
 end

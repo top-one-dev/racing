@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20151223013150) do
     t.string   "description"
     t.string   "gender"
     t.string   "age_range"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "strava_url"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "strava_athlete_url"
   end
 
   create_table "races", force: :cascade do |t|

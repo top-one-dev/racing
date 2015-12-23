@@ -14,11 +14,13 @@ class CyclistsController < ApplicationController
 
   # GET /cyclists/new
   def new
+    @cyclists = Cyclist.all
     @cyclist = Cyclist.new
   end
 
   # GET /cyclists/1/edit
   def edit
+    @cyclists = Cyclist.all
   end
 
   # POST /cyclists
@@ -28,7 +30,7 @@ class CyclistsController < ApplicationController
 
     respond_to do |format|
       if @cyclist.save
-        format.html { redirect_to @cyclist, notice: 'Cyclist was successfully created.' }
+        format.html { redirect_to cyclists_path, notice: 'Cyclist was successfully created.' }
         format.json { render :show, status: :created, location: @cyclist }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class CyclistsController < ApplicationController
   def update
     respond_to do |format|
       if @cyclist.update(cyclist_params)
-        format.html { redirect_to @cyclist, notice: 'Cyclist was successfully updated.' }
+        format.html { redirect_to cyclists_path, notice: 'Cyclist was successfully updated.' }
         format.json { render :show, status: :ok, location: @cyclist }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class CyclistsController < ApplicationController
   def destroy
     @cyclist.destroy
     respond_to do |format|
-      format.html { redirect_to cyclists_url, notice: 'Cyclist was successfully destroyed.' }
+      format.html { redirect_to cyclists_path, notice: 'Cyclist was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +71,6 @@ class CyclistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cyclist_params
-      params.require(:cyclist).permit(:name, :description, :gender)
+      params.require(:cyclist).permit(:name, :strava_athlete_url)
     end
 end

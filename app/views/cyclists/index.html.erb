@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Cyclists</h1>
+<h3>Listing Cyclists</h3>
 
 <table class="table table-striped">
   <thead>
@@ -16,7 +16,7 @@
   <tbody>
     <% @cyclists.each do |cyclist| %>
       <tr>
-        <td><%= link_to cyclist.name, cyclist %></td>
+        <td><%= cyclist.name %></td>
         <td><%= cyclist.description %></td>
         <td><%= cyclist.gender %></td>
         <td><%= cyclist.created_at %></td>        
@@ -26,7 +26,5 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
 
 <%= link_to 'New Cyclist', new_cyclist_path %>
