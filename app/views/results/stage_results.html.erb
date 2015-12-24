@@ -17,7 +17,7 @@
         <td><%= link_to cyclist.name, cyclist_path(cyclist) %></td>
         <% if stage_effort %>
           <td><%= '12:30' %></td>
-          <td><%= link_to 'https://www.strava.com/activities/444722288', 'https://www.strava.com/activities/444722288' %></td>    
+          <td><%= link_to stage_effort.strava_activity_url, 'https://www.strava.com/activities/444722288' %></td>    
           <td><%= link_to 'Update Result', edit_stage_effort_path(@race, @stage, cyclist, stage_effort) %></td>        
         <%else%>
           <td></td>
@@ -25,6 +25,34 @@
           <td><%= link_to 'Add Result', new_stage_effort_path(@race, @stage, cyclist) %></td>    
         <%end %>
       </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<h3>Stage Leaderboard</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Points</th>
+      <th>Name</th>
+      <th>Total time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cyclists.each_with_index do |cyclist, index| %>
+      <% stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage) %>
+      <% if stage_effort %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= 5.0 %></td>        
+          <td><%= cyclist.name %></td>
+          <td><%= '12:30' %></td>                
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
