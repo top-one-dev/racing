@@ -1,0 +1,13 @@
+<h3><%= link_to @race.name, race_path(@race) %> &nbsp;-&nbsp; <%= link_to 'Manage Results', manage_result_path(@race) %> &nbsp;-&nbsp; <%= @stage.name %> &nbsp;-&nbsp; <%= @cyclist.name %></h3>
+
+<%= simple_form_for(StageEffort.new) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :strava_activity_url %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

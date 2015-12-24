@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h3>List of Races</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @races.each do |race| %>
+      <tr>
+        <td><%= link_to race.name, manage_result_path(race) %></td>
+        <td><%= race.description %></td>
+        <td><%= race.start_date %></td>
+        <td><%= race.end_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

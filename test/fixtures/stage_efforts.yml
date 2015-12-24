@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stage_id: 
+  cyclist_id: 
+  strava_activity_url: MyString
+
+two:
+  stage_id: 
+  cyclist_id: 
+  strava_activity_url: MyString

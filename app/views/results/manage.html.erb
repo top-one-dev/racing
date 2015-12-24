@@ -1,0 +1,27 @@
+<h3><%= link_to @race.name, race_path(@race) %> &nbsp;-&nbsp; Manage Results</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Stage#</th>
+      <th>Name</th>
+      <th>Results</th>
+      <th>Start</th>
+      <th>End</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @race.stages.each_with_index do |stage, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= link_to stage.name, race_stage_path(@race, stage) %></td>
+        <td><%= '5/5' %></td>
+        <td><%= '12/11/2015' %></td>
+        <td><%= '12/12/2015' %></td>        
+        <td><%= link_to 'Manage Results',  stage_results_path(@race, stage) %></td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
