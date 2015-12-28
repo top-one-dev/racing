@@ -66,6 +66,6 @@ class StagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stage_params
-      params.require(:stage).permit(:race_id, :name, :description, :active_date, :close_date)
+      params.require(:stage).permit(:race_id, :stage_no, :name, :active_date, :close_date)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223171328) do
+ActiveRecord::Schema.define(version: 20151228090143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20151223171328) do
   create_table "cyclists", force: :cascade do |t|
     t.string   "name"
     t.integer  "strava_id"
-    t.string   "description"
     t.string   "gender"
     t.string   "age_range"
     t.datetime "created_at",         null: false
@@ -78,6 +77,7 @@ ActiveRecord::Schema.define(version: 20151223171328) do
     t.date     "close_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "stage_no"
   end
 
   add_index "stages", ["race_id"], name: "index_stages_on_race_id", using: :btree

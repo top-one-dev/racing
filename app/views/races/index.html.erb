@@ -18,8 +18,8 @@
       <tr>
         <td><%= link_to race.name, race %></td>
         <td><%= race.description %></td>
-        <td><%= race.start_date %></td>
-        <td><%= race.end_date %></td>
+        <td><%= race.stages.first.active_date if race.stages.first %></td>
+        <td><%= race.stages.last.close_date if race.stages.last %></td>
         <td><%= link_to 'Roster', race_rosters_path(race) %></td>
         <td><%= link_to 'Edit', edit_race_path(race) %></td>
         <td><%= link_to 'Destroy', race, method: :delete, data: { confirm: 'Are you sure?' } %></td>

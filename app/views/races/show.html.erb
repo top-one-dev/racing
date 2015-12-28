@@ -11,9 +11,9 @@
 
 <p>
   <strong>Start Date:</strong>
-  <%= @race.start_date %>
+  <%= @race.stages.first.active_date if @race.stages.first %>
   <strong>End Date:</strong>
-  <%= @race.end_date %>
+  <%= @race.stages.last.close_date if @race.stages.last %>
 </p>
 
 <p>
@@ -32,8 +32,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Stage #</th>
       <th>Name</th>
-      <th>Description</th>
+      <th>Segments</th>
       <th>Active date</th>
       <th>Close date</th>
       <th colspan="3"></th>
@@ -43,8 +44,9 @@
   <tbody>
     <% @race.stages.each do |stage| %>
       <tr>
+        <td><%= stage.stage_no %></td>
         <td><%= link_to stage.name, race_stage_path(@race, stage) %></td>
-        <td><%= stage.description %></td>
+        <td><%= stage.segments.count %></td>
         <td><%= stage.active_date %></td>
         <td><%= stage.close_date %></td>        
         <td><%= link_to 'Edit', edit_race_stage_path(@race, stage) %></td>

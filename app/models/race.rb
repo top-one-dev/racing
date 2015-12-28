@@ -1,5 +1,5 @@
 class Race < ActiveRecord::Base
-	default_scope {order('id DESC')}
+	default_scope {order('id')}
 
 	has_many :rosters, dependent: :destroy	
 	has_many :cyclists, through: :rosters

@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Description</th>
       <th>Gender</th>
       <th>Join date</th>
       <th></th>
@@ -16,8 +15,7 @@
   <tbody>
     <% @cyclists.each do |cyclist| %>
       <tr>
-        <td><%= cyclist.name %></td>
-        <td><%= cyclist.description %></td>
+        <td><%= link_to cyclist.name, cyclist.strava_athlete_url %></td>
         <td><%= cyclist.gender %></td>
         <td><%= cyclist.created_at %></td>        
         <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>

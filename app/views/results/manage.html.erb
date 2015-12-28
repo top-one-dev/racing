@@ -13,13 +13,13 @@
   </thead>
 
   <tbody>
-    <% @race.stages.each_with_index do |stage, index| %>
+    <% @race.stages.each_with_index do |stage| %>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%= stage.stage_no %></td>
         <td><%= link_to stage.name, race_stage_path(@race, stage) %></td>
-        <td><%= '5/5' %></td>
-        <td><%= '12/11/2015' %></td>
-        <td><%= '12/12/2015' %></td>        
+        <td><%= stage.stage_efforts.count.to_s + '/' + @race.stages.count.to_s %></td>
+        <td><%= stage.active_date %></td>
+        <td><%= stage.close_date %></td>        
         <td><%= link_to 'Manage Results',  stage_results_path(@race, stage) %></td>        
       </tr>
     <% end %>
