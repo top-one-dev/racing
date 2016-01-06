@@ -1,6 +1,5 @@
 <%= render template: 'results/stage_results' %>
 <h3>New Strava Activity URL</h3>
-
 <%= simple_form_for(@stage_effort, url: stage_efforts_path(@race, @stage, @cyclist, @stage_effort)) do |f| %>
   <%= f.error_notification %>
 

@@ -1,6 +1,4 @@
 <%= simple_form_for([@race, @roster]) do |f| %>
-  <%= f.error_notification %>
-
   <div class="form-inputs">
     <%= f.label :cyclist %>
     <%= f.select :cyclist_id, Cyclist.all.map{|c| [c.name, c.id]} %>

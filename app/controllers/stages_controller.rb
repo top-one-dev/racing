@@ -19,7 +19,11 @@ class StagesController < ApplicationController
   # POST /stages
   # POST /stages.json
   def create
-    @stage = @race.stages.build(stage_params)
+    @stage = Stage.new(stage_params)
+    if @stage.valid?
+      @stage.race = @race
+    end
+
     respond_to do |format|
       if @stage.save
         format.html { redirect_to race_path(@race), notice: 'Stage was successfully created.' }

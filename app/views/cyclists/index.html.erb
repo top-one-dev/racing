@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Listing Cyclists</h3>
+<h3>
+Cyclists
+<%= link_to 'New Cyclist', new_cyclist_path, class: 'btn btn-default btn-new' %>
+</h3>
 
 <table class="table table-striped">
   <thead>
@@ -13,16 +16,14 @@
   </thead>
 
   <tbody>
-    <% @cyclists.each do |cyclist| %>
+    <% Cyclist.all.each do |cyclist| %>
       <tr>
         <td><%= link_to cyclist.name, cyclist.strava_athlete_url %></td>
         <td><%= cyclist.gender %></td>
-        <td><%= cyclist.created_at %></td>        
+        <td><%= cyclist.created_at.strftime('%m/%d/%Y') %></td>        
         <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
         <td><%= link_to 'Destroy', cyclist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'New Cyclist', new_cyclist_path %>

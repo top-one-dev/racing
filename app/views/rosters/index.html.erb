@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h3><%= @race.name %></h3>
-<p><strong>Listing Rosters</strong></p>
+<h3>
+  <u><%= @race.name %></u>
+  <span>-</span>
+  <span>Roster</span>
+</h3>
 
 <table class="table table-striped">
   <thead>
@@ -16,7 +19,7 @@
     <% @rosters.each do |roster| %>
       <tr>
         <td><%= roster.cyclist.name %></td>
-        <td><%= roster.created_at %></td>                
+        <td><%= roster.created_at.strftime('%m/%d/%Y') %></td>                
         <td><%= link_to 'Remove', race_roster_path(@race, roster), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -25,7 +28,7 @@
 
 <br>
 
-<p><strong>Add Cyclists</strong></p>
+<p><strong>Cyclists to Add</strong></p>
 <table class="table table-striped">
   <thead>
     <tr>

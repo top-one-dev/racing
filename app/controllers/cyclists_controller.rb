@@ -4,12 +4,41 @@ class CyclistsController < ApplicationController
   # GET /cyclists
   # GET /cyclists.json
   def index
-    @cyclists = Cyclist.all
+    @cyclists = Cyclist.all    
+
+    #@client = Strava::Api::V3::Client.new(:access_token => "3a777777ca9e505c93514906e3956ddc6edfba7f")    
+=begin
+    result = @client.list_athlete_activities
+    File.open('list_athlete_activities.json', 'w') do |f|
+      f.write(result.to_json)
+    end
+
+    result = @client.list_friends_activities
+    File.open('list_friends_activities.json', 'w') do |f|
+      f.write(result.to_json)
+    end
+
+    result = @client.retrieve_current_athlete # fetch the authenticated athlete
+    File.open('retrieve_current_athlete.json', 'w') do |f|
+      f.write(result.to_json)
+    end
+
+    result = @client.retrieve_another_athlete(1082684) # fetch another athlete by id
+    File.open('retrieve_another_athlete.json', 'w') do |f|
+      f.write(result.to_json)
+    end
+
+    result = @client.list_athlete_segment_efforts(1082684) # fetch K/QOMs/CRs for another athlete by id
+    File.open('list_athlete_segment_efforts.json', 'w') do |f|
+      f.write(result.to_json)
+    end
+=end    
   end
 
   # GET /cyclists/1
   # GET /cyclists/1.json
-  def show
+  def show    
+    
   end
 
   # GET /cyclists/new
@@ -29,7 +58,7 @@ class CyclistsController < ApplicationController
     @cyclist = Cyclist.new(cyclist_params)
 
     respond_to do |format|
-      if @cyclist.save
+      if @cyclist.valid? and @cyclist.save
         format.html { redirect_to cyclists_path, notice: 'Cyclist was successfully created.' }
         format.json { render :show, status: :created, location: @cyclist }
       else
@@ -71,6 +100,6 @@ class CyclistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cyclist_params
-      params.require(:cyclist).permit(:name, :strava_athlete_url)
+      params.require(:cyclist).permit(:strava_athlete_url)
     end
 end

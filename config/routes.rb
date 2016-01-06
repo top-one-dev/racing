@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   #resources :stage_efforts
   
   resources :races do
-    resources :stages do
+    resources :stages, except: :index do
       resources :segments
     end
     resources :rosters, only: [:index, :create, :destroy]

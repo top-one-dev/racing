@@ -24,15 +24,18 @@ class SegmentsController < ApplicationController
   # POST /segments
   # POST /segments.json
   def create
-    @segment = @stage.segments.build(segment_params)
+    @segment = Segment.new(segment_params)
+    if @segment.valid?
+        @segment.stage = @stage        
+    end
 
     respond_to do |format|
-      if @segment.save
+      if @segment.save                
         format.html { redirect_to race_stage_path(@race, @stage), notice: 'Segment was successfully created.' }
         format.json { render :show, status: :created, location: @segment }
-      else
+      else        
         format.html { render :new }
-        format.json { render json: @segment.errors, status: :unprocessable_entity }
+        format.json { render json: @segment.errors, status: :unprocessable_entity }      
       end
     end
   end

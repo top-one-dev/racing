@@ -1,12 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Listing Races</h3>
+<h3>
+<span>Races</span>
+<%= link_to 'New Race', new_race_path, class: 'btn btn-default btn-new' %>
+</h3>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Description</th>
+      <th>Stages</th>    
+      <th>Roster</th>  
       <th>Start Date</th>
       <th>End Date</th>
       <th colspan="3"></th>
@@ -16,11 +20,12 @@
   <tbody>
     <% @races.each do |race| %>
       <tr>
-        <td><%= link_to race.name, race %></td>
-        <td><%= race.description %></td>
+        <td><%= race.name %></td>        
+        <td><%= link_to race.stages.count, race %></td>
+        <td><%= link_to race.rosters.count, race_rosters_path(race) %></td>
         <td><%= race.stages.first.active_date if race.stages.first %></td>
-        <td><%= race.stages.last.close_date if race.stages.last %></td>
-        <td><%= link_to 'Roster', race_rosters_path(race) %></td>
+        <td><%= race.stages.last.close_date if race.stages.last %></td>        
+        <td><%= link_to 'Manage Results', manage_result_path(race) %></td>
         <td><%= link_to 'Edit', edit_race_path(race) %></td>
         <td><%= link_to 'Destroy', race, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -29,5 +34,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Race', new_race_path %>

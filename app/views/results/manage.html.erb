@@ -43,9 +43,15 @@
     <% @race.cyclists.each_with_index do |cyclist, index| %>
       <tr>
         <td><%= index + 1 %></td>
-        <td><%= 5.0 %></td>        
+        <td>1</td>      
         <td><%= cyclist.name %></td>
-        <td><%= '1:00:00' %></td>                
+        <td>
+          <% 
+          total_time = 0          
+          cyclist.stage_efforts.each { |se| total_time = total_time + se.elapsed_time if se.stage.race == @race }  
+          %>
+          <%= Time.at(total_time).utc.strftime('%H:%M:%S') %>
+        </td>  
       </tr>
     <% end %>
   </tbody>

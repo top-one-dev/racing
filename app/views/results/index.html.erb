@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h3>List of Races</h3>
+<h3>Races</h3>
 
 <table class="table table-striped">
   <thead>
@@ -17,8 +17,8 @@
       <tr>
         <td><%= link_to race.name, manage_result_path(race) %></td>
         <td><%= race.description %></td>
-        <td><%= race.start_date %></td>
-        <td><%= race.end_date %></td>
+        <td><%= race.stages.first.active_date if race.stages.first %></td>
+        <td><%= race.stages.last.close_date if race.stages.last %></td>
       </tr>
     <% end %>
   </tbody>

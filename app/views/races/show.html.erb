@@ -1,33 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <h3>
-  Name: <%= @race.name %>
+  <u><%= @race.name %></u>
+  <span>-</span>
+  <span>Stages</span>
+  <span><%= link_to 'Add Stage', new_race_stage_path(@race), class: 'btn btn-default btn-new' %></span>
 </h3>
-
-<p>
-  <strong>Description:</strong>
-  <%= @race.description %>
-</p>
-
-<p>
-  <strong>Start Date:</strong>
-  <%= @race.stages.first.active_date if @race.stages.first %>
-  <strong>End Date:</strong>
-  <%= @race.stages.last.close_date if @race.stages.last %>
-</p>
-
-<p>
-  <strong>Hash tag:</strong>
-  <%= @race.hashtag %>
-</p>
-
-<p>
-<%= link_to 'Edit', edit_race_path(@race) %> |
-<%= link_to 'Races List', races_path %>
-</p>
-
-<br/>
-<p><strong>Listing Stages</strong></p>
 
 <table class="table table-striped">
   <thead>
@@ -50,14 +28,10 @@
         <td><%= stage.active_date %></td>
         <td><%= stage.close_date %></td>        
         <td><%= link_to 'Edit', edit_race_stage_path(@race, stage) %></td>
-        <td><%= link_to 'Destroy', race_stage_path(@race, stage), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', race_stage_path(@race, stage), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<p>
-<%= link_to 'Add Stage', new_race_stage_path(@race) %>
-</p>
 
 <br/>

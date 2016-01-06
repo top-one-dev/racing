@@ -1,13 +1,13 @@
 <%= simple_form_for(@race) do |f| %>
-  <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.text_area :description, size: '120x6' %>
     <%= f.input :hashtag %>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
+    <%= link_to 'Cancel', races_path, class: 'btn btn-default btn-cancel'  %>
   </div>
 <% end %>
