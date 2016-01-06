@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h3>
-  <span><u><%= @stage.race.name %></u></span>
+  <span><u><%= link_to @stage.race.name, @race %></u></span>
   <span>-</span>
   <u>
   <span>Stage <%= @stage.stage_no %> </span>
