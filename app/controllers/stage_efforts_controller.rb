@@ -2,7 +2,7 @@ class StageEffortsController < ApplicationController
 	before_action :set_stage_effort
 
 	def new
-		@stage_effort = StageEffort.new
+		@stage_effort = StageEffort.new		
 	end
 
 	def create
@@ -26,7 +26,7 @@ class StageEffortsController < ApplicationController
 
 	def update
 		respond_to do |format|
-	      if @stage_effort.update(stage_effort_params)
+	      if @stage_effort.update(stage_effort_params)	      	
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @segment }
 	      else

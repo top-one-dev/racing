@@ -1,0 +1,2 @@
+module SegmentEffortHelper
+end

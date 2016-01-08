@@ -48,7 +48,7 @@
         <td>
           <% 
           total_time = 0          
-          cyclist.stage_efforts.each { |se| total_time = total_time + se.elapsed_time if se.stage.race == @race }  
+          cyclist.stage_efforts.each { |se| total_time = total_time + se.elapsed_time.to_i if se.stage.race == @race }  
           %>
           <%= Time.at(total_time).utc.strftime('%H:%M:%S') %>
         </td>  

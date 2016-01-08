@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105102417) do
+ActiveRecord::Schema.define(version: 20160108021402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(version: 20160105102417) do
 
   add_index "rosters", ["cyclist_id"], name: "index_rosters_on_cyclist_id", using: :btree
   add_index "rosters", ["race_id"], name: "index_rosters_on_race_id", using: :btree
+
+  create_table "segment_efforts", force: :cascade do |t|
+    t.integer  "segment_id"
+    t.integer  "stage_effort_id"
+    t.integer  "segment_effort_id"
+    t.integer  "elapsed_time"
+    t.string   "strava_segment_url"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "segment_efforts", ["segment_id"], name: "index_segment_efforts_on_segment_id", using: :btree
+  add_index "segment_efforts", ["stage_effort_id"], name: "index_segment_efforts_on_stage_effort_id", using: :btree
 
   create_table "segments", force: :cascade do |t|
     t.string   "strava_segment_url"
@@ -85,6 +98,8 @@ ActiveRecord::Schema.define(version: 20160105102417) do
 
   add_foreign_key "rosters", "cyclists"
   add_foreign_key "rosters", "races"
+  add_foreign_key "segment_efforts", "segments"
+  add_foreign_key "segment_efforts", "stage_efforts"
   add_foreign_key "segments", "stages"
   add_foreign_key "stage_efforts", "cyclists"
   add_foreign_key "stage_efforts", "stages"

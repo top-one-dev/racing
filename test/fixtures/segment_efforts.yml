@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  segment_effort_id: 
+  stage_effort_id: 
+  segment_id: 1
+  elapsed_time: 1
+  strava_segment_url: MyString
+
+two:
+  segment_effort_id: 
+  stage_effort_id: 
+  segment_id: 1
+  elapsed_time: 1
+  strava_segment_url: MyString
