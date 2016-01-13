@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   delete 'results/races/:race_id/stages/:stage_id/cyclists/:cyclist_id/stage_efforts/:id(.:format)', to: 'stage_efforts#destroy'
 
   resources :cyclists
+  get '/auth', to: 'sessions#create'
+  get '/token_exchange', to: 'sessions#get_token'
+  get '/deauth', to: 'sessions#deauth'
   #resources :stage_efforts
   
   resources :races do
