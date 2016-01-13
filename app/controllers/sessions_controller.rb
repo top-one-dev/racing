@@ -7,19 +7,20 @@ class SessionsController < ApplicationController
 		end
 	end
 
-	def get_token		
-		print 1
+	def get_token				
 		if session[:access_token].nil?
 			code = params[:code]			
-			resp = RestClient.post 'https://www.strava.com/oauth/token', client_id: 9388, client_secret: '00012a020dcbe8d72c4a74a66df4489e2307dcdc', code: code	
-			print 2
+			resp = RestClient.post 'https://www.strava.com/oauth/token', client_id: 9388, client_secret: '00012a020dcbe8d72c4a74a66df4489e2307dcdc', code: code
 
-			resp_json = JSON.parse(resp)						
+			print "=======#{resp}========"
+			resp_json = JSON.parse(resp)
 			access_token = resp_json["access_token"]				
 			athlete = resp_json["athlete"]						
 
-			@cyclist = Cyclist.find_by(strava_id: athlete['id'])
-			print 3
+			print "=====#{athlete}===="
+			print "=====#{athlete['id']}====="
+
+			@cyclist = Cyclist.find_by(strava_id: athlete['id'])			
 			if @cyclist.nil?
 			    gender = 'Male' if athlete['sex'] == 'M'
 			    gender = 'Female' if athlete['sex'] == 'F'
@@ -28,7 +29,7 @@ class SessionsController < ApplicationController
 			else
 				@cyclist.update access_token: access_token
 			end
-			print 4		
+
 			session[:cyclist_name] = athlete['firstname'] + ' ' + athlete['lastname']
 			session[:access_token] = access_token
 			#print "=====#{access_token}====="
