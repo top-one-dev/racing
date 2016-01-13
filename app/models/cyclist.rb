@@ -15,15 +15,15 @@ class Cyclist < ActiveRecord::Base
     def get_cyclist_info
       self.strava_id = /\d+\z/.match(self.strava_athlete_url)[0]
       begin
-      	result = strava_client.retrieve_another_athlete(self.strava_id)
+      	result = strava_client(self.access_token).retrieve_an_athlete(self.strava_id)
       rescue
       	self.name = ''
-	      self.gender = ''
-	      self.gender = ''
+	    self.gender = ''
+	    self.gender = ''
       else
       	self.name = result['firstname'] + ' ' + result['lastname']
-	      self.gender = 'Male' if result['sex'] == 'M'
-	      self.gender = 'Female' if result['sex'] == 'F'
-	    end
+	    self.gender = 'Male' if result['sex'] == 'M'
+	    self.gender = 'Female' if result['sex'] == 'F'
+	  end
     end
 end
