@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
 	def create
 		if session[:access_token].nil?
 			redirect_uri = Rails.application.secrets[:redirect_url]			
-			redirect_to "https://www.strava.com/oauth/authorize?client_id=9388&response_type=code&redirect_uri=#{redirect_uri}/token_exchange&scope=write&state=mystate&approval_prompt=force"
+			client_id = Rails.application.secrets[:strava_client_id]
+			redirect_to "https://www.strava.com/oauth/authorize?client_id=#{client_id}&response_type=code&redirect_uri=#{redirect_uri}/token_exchange&scope=write&state=mystate&approval_prompt=force"
 		else
 			redirect_to action: :get_token
 		end
