@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
 	def create
 		if session[:access_token].nil?
-			redirect_to 'https://www.strava.com/oauth/authorize?client_id=9388&response_type=code&redirect_uri=https://gpsracing.herokuapp.com/token_exchange&scope=write&state=mystate&approval_prompt=force'
+			redirect_uri = Rails.application.secrets[:redirect_url]			
+			redirect_to "https://www.strava.com/oauth/authorize?client_id=9388&response_type=code&redirect_uri=#{redirect_uri}/token_exchange&scope=write&state=mystate&approval_prompt=force"
 		else
 			redirect_to action: :get_token
 		end
@@ -10,7 +11,9 @@ class SessionsController < ApplicationController
 	def get_token				
 		if session[:access_token].nil?
 			code = params[:code]			
-			resp = RestClient.post 'https://www.strava.com/oauth/token', client_id: 9388, client_secret: '00012a020dcbe8d72c4a74a66df4489e2307dcdc', code: code
+			client_id = Rails.application.secrets[:strava_client_id]	
+			client_secret = Rails.application.secrets[:strava_client_secret]	
+			resp = RestClient.post 'https://www.strava.com/oauth/token', client_id: client_id, client_secret: client_secret, code: code
 
 			resp_json = JSON.parse(resp)
 			access_token = resp_json["access_token"]				

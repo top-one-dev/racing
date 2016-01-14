@@ -25,10 +25,10 @@ class SegmentsController < ApplicationController
   # POST /segments.json
   def create
     @segment = Segment.new(segment_params)
+    @segment.get_segment_info(session[:access_token])
     if @segment.valid?
         @segment.stage = @stage        
     end
-
     respond_to do |format|
       if @segment.save                
         format.html { redirect_to race_stage_path(@race, @stage), notice: 'Segment was successfully created.' }

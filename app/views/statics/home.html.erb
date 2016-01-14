@@ -1,4 +1,9 @@
 <h1>GPS Cycling Race</h1>
+
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%=key%>"><%= value %> </div>	
+<% end %>
+
 <% if session[:access_token].nil? %>
 	<%= link_to (image_tag "ConnectWithStrava2x.png"), '/auth' %>
 <% else %>
