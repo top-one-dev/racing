@@ -12,7 +12,7 @@ class StageEffort < ActiveRecord::Base
     def get_stage_effort_info      
       activity_id = /\d+\z/.match(self.strava_activity_url)[0]      
       begin
-      	result = strava_client(self.cyclist.access_token).retrieve_an_activity(activity_id)        
+      	result = my_strava_client(self.cyclist.access_token).retrieve_an_activity(activity_id)        
       rescue
       	self.elapsed_time = nil        
       else              	

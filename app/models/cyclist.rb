@@ -14,9 +14,11 @@ class Cyclist < ActiveRecord::Base
   private 
     def get_cyclist_info
       self.strava_id = /\d+\z/.match(self.strava_athlete_url)[0]
+      print "==strava_id: #{strava_id}=="
       begin
-      	result = strava_client(self.access_token).retrieve_an_athlete(self.strava_id)
+      	result = strava_client(self.access_token).retrieve_current_athlete	
       rescue
+      	print "strava_client retrieve_current_athlete error"
       	self.name = ''
 	    self.gender = ''
 	    self.gender = ''

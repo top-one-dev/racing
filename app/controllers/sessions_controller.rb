@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 	def create
 		if session[:access_token].nil?
-			redirect_to 'https://www.strava.com/oauth/authorize?client_id=9388&response_type=code&redirect_uri=https://gpsracing.herokuapp.com/token_exchange&scope=write&state=mystate&approval_prompt=force'
+			redirect_to 'https://www.strava.com/oauth/authorize?client_id=9388&response_type=code&redirect_uri=http://localhost:3000/token_exchange&scope=write&state=mystate&approval_prompt=force'
 		else
 			redirect_to action: :get_token
 		end
@@ -12,20 +12,17 @@ class SessionsController < ApplicationController
 			code = params[:code]			
 			resp = RestClient.post 'https://www.strava.com/oauth/token', client_id: 9388, client_secret: '00012a020dcbe8d72c4a74a66df4489e2307dcdc', code: code
 
-			print "=======#{resp}========"
 			resp_json = JSON.parse(resp)
 			access_token = resp_json["access_token"]				
 			athlete = resp_json["athlete"]						
 
-			print "=====#{athlete}===="
-			print "=====#{athlete['id']}====="
-
 			@cyclist = Cyclist.find_by(strava_id: athlete['id'])			
 			if @cyclist.nil?
-			    gender = 'Male' if athlete['sex'] == 'M'
-			    gender = 'Female' if athlete['sex'] == 'F'
-
-				@cyclist = Cyclist.create access_token: access_token, name: athlete['firstname'] + ' ' + athlete['lastname'], strava_id: athlete['id'], gender: gender, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
+				gender = "Male"
+			    gender = "Male" if athlete["sex"] == "M"
+			    gender = "Female" if athlete["sex"] == "F"
+			    name = athlete["firstname"] + " " + athlete["lastname"]
+				@cyclist = Cyclist.new access_token: access_token, name: name, strava_id: athlete['id'], gender: gender, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
 			else
 				@cyclist.update access_token: access_token
 			end

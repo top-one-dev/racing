@@ -11,13 +11,14 @@ class Segment < ActiveRecord::Base
     def get_segment_info
     	self.strava_segment_id = /\d+\z/.match(self.strava_segment_url)[0]
     	begin	      
-	      result = strava_client.retrieve_a_segment(self.strava_segment_id)            	      			  
+        
+	      result = default_strava_client.retrieve_a_segment(self.strava_segment_id)            	      			  
 			rescue 
-				self.description = "Athlete id does't exist"
+				self.description = "Athlete id does't exist or there is an error."
 				self.length = nil
 			else
 				self.length = (result['distance'].to_f) / 1609.34 #(in mile)      		     
-			  self.description = result['name']		    
+			  self.description = result['name']		      
 			end 
     end
 end
