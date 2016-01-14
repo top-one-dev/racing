@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def require_oauth
   	if session[:access_token].nil?
-  		flash[:error] = "You mush connect to strava."
+  		flash[:danger] = "You must connect to strava."
   		redirect_to root_path
   	end
   end 
