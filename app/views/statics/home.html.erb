@@ -1,7 +1,8 @@
 <h1>GPS Cycling Race</h1>
 
 <% flash.each do |key, value| %>
-	<div class="alert alert-<%=key%>"><%= value %> </div>	
+	<div class="alert alert-<%= key %>"><%= value %> </div>	
+	<div class="alert alert-error"><%= value %> </div>	
 <% end %>
 
 <% if session[:access_token].nil? %>

@@ -42,9 +42,11 @@ class SegmentsController < ApplicationController
 
   # PATCH/PUT /segments/1
   # PATCH/PUT /segments/1.json
-  def update
+  def update    
     respond_to do |format|
       if @segment.update(segment_params)
+        @segment.get_segment_info(session[:access_token])
+        @segment.save
         format.html { redirect_to race_stage_path(@race, @stage), notice: 'Segment was successfully updated.' }
         format.json { render :show, status: :ok, location: @segment }
       else

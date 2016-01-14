@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+	
+	skip_before_action :require_oauth
+
 	def create
 		if session[:access_token].nil?
 			redirect_uri = Rails.application.secrets[:redirect_url]			
@@ -26,7 +29,7 @@ class SessionsController < ApplicationController
 			    gender = "Male" if athlete["sex"] == "M"
 			    gender = "Female" if athlete["sex"] == "F"
 			    name = athlete["firstname"] + " " + athlete["lastname"]
-				@cyclist = Cyclist.new access_token: access_token, name: name, strava_id: athlete['id'], gender: gender, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
+				@cyclist = Cyclist.create access_token: access_token, name: name, strava_id: athlete['id'], gender: gender, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
 			else
 				@cyclist.update access_token: access_token
 			end
@@ -37,7 +40,6 @@ class SessionsController < ApplicationController
 			session[:token_type] = resp_json["token_type"]
 			session[:athlete_id] = resp_json["athlete_id"]
 		end
-
 		render template: 'statics/home'
 	end
 
