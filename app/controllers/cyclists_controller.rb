@@ -5,13 +5,6 @@ class CyclistsController < ApplicationController
   # GET /cyclists.json
   def index
     @cyclists = Cyclist.all    
-=begin
-    @client = Strava::Api::V3::Client.new(:access_token => "6f56c7b2e6461816426e0ef1034a8146ad5f2cee")    
-    result = @client.retrieve_an_activity(444686827) # fetch the authenticated athlete
-    File.open('retrieve_an_activity.json', 'w') do |f|
-      f.write(result.to_json)
-    end
-=end    
   end
 
   # GET /cyclists/1
