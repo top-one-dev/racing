@@ -25,7 +25,7 @@ class ResultsController < ApplicationController
         @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => nil, 'point' => nil}
       end
     end
-    @sorted_cyclists.sort_by!{|k| k['elapsed_time'].to_i}.reverse!            
+    @sorted_cyclists.sort_by!{|k| k['elapsed_time'].to_i}
   end
 
   def edit
