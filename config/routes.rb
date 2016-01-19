@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'results/races/:race_id/stages/:stage_id/cyclists/:cyclist_id/stage_efforts/:id/edit(.:format)', to: 'stage_efforts#edit', as: 'edit_stage_effort'
   put 'results/races/:race_id/stages/:stage_id/cyclists/:cyclist_id/stage_efforts/:id(.:format)', to: 'stage_efforts#update'
   patch 'results/races/:race_id/stages/:stage_id/cyclists/:cyclist_id/stage_efforts/:id(.:format)', to: 'stage_efforts#update', as: 'update_stage_effort'
-  delete 'results/races/:race_id/stages/:stage_id/cyclists/:cyclist_id/stage_efforts/:id(.:format)', to: 'stage_efforts#destroy'
+  delete 'results/races/:race_id/stages/:stage_id/cyclists/:cyclist_id/stage_efforts/:id(.:format)', to: 'stage_efforts#destroy', as: 'destroy_stage_effort'
 
   resources :cyclists
   get '/auth', to: 'sessions#create'

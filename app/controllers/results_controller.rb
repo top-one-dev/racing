@@ -11,13 +11,28 @@ class ResultsController < ApplicationController
   	@race = Race.find(params[:race_id])
   	@stage = @race.stages.find(params[:id])
   	@cyclists = @race.cyclists    
+
+    #Ordering Cyclists by elapsed_time
+    @sorted_cyclists = []
+  
+    @cyclists.each_with_index do |cyclist, index|
+      stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage)
+      if stage_effort
+        elapsed_time = stage_effort.elapsed_time if stage_effort.elapsed_time
+        elapsed_time = nil if stage_effort.elapsed_time.nil?        
+        @sorted_cyclists << {'index' => index, 'name' => cyclist.name, 'elapsed_time' => elapsed_time, 'point' =>5}
+      else
+        @sorted_cyclists << {'index' => index, 'name' => cyclist.name, 'elapsed_time' => nil, 'point' => nil}
+      end
+    end
+    @sorted_cyclists.sort_by!{|k| k['elapsed_time'].to_i}.reverse!            
   end
 
   def edit
     @race = Race.find(params[:race_id])
     @stage = @race.stages.find(params[:stage_id])
     @cyclist = Cyclist.find(params[:id])
-  end
+  end    
 
   def update
     @race = Race.find(params[:race_id])
