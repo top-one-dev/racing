@@ -12,6 +12,17 @@ class ResultsController < ApplicationController
   	@stage = @race.stages.find(params[:id])
   	@cyclists = @race.cyclists    
 
+=begin    
+    @cyclists.each do |cyclist|
+      stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage)
+        if stage_effort
+          stage_effort.elapsed_time
+        else
+          
+        end      
+      end
+    end
+
     #Ordering Cyclists by elapsed_time
     @sorted_cyclists = []
     @nil_cyclists = []
@@ -31,6 +42,8 @@ class ResultsController < ApplicationController
     end
     @sorted_cyclists.sort_by!{|k| k['elapsed_time'].to_i}
     @nil_cyclists.each {|item| @sorted_cyclists << item}
+    @cyclists = @sorted_cyclists
+=end    
   end
 
   def edit
