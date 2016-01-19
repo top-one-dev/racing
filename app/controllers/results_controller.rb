@@ -19,9 +19,12 @@ class ResultsController < ApplicationController
     @cyclists.each_with_index do |cyclist, index|
       stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage)
       if stage_effort
-        elapsed_time = stage_effort.elapsed_time if stage_effort.elapsed_time
-        elapsed_time = nil if stage_effort.elapsed_time.nil?        
-        @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => elapsed_time, 'point' =>5}
+        elapsed_time = stage_effort.elapsed_time # if stage_effort.elapsed_time
+        if stage_effort.elapsed_time.to_i > 0
+          @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => elapsed_time, 'point' =>5}
+        else
+          @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => nil, 'point' => nil}
+        end
       else
         @nil_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => nil, 'point' => nil}
       end
