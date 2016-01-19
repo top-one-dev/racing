@@ -20,9 +20,9 @@ class ResultsController < ApplicationController
       if stage_effort
         elapsed_time = stage_effort.elapsed_time if stage_effort.elapsed_time
         elapsed_time = nil if stage_effort.elapsed_time.nil?        
-        @sorted_cyclists << { 'name' => cyclist.name, 'elapsed_time' => elapsed_time, 'point' =>5}
+        @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => elapsed_time, 'point' =>5}
       else
-        @sorted_cyclists << { 'name' => cyclist.name, 'elapsed_time' => nil, 'point' => nil}
+        @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => nil, 'point' => nil}
       end
     end
     @sorted_cyclists.sort_by!{|k| k['elapsed_time'].to_i}.reverse!            
