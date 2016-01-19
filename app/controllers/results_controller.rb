@@ -23,7 +23,7 @@ class ResultsController < ApplicationController
         if stage_effort.elapsed_time.to_i > 0
           @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => elapsed_time, 'point' =>5}
         else
-          @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => nil, 'point' => nil}
+          @sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => 0, 'point' => nil}
         end
       else
         @nil_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => nil, 'point' => nil}
