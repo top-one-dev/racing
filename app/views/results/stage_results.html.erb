@@ -45,9 +45,9 @@
   </thead>
 
   <tbody>
-    <% @sorted_cyclists.each_with_index do |cyclist| %>
+    <% @sorted_cyclists.each_with_index do |cyclist, index| %>
         <tr>
-          <td><%= cyclist['index'] + 1 %></td>
+          <td><%= index + 1 %></td>
           <td><%= cyclist['point'] %></td>        
           <td><%= cyclist['name'] %></td>
           <td><%= Time.at(cyclist['elapsed_time']).utc.strftime('%H:%M:%S') if cyclist['elapsed_time']%></td>
