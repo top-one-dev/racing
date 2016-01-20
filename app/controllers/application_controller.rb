@@ -41,6 +41,7 @@ class ApplicationController < ActionController::Base
 
   def sort_cyclists_race(race)
     sorted_cyclists = []
+    nil_cyclists = []
 
     race.cyclists.each_with_index do |cyclist, index|      
       total_time = 0
@@ -48,10 +49,15 @@ class ApplicationController < ActionController::Base
         stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
         total_time = total_time + stage_effort.elapsed_time.to_i if stage_effort
       end      
-      sorted_cyclists << { 'cyclist' => cyclist, 'total_time' => total_time, 'point' => 5}
+      if total_time > 0
+        sorted_cyclists << { 'cyclist' => cyclist, 'total_time' => total_time, 'point' => 5} 
+      else
+        nil_cyclists <<  { 'cyclist' => cyclist, 'total_time' => nil, 'point' => nil} 
+      end
     end
 
     sorted_cyclists.sort_by!{|k| k['total_time'].to_i}
+    nil_cyclists.each {|item| sorted_cyclists << item}
     result = []
     sorted_cyclists.each {|item| result << item['cyclist']}
     return result
