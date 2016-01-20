@@ -11,7 +11,7 @@ class ResultsController < ApplicationController
   	@race = Race.find(params[:race_id])
   	@stage = @race.stages.find(params[:id])
   	@cyclists = @race.cyclists    
-    @cyclists = sort_cyclists_by_elapsed_time(@cyclists, @stage)    
+    #@cyclists = sort_cyclists_stage(@cyclists, @stage)    
   end
 
   def edit

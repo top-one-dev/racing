@@ -2,7 +2,8 @@ class StageEffort < ActiveRecord::Base
   belongs_to :stage
   belongs_to :cyclist
   
-  default_scope {order('id')}
+  default_scope {order('stage_id, elapsed_time')}
+
   #validates :strava_athlete_url, format: {with: /\A(https|http):\/\/www.strava.com\/athletes\/\d+\z/ , message: "It's incorrect althlete url"}
 
   include StravaClient

@@ -51,7 +51,7 @@ class StageEffortsController < ApplicationController
 		    @stage = @race.stages.find(params[:stage_id]) unless @race.nil?
 		    @cyclist = @race.cyclists.find(params[:cyclist_id]) unless @race.nil?
 			@cyclists = @race.cyclists
-			@cyclists = sort_cyclists_by_elapsed_time(@cyclists, @stage)
+			@cyclists = sort_cyclists_stage(@cyclists, @stage)
 			
 		    if params[:id].present?
 		    	@stage_effort = @cyclist.stage_efforts.find(params[:id]) unless @cyclist.nil?

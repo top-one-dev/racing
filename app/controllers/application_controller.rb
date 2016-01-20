@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   	end
   end 
 
-  def sort_cyclists_by_elapsed_time(cyclists, stage)
+  def sort_cyclists_stage(cyclists, stage)
     sorted_cyclists = []
     nil_cyclists = []
 
@@ -36,6 +36,21 @@ class ApplicationController < ActionController::Base
 
     result = []
     sorted_cyclists.each { |item| result << item['cyclist']}    
+    return result
+  end
+
+  def sort_cyclists_race(race)
+    sorted_cyclists = []
+
+    race.cyclists.each_with_index do |cyclist, index|
+      total_time = 0          
+      cyclist.stage_efforts.each { |se| total_time = total_time + se.elapsed_time.to_i if se.stage.race == race }            
+      sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => total_time, 'point' =>5}
+    end
+
+    sorted_cyclists.sort_by!{|k| k['elapsed_time'].to_i}
+    result = []
+    sorted_cyclists.each {|item| result << item['cyclist']}
     return result
   end
 
