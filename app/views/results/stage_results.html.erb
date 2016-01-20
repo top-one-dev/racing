@@ -1,4 +1,12 @@
-<h3><%= link_to @race.name, race_path(@race) %> &nbsp;-&nbsp; <%= link_to 'Manage Results', manage_result_path(@race) %> &nbsp;-&nbsp; <%= @stage.name %> </h3>
+<h3>
+<u><%= link_to @race.name, race_path(@race) %></u>
+ &nbsp;-&nbsp; 
+ <u><%= link_to 'Manage Results', manage_result_path(@race) %></u>
+ &nbsp;-&nbsp; 
+ Stage<%= @stage.stage_no %>  
+ &nbsp;-&nbsp; 
+ <%= @stage.name %> 
+</h3>
 
 <table class="table table-striped">
   <thead>
