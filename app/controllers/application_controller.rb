@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :require_oauth
+  helper_method :points_stage
 
   def require_oauth
   	if session[:access_token].nil?
@@ -38,4 +39,13 @@ class ApplicationController < ActionController::Base
     return result
   end
 
+  def points_stage(place)
+    points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1, -1]
+    places_count = 16
+    if place > places_count
+      points_array[16]
+    else
+      points_array[place - 1]
+    end
+  end
 end

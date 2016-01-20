@@ -59,7 +59,7 @@
       <% if stage_effort %>
         <tr>
           <td><%= index+=1 %></td>
-          <td><%= 5.0 %></td>        
+          <td><%= points_stage(index) %></td>        
           <td><%= cyclist.name %></td>
           <td><%= Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') if stage_effort.elapsed_time %></td>                
         </tr>
