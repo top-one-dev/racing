@@ -12,7 +12,6 @@
 
   <tbody>
     <% @cyclists.each_with_index do |cyclist| %>
-    <% #cyclist = item['cyclist'] %>
     <% stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage) %>
       <tr>
         <td><%= link_to cyclist.name, cyclist.strava_athlete_url %></td>
