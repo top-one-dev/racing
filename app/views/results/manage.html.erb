@@ -14,10 +14,9 @@
 
   <tbody>
     <% @race.stages.each_with_index do |stage| %>
-    <% 
-      stage_effort_count = 0
-      @race.cyclists.each {|cyclist| stage_effort_count = stage_effort_count + 1 if cyclist.stage_efforts.find_by(stage_id: stage) } %>  
-    %>
+    <%
+        stage_effort_count = 0
+        @race.cyclists.each {|cyclist| stage_effort_count = stage_effort_count + 1 if cyclist.stage_efforts.find_by(stage_id: stage) } %>
       <tr>
         <td><%= stage.stage_no %></td>
         <td><%= link_to stage.name, race_stage_path(@race, stage) %></td>
