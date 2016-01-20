@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :require_oauth
-  helper_method :points_stage
+  helper_method :points_in_stage
 
   def require_oauth
   	if session[:access_token].nil?
@@ -42,19 +42,22 @@ class ApplicationController < ActionController::Base
   def sort_cyclists_race(race)
     sorted_cyclists = []
 
-    race.cyclists.each_with_index do |cyclist, index|
-      total_time = 0          
-      cyclist.stage_efforts.each { |se| total_time = total_time + se.elapsed_time.to_i if se.stage.race == race }            
-      sorted_cyclists << { 'cyclist' => cyclist, 'elapsed_time' => total_time, 'point' =>5}
+    race.cyclists.each_with_index do |cyclist, index|      
+      total_time = 0
+      race.stages.each do |stage|
+        stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
+        total_time = total_time + stage_effort.elapsed_time.to_i if stage_effort
+      end      
+      sorted_cyclists << { 'cyclist' => cyclist, 'total_time' => total_time, 'point' => 5}
     end
 
-    sorted_cyclists.sort_by!{|k| k['elapsed_time'].to_i}
+    sorted_cyclists.sort_by!{|k| k['total_time'].to_i}
     result = []
     sorted_cyclists.each {|item| result << item['cyclist']}
     return result
   end
 
-  def points_stage(place)
+  def points_in_stage(place)
     points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1, -1]
     places_count = 16
     if place > places_count

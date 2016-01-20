@@ -11,6 +11,7 @@ class StageEffortsController < ApplicationController
 
 	    respond_to do |format|
 	      if @stage_effort.save
+	      	update_points
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully created.' }
 	        format.json { render :show, status: :created, location: @segment }
 	      else
@@ -27,6 +28,7 @@ class StageEffortsController < ApplicationController
 	def update
 		respond_to do |format|
 	      if @stage_effort.update(stage_effort_params)	      	
+	      	update_points
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @segment }
 	      else
@@ -39,6 +41,7 @@ class StageEffortsController < ApplicationController
 	def destroy
 		@stage_effort.destroy
 	    respond_to do |format|
+	      update_points
 	      format.html { redirect_to stage_results_path(@race, @stage), notice: 'Segment was successfully destroyed.' }
 	      format.json { head :no_content }
 	    end
@@ -52,10 +55,23 @@ class StageEffortsController < ApplicationController
 		    @cyclist = @race.cyclists.find(params[:cyclist_id]) unless @race.nil?
 			@cyclists = @race.cyclists
 			@cyclists = sort_cyclists_stage(@cyclists, @stage)
-			
+
 		    if params[:id].present?
 		    	@stage_effort = @cyclist.stage_efforts.find(params[:id]) unless @cyclist.nil?
 		    end
+	    end
+
+	    def update_points
+	    	@cyclists = @race.cyclists
+			@cyclists = sort_cyclists_stage(@cyclists, @stage)
+	    	@cyclists.each_with_index do |cyclist, index|	    		
+	    		stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage)
+	    		elapsed_time = 0
+	    		elapsed_time = stage_effort.elapsed_time.to_i if stage_effort
+	    		if elapsed_time > 0
+	    			cyclist.update! points: points_in_stage(index)
+	    		end
+	    	end
 	    end
 
 	    # Never trust parameters from the scary internet, only allow the white list through.
