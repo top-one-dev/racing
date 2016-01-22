@@ -43,11 +43,12 @@
   </thead>
 
   <tbody>
-    <% @cyclists.each_with_index do |cyclist, index| %>
+    <% @sorted_cyclists_race.each_with_index do |item, index| %>
       <tr>
         <td><%= index + 1 %></td>
         <td>
         <%
+=begin        
           total_time = 0
           total_points = 0
           @race.stages.each do |stage|
@@ -55,12 +56,13 @@
             total_time = total_time + stage_effort.elapsed_time.to_i if stage_effort
             total_points = total_points + stage_effort.points.to_i if stage_effort
           end      
+=end          
         %>
-        <%= total_points %>
+        <%= item['total_points'] %>
         </td>      
-        <td><%= cyclist.name %></td>
+        <td><%= item['cyclist'].name %></td>
         <td>
-          <%= Time.at(total_time).utc.strftime('%H:%M:%S') %>
+          <%= Time.at(item['total_time']).utc.strftime('%H:%M:%S') %>
         </td>  
       </tr>
     <% end %>
