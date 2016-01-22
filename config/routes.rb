@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get '/admin', to: 'admin#index'
+  get 'admin/logout', to: 'admin#destroy'
+  post 'admin/login', to: 'admin#authorize'
+
   get 'results(.:format)', to: 'results#index'
 
   get 'results/races/:id(.:format)', to: 'results#manage', as: 'manage_result'

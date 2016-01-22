@@ -1,0 +1,22 @@
+<% flash.each do |key, value| %>
+  <% key = 'success' if key == 'notice' %>
+	<div class="alert alert-<%= key %>"><%= value %> </div>		
+<% end %>
+<% if session[:admin_user] %>  
+  <%= link_to 'Admin Logout', admin_logout_path %>  
+<% else %>
+  <p>Please admin username and password.</p>
+  <%= form_tag admin_login_path, :method => :post, class: 'form-inline' do%>
+    <div class="form-group">
+      <%= text_field_tag :username, params[:username], class: 'form-control', :placeholder => 'Username'%>
+    </div>
+
+    <div class="form-group">
+      <%= password_field_tag :password, params[:password], class: 'form-control', :placeholder => 'Password'%>
+    </div>
+
+    <div class="form-group" >
+      <%= submit_tag "Login", :name => nil, class: 'btn btn-default' %>
+    </div>
+  <% end %>
+<% end %>
