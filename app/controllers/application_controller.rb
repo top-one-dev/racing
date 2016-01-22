@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :points_in_stage
 
   def require_oauth    
-  	if session[:access_token].nil? and session[:admin_user] == false
+  	if session[:access_token].nil? and session[:admin_user] == false or session[:admin_user].nil?
   		flash[:danger] = "You must connect to strava."
   		redirect_to root_path
   	end
