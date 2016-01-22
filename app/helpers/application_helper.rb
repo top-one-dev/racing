@@ -8,7 +8,7 @@ module ApplicationHelper
 		end
 
 		if result.nil?
-			menu = /^\/results/.match(request.path)
+			result = /^\/results/.match(request.path)
 		end
 
 		if result
