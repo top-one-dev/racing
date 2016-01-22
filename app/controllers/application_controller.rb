@@ -58,15 +58,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    #sorted_cyclists.sort_by!{|k| [k['total_points'].to_i, k['total_time'].to_i]}.reverse!
-    sorted_cyclists.sort_by!('total_points DESC', 'total_time ASC').reverse!
+    sorted_cyclists.sort_by!{|k| [k['total_points'].to_i}.reverse!    
     #nil_cyclists.each {|item| sorted_cyclists << item}
     #result = []
     #sorted_cyclists.each {|item| result << item['cyclist']}
     #return result
     return sorted_cyclists
   end
-  
+
   def points_in_stage(place)
     points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1, -1]
     places_count = 16
