@@ -20,7 +20,7 @@
       <tr>
         <td><%= stage.stage_no %></td>
         <td><%= link_to stage.name, race_stage_path(@race, stage) %></td>
-        <td><%= stage_effort_count.to_s + '/' + @race.stages.count.to_s %></td>
+        <td><%= stage_effort_count.to_s + '/' + @race.cyclists.count.to_s %></td>
         <td><%= stage.active_date %></td>
         <td><%= stage.close_date %></td>        
         <td><%= link_to 'Manage Results',  stage_results_path(@race, stage) %></td>        
