@@ -62,6 +62,11 @@ class SessionsController < ApplicationController
 		render template: 'statics/home'
 		#redirect root_path
 	end
+
+	def reset_token
+		ssession[:access_token] = nil
+		render template: 'statics/home'
+	end
 end
 
 =begin
