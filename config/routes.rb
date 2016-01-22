@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get '/auth', to: 'sessions#create'
   get '/token_exchange', to: 'sessions#get_token'
   get '/deauth', to: 'sessions#deauth'
-  get '/deauth', to: 'sessions#reset_token'
+  #get '/deauth', to: 'sessions#reset_token'
   #resources :stage_efforts
   
   resources :races, path: '/admin/races' do

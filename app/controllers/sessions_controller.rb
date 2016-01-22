@@ -48,8 +48,11 @@ class SessionsController < ApplicationController
 			
 			auth_param =  session[:token_type].to_s + ' ' + session[:access_token]
 			#print "=======#{auth_param.class}==========="
-
-			access_token = RestClient.post "https://www.strava.com/oauth/deauthorize", { 'x' => 1 }.to_json, :content_type => :json, :accept => :json, :Authorization => auth_param
+			begin
+				access_token = RestClient.post "https://www.strava.com/oauth/deauthorize", { 'x' => 1 }.to_json, :content_type => :json, :accept => :json, :Authorization => auth_param
+			rescue
+				session[:cyclist_name] = nil				
+			end
 
 			@cyclist = Cyclist.find_by(strava_id: session[:athlete_id])	
 			@cyclist.update access_token: nil if @cyclist
