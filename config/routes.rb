@@ -24,12 +24,12 @@ Rails.application.routes.draw do
   get '/deauth', to: 'sessions#deauth'
   #resources :stage_efforts
   
-  resources :races do
+  resources :races, path: '/admin/races' do
     resources :stages, except: :index do
       resources :segments
     end
     resources :rosters, only: [:index, :create, :destroy]
   end
-
+  
   root 'statics#home'
 end
