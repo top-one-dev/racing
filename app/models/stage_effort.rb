@@ -17,8 +17,8 @@ class StageEffort < ActiveRecord::Base
       print "======#{activity_id}========="        
       if activity_id
         begin          
-        	#auth_param = 'Bearer ' + self.cyclist.access_token
-          auth_param = 'Bearer ' + '8b4cf48c943d70868b1224d23268e19ed8e80c2d'
+        	auth_param = 'Bearer ' + self.cyclist.access_token
+          #auth_param = 'Bearer ' + '8b4cf48c943d70868b1224d23268e19ed8e80c2d'
           result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
           result_json = JSON.parse(result)
         rescue
