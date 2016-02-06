@@ -44,14 +44,14 @@
 
   <tbody>
     <% 
-      index = 1
+      index = 0
       total_points = 0
     %>
-    <% @sorted_cyclists_race.each_with_index do |item, index| %>    
+    <% @sorted_cyclists_race.each_with_index do |item| %>    
       <tr>      
       <%
-      if total_points > item['total_points'].to_i
-        total_points = item['total_points'].to_i
+      if total_points > item['total_points']
+        total_points = item['total_points']
         index = index + 1
       end
       %>
