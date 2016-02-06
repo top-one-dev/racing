@@ -17,22 +17,26 @@ class StageEffort < ActiveRecord::Base
       print "======#{activity_id}========="        
       if activity_id
         begin          
-        	auth_param = 'Bearer ' + self.cyclist.access_token
-          result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param
+        	#auth_param = 'Bearer ' + self.cyclist.access_token
+          auth_param = 'Bearer ' + '8b4cf48c943d70868b1224d23268e19ed8e80c2d'
+          result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
           result_json = JSON.parse(result)
         rescue
         	self.elapsed_time = nil        
         else              	
           self.elapsed_time = 0
           unless result_json['segment_efforts'].nil?                    
-            self.stage.segments.each do |segment|                                        
-              result_json['segment_efforts'].each do |segment_effort|                              
+            self.stage.segments.each do |segment|
+              elapsed_time = 0
+              result_json['segment_efforts'].each do |segment_effort|
                 print "==#{segment_effort['segment']['id']}--#{segment.strava_segment_id}=="
-                if segment_effort['segment']['id'] == segment.strava_segment_id          
-                  self.elapsed_time += segment_effort['elapsed_time']
-                  break
+                if segment_effort['segment']['id'] == segment.strava_segment_id
+                  if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
+                    elapsed_time = segment_effort['elapsed_time']
+                  end
                 end
               end
+              self.elapsed_time += elapsed_time
             end
           end
         end                
