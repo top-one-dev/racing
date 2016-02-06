@@ -43,9 +43,19 @@
   </thead>
 
   <tbody>
-    <% @sorted_cyclists_race.each_with_index do |item, index| %>
+    <% 
+      index = 1
+      total_time = 0
+    %>
+    <% @sorted_cyclists_race.each_with_index do |item, index| %>    
       <tr>
-        <td><%= index + 1 %></td>
+      <?
+      if total_time > item['total_time'].to_i
+        total_time = item['total_time'].to_i
+        index = index + 1        
+      end
+      ?>
+        <td><%= index %></td>
         <td>
         <%
 =begin        
