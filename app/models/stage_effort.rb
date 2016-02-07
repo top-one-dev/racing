@@ -10,7 +10,7 @@ class StageEffort < ActiveRecord::Base
 
   before_save :get_stage_effort_info
 
-  private 
+  public 
     def get_stage_effort_info      
       match_result = /\d+\z/.match(self.strava_activity_url) 
       activity_id = match_result[0] if match_result   
