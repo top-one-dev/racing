@@ -50,7 +50,7 @@
     <% @sorted_cyclists_race.each_with_index do |item, index| %>    
       <tr>      
       <%
-      if total_points_temp == 0 or total_points > item['total_points']
+      if total_points_temp == 0 or total_points_temp > item['total_points']
         total_points_temp = item['total_points']
         index_tmp = index + 1
       end
