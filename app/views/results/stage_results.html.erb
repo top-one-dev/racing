@@ -53,12 +53,22 @@
   </thead>
 
   <tbody>
-    <% index = 0 %>
-    <% @cyclists.each_with_index do |cyclist| %>
+    <% 
+    index_temp = 0 
+    elapsed_time_temp = 0
+
+    %>
+    <% @cyclists.each_with_index do |cyclist, index| %>
       <% stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage) %>
       <% if stage_effort %>
+      <%
+      if elapsed_time_temp < stage_effort.elapsed_time
+        elapsed_time_temp = stage_effort.elapsed_time
+        index_temp = index + 1
+      end
+      %>
         <tr>
-          <td><%= index+=1 %></td>
+          <td><%= index_temp %></td>
           <td><%= stage_effort.points %></td>        
           <td><%= cyclist.name %></td>
           <td><%= Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') if stage_effort.elapsed_time %></td>                
