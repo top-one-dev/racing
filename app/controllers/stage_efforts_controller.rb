@@ -70,7 +70,7 @@ class StageEffortsController < ApplicationController
 	    		stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage)	    		
 	    		elapsed_time = 0
 	    		elapsed_time = stage_effort.elapsed_time.to_i if stage_effort
-	    		if elapsed_time > 0 or elapsed_time > elapsed_time_temp
+	    		if elapsed_time > elapsed_time_temp
 	    			index += 1
 	    			elapsed_time_temp = elapsed_time
 	    			stage_effort.update! points: points_in_stage(index)	    			
