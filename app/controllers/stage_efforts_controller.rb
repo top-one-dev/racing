@@ -28,8 +28,7 @@ class StageEffortsController < ApplicationController
 	def update				
 		respond_to do |format|
 	      if @stage_effort.update(stage_effort_params)	      		      	
-	      	update_points	      	
-	      	print "2222222222222222111111111111111"
+	      	update_points	      		      	
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @segment }
 	      else
