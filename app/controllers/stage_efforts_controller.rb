@@ -67,7 +67,7 @@ class StageEffortsController < ApplicationController
 			@cyclists = sort_cyclists_stage(@cyclists, @stage)			
 			index_temp = 0			
 			elapsed_time_temp = 0
-	    	@cyclists.each do |cyclist, index|	  	    	  	
+	    	@cyclists.each_with_index do |cyclist, index|	  	    	  	
 	    		stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage)	    		
 	    		elapsed_time = 0
 	    		elapsed_time = stage_effort.elapsed_time.to_i if stage_effort
