@@ -27,8 +27,7 @@ class StageEffortsController < ApplicationController
 
 	def update				
 		respond_to do |format|
-	      if @stage_effort.update(stage_effort_params)	      	
-	      	print "111111111111111111111111111"
+	      if @stage_effort.update(stage_effort_params)	      		      	
 	      	update_points	      	
 	      	print "2222222222222222111111111111111"
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
@@ -77,6 +76,7 @@ class StageEffortsController < ApplicationController
 	    			elapsed_time_temp = elapsed_time
 	    		end
 	    		if index_temp > 0
+	    			print "---#{index_temp}---"
 	    			stage_effort.update! points: points_in_stage(index_temp)	    			
 	    		end
 	    	end
