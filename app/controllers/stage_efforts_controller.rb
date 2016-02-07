@@ -73,6 +73,8 @@ class StageEffortsController < ApplicationController
 	    		if elapsed_time > elapsed_time_temp
 	    			index += 1
 	    			elapsed_time_temp = elapsed_time
+	    		end
+	    		if index > 0
 	    			stage_effort.update! points: points_in_stage(index)	    			
 	    		end
 	    	end
