@@ -25,10 +25,11 @@ class StageEffortsController < ApplicationController
 
 	end
 
-	def update
+	def update		
 		respond_to do |format|
 	      if @stage_effort.update(stage_effort_params)	      	
 	      	update_points
+	      	print "1111111111111111111111111111111111111111"
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @segment }
 	      else
@@ -74,7 +75,7 @@ class StageEffortsController < ApplicationController
 	    			index_temp = index + 1
 	    			elapsed_time_temp = elapsed_time
 	    		end
-	    		if index_temp > 0	    			
+	    		if index_temp > 0
 	    			stage_effort.update! points: points_in_stage(index_temp)	    			
 	    		end
 	    	end
