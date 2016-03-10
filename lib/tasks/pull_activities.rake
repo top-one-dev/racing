@@ -2,7 +2,7 @@ namespace :strava do
 	desc "Pick a random"
 	task :auto_update => :environment do
 		today = Time.now.to_date
-		today = Date.new(2016, 2, 8)
+		today = Date.new(2016, 3, 9)
 		puts "Today is #{today}"
 		stages = Stage.all
 		stages.each do |stage|
@@ -16,7 +16,10 @@ namespace :strava do
 					results = @client.list_athlete_activities
 					results.each do |r|
 						unless StageEffort.exists?(['strava_activity_url LIKE ?', "%#{r["id"]}%"])
-							StageEffort.create(:strava_activity_url => "https://www.strava.com/activities/" + r["id"].to_s)		
+							stage_effort = StageEffort.new(:strava_activity_url => "https://www.strava.com/activities/" + r["id"].to_s)	
+							stage_effort.cyclist = cyclist
+							stage_effort.stage = stage
+							stage_effort.save!
 							puts "-#{r["id"]}-"
 							#segment_effects = @client.retrieve_an_activity(r["id"])
 							#puts segment_effects
