@@ -12,6 +12,7 @@ namespace :strava do
 				segments = stage.segments
 				cyclists.each do |cyclist|					
 					puts "#{cyclist.name} #{cyclist.strava_id}"
+=begin					
 					@client = Strava::Api::V3::Client.new(:access_token => cyclist.access_token)
 					results = @client.list_athlete_activities
 					results.each do |r|
@@ -25,6 +26,7 @@ namespace :strava do
 							#puts segment_effects
 						end
 					end
+=end					
 				end
 			end
 		end
