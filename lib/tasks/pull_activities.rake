@@ -16,9 +16,10 @@ namespace :strava do
 					results = @client.list_athlete_activities
 					results.each do |r|
 						unless StageEffort.exists?(['strava_activity_url LIKE ?', "%#{r["id"]}%"])
-							StageEffort.create(:strava_activity_url => "https://www.strava.com/activities/" + r["id"].to_s)							
-							segment_effects = @client.retrieve_an_activity(r["id"])
-							puts segment_effects
+							StageEffort.create(:strava_activity_url => "https://www.strava.com/activities/" + r["id"].to_s)		
+							puts "-#{r["id"]}-"
+							#segment_effects = @client.retrieve_an_activity(r["id"])
+							#puts segment_effects
 						end
 					end
 				end
