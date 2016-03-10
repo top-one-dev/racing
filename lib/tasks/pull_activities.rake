@@ -2,6 +2,7 @@ namespace :strava do
 	desc "Pick a random"
 	task :auto_update => :environment do
 		today = Time.now.to_date
+		today = Date.new(2016, 3, 10)
 		puts "Today is #{today}"
 		stages = Stage.all
 		stages.each do |stage|
