@@ -25,11 +25,11 @@ class StageEffort < ActiveRecord::Base
         	self.elapsed_time = nil        
         else              	
           self.elapsed_time = 0
-          unless result_json['segment_efforts'].nil?                    
+          unless result_json['segment_efforts'].nil?
             self.stage.segments.each do |segment|
               elapsed_time = 0
               result_json['segment_efforts'].each do |segment_effort|
-                print "==#{segment_effort['segment']['id']}--#{segment.strava_segment_id}=="
+                #print "==#{segment_effort['segment']['id']}--#{segment.strava_segment_id}=="
                 if segment_effort['segment']['id'] == segment.strava_segment_id
                   if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
                     elapsed_time = segment_effort['elapsed_time']
@@ -39,7 +39,7 @@ class StageEffort < ActiveRecord::Base
               self.elapsed_time += elapsed_time
             end
           end
-        end                
+        end
       end
     end
 end

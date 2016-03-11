@@ -5,6 +5,12 @@ class CyclistsController < ApplicationController
   # GET /cyclists.json
   def index
     @cyclists = Cyclist.all    
+    
+    auth_param = 'Bearer ' + '9f874434ae7ac4498258620d1a9d3d663aa4e4b0'
+    result = RestClient.get "https://www.strava.com/api/v3/activities/513157106?include_all_efforts=true", :Authorization => auth_param
+    open('activity.json', 'w') do |f|
+      f.puts result
+    end
   end
 
   # GET /cyclists/1
