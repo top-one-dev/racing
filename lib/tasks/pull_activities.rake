@@ -14,9 +14,9 @@ namespace :strava do
 					client = Strava::Api::V3::Client.new(:access_token => cyclist.access_token)
 					results = client.list_athlete_activities
 					results.each do |r|
-						puts "Stage-#{stage.name} is active."
-						puts "#{cyclist.name} #{cyclist.strava_id}"	
 						unless StageEffort.exists?(['strava_activity_url LIKE ?', "%#{r["id"]}%"])
+							puts "Stage-#{stage.name} is active."
+							puts "#{cyclist.name} #{cyclist.strava_id}"	
 							stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + r["id"].to_s)
 							stage_effort.cyclist = cyclist
 						    stage_effort.save
