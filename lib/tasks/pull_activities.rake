@@ -31,7 +31,7 @@ namespace :strava do
 							# request activities from strava.com
 							activity_id = r["id"]
 							auth_param = 'Bearer ' + cyclist.access_token
-							
+
 					        #auth_param = 'Bearer ' + '8b4cf48c943d70868b1224d23268e19ed8e80c2d'
 					        result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
 					        result_json = JSON.parse(result)
@@ -41,15 +41,18 @@ namespace :strava do
 					            stage.segments.each do |segment|
 					              result_json['segment_efforts'].each do |segment_effort|
 					                if segment_effort['segment']['id'] == segment.strava_segment_id
-					                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
-										stage_effort.cyclist = cyclist
-									    stage_effort.save
+					                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+						                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+											stage_effort.cyclist = cyclist
+										    stage_effort.save
+										end
 					                end
 					              end
 					            end
 					        end
 						end
 					end
+					update_points(stage.race, stage)
 				end
 			end
 		end
