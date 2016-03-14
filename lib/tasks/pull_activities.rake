@@ -36,11 +36,10 @@ namespace :strava do
 					puts "#{cyclist.name} #{cyclist.strava_id}"
 					results.each do |r|
 						start_date = Date.parse(r["start_date"])
-						puts "activity start on #{r["start_date"]}"
-						puts "activity id is #{r["id"]}"
 						# when stage is active?
 						if stage.active_date <= start_date and stage.close_date >= start_date
 
+							puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"
 							# request activities from strava.com
 							activity_id = r["id"]
 							auth_param = 'Bearer ' + cyclist.access_token
@@ -53,9 +52,8 @@ namespace :strava do
 					        unless result_json['segment_efforts'].nil?
 					            stage.segments.each do |segment|
 					              result_json['segment_efforts'].each do |segment_effort|
-					              	puts "stage segment_id is #{segment.strava_segment_id}"
 					                if segment_effort['segment']['id'] == segment.strava_segment_id
-					                	puts "matched activity id is #{segment_effort['segment']['id']}"
+					                	puts "-----matched activity id is #{segment_effort['segment']['id']}-----"
 					                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 						                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 											stage_effort.cyclist = cyclist
@@ -67,7 +65,7 @@ namespace :strava do
 					        end
 						end
 					end
-					update_points(stage.race, stage)
+					#update_points(stage.race, stage)
 				end				
 			end
 		end		
