@@ -53,12 +53,15 @@ namespace :strava do
 					            stage.segments.each do |segment|
 					              result_json['segment_efforts'].each do |segment_effort|
 					                if segment_effort['segment']['id'] == segment.strava_segment_id
+					                	#start_date = Date.parse(segment_effort['start_date'])
+					                	#if stage.active_date <= start_date and stage.close_date >= start_date
 					                	puts "-----matched activity id is #{segment_effort['segment']['id']}-----"
-					                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
-						                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
-											stage_effort.cyclist = cyclist
-										    stage_effort.save
-										end
+						                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+							                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+												stage_effort.cyclist = cyclist
+											    stage_effort.save
+											end
+										#end
 					                end
 					              end
 					            end

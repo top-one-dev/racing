@@ -29,15 +29,15 @@ class StageEffort < ActiveRecord::Base
             self.stage.segments.each do |segment|
               elapsed_time = 0
               result_json['segment_efforts'].each do |segment_effort|
-                start_date = Date.parse(segment_effort["start_date"])
-                if self.stage.active_date <= start_date and self.stage.close_date >= start_date
+                #start_date = Date.parse(segment_effort["start_date"])
+                #if self.stage.active_date <= start_date and self.stage.close_date >= start_date
                   #print "==#{segment_effort['segment']['id']}--#{segment.strava_segment_id}=="
                   if segment_effort['segment']['id'] == segment.strava_segment_id
                     if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
                       elapsed_time = segment_effort['elapsed_time']
                     end
                   end
-                end
+                #end
               end
               self.elapsed_time += elapsed_time
             end
