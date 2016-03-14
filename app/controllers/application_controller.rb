@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   
   before_action :require_oauth
   helper_method :points_in_stage
+  helper_method :update_points1
 
   def require_oauth    
   	if session[:access_token].nil? and session[:admin_user] == false or session[:admin_user].nil?
@@ -76,7 +77,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def update_points(race, stage)
+  def update_points1(race, stage)
     cyclists = race.cyclists
     cyclists = sort_cyclists_stage(cyclists, stage)      
     index_temp = 0
