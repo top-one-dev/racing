@@ -55,11 +55,13 @@ namespace :strava do
 					                if segment_effort['segment']['id'] == segment.strava_segment_id
 					                	#start_date = Date.parse(segment_effort['start_date'])
 					                	#if stage.active_date <= start_date and stage.close_date >= start_date
-					                	puts "#{cyclist.name} #{cyclist.strava_id}"
+					                	
+						                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+						                		puts "#{cyclist.name} #{cyclist.strava_id}"
 					                	puts "#{stage.name} #{stage.active_date} #{stage.close_date}"
 					                	puts "matched activity start on #{r["start_date"]}, #{r["id"]}"
 					                	puts "matched segment id is #{segment_effort['segment']['id']}"
-						                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+					                	
 							                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 												stage_effort.cyclist = cyclist
 											    stage_effort.save
@@ -71,7 +73,7 @@ namespace :strava do
 					        end
 						end
 					end
-					StageEffortsController.new.update_points(stage.race, stage)
+					#StageEffortsController.new.update_points(stage.race, stage)
 				end				
 			#end
 		end		
