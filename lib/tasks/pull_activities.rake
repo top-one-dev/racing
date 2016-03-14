@@ -26,7 +26,7 @@ namespace :strava do
 =end
 
 		stages.each do |stage|
-			if stage.active_date <= today and stage.close_date >= today
+			#if stage.active_date <= today and stage.close_date >= today
 				cyclists = stage.race.cyclists
 				segments = stage.segments
 				puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
@@ -68,9 +68,9 @@ namespace :strava do
 					        end
 						end
 					end
-					StageEffortsController::update_points(stage.race, stage)
+					StageEffortsController.new.update_points(stage.race, stage)
 				end				
-			end
+			#end
 		end		
 	end
 end

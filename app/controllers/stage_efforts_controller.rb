@@ -82,7 +82,7 @@ class StageEffortsController < ApplicationController
 	    	end
 	    end
 
-		def self.update_points(race, stage)
+		def update_points(race, stage)
 		    cyclists = race.cyclists
 		    cyclists = sort_cyclists_stage(cyclists, stage)      
 		    index_temp = 0
