@@ -14,7 +14,7 @@ class StageEffort < ActiveRecord::Base
     def get_stage_effort_info      
       match_result = /\d+\z/.match(self.strava_activity_url) 
       activity_id = match_result[0] if match_result   
-      print "======#{activity_id}========="        
+      #print "#{activity_id}"        
       if activity_id
         begin          
         	auth_param = 'Bearer ' + self.cyclist.access_token

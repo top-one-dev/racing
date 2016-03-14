@@ -29,17 +29,17 @@ namespace :strava do
 			#if stage.active_date <= today and stage.close_date >= today
 				cyclists = stage.race.cyclists
 				segments = stage.segments
-				puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
+				#puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
 				cyclists.each do |cyclist|					
 					client = Strava::Api::V3::Client.new(:access_token => cyclist.access_token)
 					results = client.list_athlete_activities
-					puts "#{cyclist.name} #{cyclist.strava_id}"
+					#puts "#{cyclist.name} #{cyclist.strava_id}"
 					results.each do |r|
 						start_date = Date.parse(r["start_date"])
 						# when stage is active?
 						if stage.active_date <= start_date and stage.close_date >= start_date
 
-							puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"
+							#puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"
 							# request activities from strava.com
 							activity_id = r["id"]
 							auth_param = 'Bearer ' + cyclist.access_token
@@ -55,7 +55,10 @@ namespace :strava do
 					                if segment_effort['segment']['id'] == segment.strava_segment_id
 					                	#start_date = Date.parse(segment_effort['start_date'])
 					                	#if stage.active_date <= start_date and stage.close_date >= start_date
-					                	puts "-----matched activity id is #{segment_effort['segment']['id']}-----"
+					                	puts "#{cyclist.name} #{cyclist.strava_id}"
+					                	puts "#{stage.name} #{stage.active_date} #{stage.close_date}"
+					                	puts "matched activity start on #{r["start_date"]}, #{r["id"]}"
+					                	puts "matched segment id is #{segment_effort['segment']['id']}"
 						                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 							                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 												stage_effort.cyclist = cyclist

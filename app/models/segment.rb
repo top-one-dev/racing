@@ -10,7 +10,7 @@ class Segment < ActiveRecord::Base
   def get_segment_info(access_token)
     match_result = /\d+\z/.match(self.strava_segment_url)    
   	self.strava_segment_id = match_result[0] if match_result  
-    print "======#{self.strava_segment_id}========="
+    #print "======#{self.strava_segment_id}========="
     if self.strava_segment_id
     	begin	            
         result = strava_client(access_token).retrieve_a_segment(self.strava_segment_id) 
