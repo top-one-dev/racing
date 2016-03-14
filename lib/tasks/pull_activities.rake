@@ -1,15 +1,17 @@
 namespace :strava do
 	desc "Pick a random"
+	f = File.new("log/production.log",  "w")
+
 	task :auto_update => :environment do
 		today = Time.now.to_date
 		today = Date.new(2016, 3, 9)
 		puts "Today is #{today}"
 		stages = Stage.all
-
+=begin
 		client = Strava::Api::V3::Client.new(:access_token => client.access_token)
 		results = client.list_athlete_activities
 
-=begin
+
 		#open("activity.json", "w") do |f|
 		#	f.puts results 
 		#end
@@ -30,14 +32,15 @@ namespace :strava do
 			if stage.active_date <= today and stage.close_date >= today
 				cyclists = stage.race.cyclists
 				segments = stage.segments
-				puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
-=begin
+				f.puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
 				cyclists.each do |cyclist|					
 					client = Strava::Api::V3::Client.new(:access_token => cyclist.access_token)
 					results = client.list_athlete_activities
-
+					f.puts "#{cyclist.name} #{cyclist.strava_id}"
 					results.each do |r|
 						start_date = Date.parse(r["start_date"])
+						f.puts "activity start on #{r["start_date"]}"
+						f.puts "activity id is #{r["id"]}"
 						# when stage is active?
 						if stage.active_date <= start_date and stage.close_date >= start_date
 
@@ -53,7 +56,9 @@ namespace :strava do
 					        unless result_json['segment_efforts'].nil?
 					            stage.segments.each do |segment|
 					              result_json['segment_efforts'].each do |segment_effort|
+					              	f.puts "stage segment_id is #{segment.strava_segment_id}"
 					                if segment_effort['segment']['id'] == segment.strava_segment_id
+					                	f.puts "matched activity id is #{segment_effort['segment']['id']}"
 					                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 						                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 											stage_effort.cyclist = cyclist
@@ -66,9 +71,9 @@ namespace :strava do
 						end
 					end
 					update_points(stage.race, stage)
-				end
-=end				
+				end				
 			end
 		end		
 	end
+	f.close
 end
