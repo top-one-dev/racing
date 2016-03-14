@@ -1,6 +1,6 @@
 namespace :strava do
 	desc "Pick a random"
-	f = File.new("log/production.log",  "w")
+	f = open("prod.log",  "w")
 
 	task :auto_update => :environment do
 		today = Time.now.to_date
