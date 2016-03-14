@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   
   before_action :require_oauth
   helper_method :points_in_stage
-  helper_method :update_points1
 
   def require_oauth    
   	if session[:access_token].nil? and session[:admin_user] == false or session[:admin_user].nil?
@@ -74,27 +73,6 @@ class ApplicationController < ActionController::Base
       points_array[16]
     else
       points_array[place - 1]
-    end
-  end
-
-  def update_points1(race, stage)
-    cyclists = race.cyclists
-    cyclists = sort_cyclists_stage(cyclists, stage)      
-    index_temp = 0
-    elapsed_time_temp = 0
-    cyclists.each_with_index do |cyclist, index|               
-      stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)          
-      if stage_effort
-        elapsed_time = 0
-        elapsed_time = stage_effort.elapsed_time.to_i #if stage_effort
-        if elapsed_time > elapsed_time_temp
-          index_temp = index + 1
-          elapsed_time_temp = elapsed_time
-        end
-        if index_temp > 0           
-          stage_effort.update! points: points_in_stage(index_temp)            
-        end
-      end
     end
   end
   

@@ -68,7 +68,7 @@ namespace :strava do
 					        end
 						end
 					end
-					update_points1(stage.race, stage)
+					StageEffortsController::update_points(stage.race, stage)
 				end				
 			end
 		end		
