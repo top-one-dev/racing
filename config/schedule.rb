@@ -19,5 +19,5 @@
 
 # Learn more: http://github.com/javan/whenever
 every :hour do 
-	command "echo 'a'"
+	rake "strava:auto_update"
 end
