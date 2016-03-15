@@ -58,9 +58,9 @@ namespace :strava do
 					                	
 						                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 						                		puts "#{cyclist.name} #{cyclist.strava_id}"
-					                	puts "#{stage.name} #{stage.active_date} #{stage.close_date}"
-					                	puts "matched activity start on #{r["start_date"]}, #{r["id"]}"
-					                	puts "matched segment id is #{segment_effort['segment']['id']}"
+							                	puts "#{stage.name} #{stage.active_date} #{stage.close_date}"
+							                	puts "matched activity start on #{r["start_date"]}, #{r["id"]}"
+							                	puts "matched segment id is #{segment_effort['segment']['id']}"
 					                	
 							                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 												stage_effort.cyclist = cyclist
