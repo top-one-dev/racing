@@ -17,28 +17,32 @@ class SessionsController < ApplicationController
 			code = params[:code]			
 			client_id = Rails.application.secrets[:strava_client_id]	
 			client_secret = Rails.application.secrets[:strava_client_secret]	
-			resp = RestClient.post 'https://www.strava.com/oauth/token', client_id: client_id, client_secret: client_secret, code: code
-
-			resp_json = JSON.parse(resp)
-			access_token = resp_json["access_token"]				
-			athlete = resp_json["athlete"]						
-
-			@cyclist = Cyclist.find_by(strava_id: athlete['id'])			
-			if @cyclist.nil?
-				gender = "Male"
-			    gender = "Male" if athlete["sex"] == "M"
-			    gender = "Female" if athlete["sex"] == "F"
-			    name = athlete["firstname"] + " " + athlete["lastname"]
-				@cyclist = Cyclist.create access_token: access_token, name: name, strava_id: athlete['id'], gender: gender, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
+			begin
+				resp = RestClient.post 'https://www.strava.com/oauth/token', client_id: client_id, client_secret: client_secret, code: code
+			rescue
+				puts "The request failed - https://www.strava.com/oauth/token client_id: #{client_id} client_secret: #{client_secret} code: #{code}"
 			else
-				@cyclist.update access_token: access_token
-			end
+				resp_json = JSON.parse(resp)
+				access_token = resp_json["access_token"]				
+				athlete = resp_json["athlete"]						
 
-			session[:cyclist_name] = athlete['firstname'] + ' ' + athlete['lastname']
-			session[:access_token] = access_token
-			#print "=====#{access_token}====="
-			session[:token_type] = resp_json["token_type"]
-			session[:athlete_id] = resp_json["athlete_id"]
+				@cyclist = Cyclist.find_by(strava_id: athlete['id'])			
+				if @cyclist.nil?
+					gender = "Male"
+				    gender = "Male" if athlete["sex"] == "M"
+				    gender = "Female" if athlete["sex"] == "F"
+				    name = athlete["firstname"] + " " + athlete["lastname"]
+					@cyclist = Cyclist.create access_token: access_token, name: name, strava_id: athlete['id'], gender: gender, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
+				else
+					@cyclist.update access_token: access_token
+				end
+
+				session[:cyclist_name] = athlete['firstname'] + ' ' + athlete['lastname']
+				session[:access_token] = access_token
+				#print "=====#{access_token}====="
+				session[:token_type] = resp_json["token_type"]
+				session[:athlete_id] = resp_json["athlete_id"]
+			end
 		end
 		render template: 'statics/home'
 	end

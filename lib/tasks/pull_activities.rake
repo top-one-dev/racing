@@ -10,47 +10,57 @@ namespace :strava do
 				cyclists = stage.race.cyclists
 				segments = stage.segments
 				#puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
-				cyclists.each do |cyclist|					
-					client = Strava::Api::V3::Client.new(:access_token => cyclist.access_token)
-					results = client.list_athlete_activities
-					#puts "#{cyclist.name} #{cyclist.strava_id}"
-					results.each do |r|
-						start_date = Date.parse(r["start_date"])
-						# the activity is on active days?
-						if stage.active_date <= start_date and stage.close_date >= start_date
+				cyclists.each do |cyclist|
+					begin 
+						client = Strava::Api::V3::Client.new(:access_token => cyclist.access_token)
+						results = client.list_athlete_activities
+					rescue 
+						puts "the request failed : #{cyclist.name} list_athlete_activities"
+					else
+						#puts "#{cyclist.name} #{cyclist.strava_id}"
+						unless results.nil?
+							results.each do |r|
+								start_date = Date.parse(r["start_date"])
+								# the activity is on active days?
+								if stage.active_date <= start_date and stage.close_date >= start_date
 
-							#puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"
-							# request activities from strava.com
-							activity_id = r["id"]
-							auth_param = 'Bearer ' + cyclist.access_token
+									#puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"
+									# request activities from strava.com
+									activity_id = r["id"]
+									auth_param = 'Bearer ' + cyclist.access_token
 
-					        #auth_param = 'Bearer ' + '8b4cf48c943d70868b1224d23268e19ed8e80c2d'
-					        result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
-					        result_json = JSON.parse(result)
+							        begin
+								        result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
+								        result_json = JSON.parse(result)
+								    rescue
+								    	puts "the strava request failed."
+								    else 
+								        # match activities ids and stages segment ids
+								        unless result_json['segment_efforts'].nil?
+								            stage.segments.each do |segment|
+								              result_json['segment_efforts'].each do |segment_effort|
+								                if segment_effort['segment']['id'] == segment.strava_segment_id
+								                	#start_date = Date.parse(segment_effort['start_date'])
+								                	#if stage.active_date <= start_date and stage.close_date >= start_date
+								                	
+									                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+									                		puts "Stage-#{stage.name} #{stage.active_date}-#{stage.close_date}"
+									                		puts "Joined cyclist-#{cyclist.name} #{cyclist.strava_id}"
+										                	puts "Found a new activity-start date #{r["start_date"]}, #{r["id"]}"
+										                	puts "The activity's segment is #{segment_effort['segment']['id']}"
 
-					        # match activities ids and stages segment ids
-					        unless result_json['segment_efforts'].nil?
-					            stage.segments.each do |segment|
-					              result_json['segment_efforts'].each do |segment_effort|
-					                if segment_effort['segment']['id'] == segment.strava_segment_id
-					                	#start_date = Date.parse(segment_effort['start_date'])
-					                	#if stage.active_date <= start_date and stage.close_date >= start_date
-					                	
-						                	unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
-						                		puts "Stage-#{stage.name} #{stage.active_date}-#{stage.close_date}"
-						                		puts "Joined cyclist-#{cyclist.name} #{cyclist.strava_id}"
-							                	puts "Found a new activity-start date #{r["start_date"]}, #{r["id"]}"
-							                	puts "The activity's segment is #{segment_effort['segment']['id']}"
-
-							                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
-												stage_effort.cyclist = cyclist
-											    stage_effort.save
-											end
-										#end
-					                end
-					              end
-					            end
-					        end
+										                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
+															stage_effort.cyclist = cyclist
+														    stage_effort.save
+														end
+													#end
+								                end
+								              end
+								            end
+								        end
+								    end
+								end
+							end
 						end
 					end
 					#StageEffortsController.new.update_points(stage.race, stage)
