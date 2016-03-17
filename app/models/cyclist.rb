@@ -29,6 +29,7 @@ class Cyclist < ActiveRecord::Base
     	    self.gender = 'Male' if result['sex'] == 'M'
     	    self.gender = 'Female' if result['sex'] == 'F'
           self.ftp = result['ftp']
+          puts "-#{result['ftp']}-"
     	  end
       end
     end
