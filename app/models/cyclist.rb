@@ -28,8 +28,7 @@ class Cyclist < ActiveRecord::Base
         	self.name = result['firstname'] + ' ' + result['lastname']
     	    self.gender = 'Male' if result['sex'] == 'M'
     	    self.gender = 'Female' if result['sex'] == 'F'
-          self.ftp = result['ftp'].to_i
-          puts result['ftp']
+          self.ftp = result['ftp']
     	  end
       end
     end
