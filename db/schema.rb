@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122073748) do
+ActiveRecord::Schema.define(version: 20160317110136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160122073748) do
     t.datetime "updated_at",         null: false
     t.string   "strava_athlete_url"
     t.string   "access_token"
+    t.integer  "ftp"
   end
 
   create_table "races", force: :cascade do |t|

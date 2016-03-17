@@ -23,11 +23,12 @@ class Cyclist < ActiveRecord::Base
         	print "strava_client retrieve_current_athlete error"
         	self.name = ''
     	    self.gender = ''
-    	    self.gender = ''
+          self.ftp = 0
         else
         	self.name = result['firstname'] + ' ' + result['lastname']
     	    self.gender = 'Male' if result['sex'] == 'M'
     	    self.gender = 'Female' if result['sex'] == 'F'
+          self.ftp = result['ftp'].to_i
     	  end
       end
     end
