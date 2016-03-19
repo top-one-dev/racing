@@ -21,7 +21,7 @@ Cyclists
       <tr>
         <td><%= link_to cyclist.name, cyclist.strava_athlete_url %></td>
         <td><%= cyclist.gender %></td>
-        <td>Email</td>
+        <td><%= cyclist.email %></td>
         <td><%= cyclist.created_at.strftime('%m/%d/%Y') %></td>  
         <td><%= cyclist.ftp %></td>      
         <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
