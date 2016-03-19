@@ -9,6 +9,7 @@ Cyclists
     <tr>
       <th>Name</th>
       <th>Gender</th>
+      <th>Email</th>
       <th>Join date</th>
       <th>FTP</th>
       <th></th>
@@ -20,6 +21,7 @@ Cyclists
       <tr>
         <td><%= link_to cyclist.name, cyclist.strava_athlete_url %></td>
         <td><%= cyclist.gender %></td>
+        <td>Email</td>
         <td><%= cyclist.created_at.strftime('%m/%d/%Y') %></td>  
         <td><%= cyclist.ftp %></td>      
         <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
