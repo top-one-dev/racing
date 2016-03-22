@@ -25,12 +25,16 @@ class Cyclist < ActiveRecord::Base
     	    self.gender = ''
           self.ftp = 0
           self.email = nil
+          self.premium = nil
+          self.weight = nil
         else
         	self.name = result['firstname'] + ' ' + result['lastname']
     	    self.gender = 'Male' if result['sex'] == 'M'
     	    self.gender = 'Female' if result['sex'] == 'F'
           self.ftp = result['ftp']
           self.email = result['email']
+          self.premium = resut['premium']
+          self.weight = result['weight']
     	  end
       end
     end

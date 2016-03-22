@@ -12,6 +12,8 @@ Cyclists
       <th>Email</th>
       <th>Join date</th>
       <th>FTP</th>
+      <th>Premium</th>
+      <th>Weight</th>
       <th></th>
     </tr>
   </thead>
@@ -23,7 +25,9 @@ Cyclists
         <td><%= cyclist.gender %></td>
         <td><%= cyclist.email %></td>
         <td><%= cyclist.created_at.strftime('%m/%d/%Y') %></td>  
-        <td><%= cyclist.ftp %></td>      
+        <td><%= cyclist.ftp %></td>   
+        <td><%= cyclist.premium %></td>  
+        <td><%= cyclist.weight %></td> 
         <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
         <td><%= link_to 'Destroy', cyclist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
