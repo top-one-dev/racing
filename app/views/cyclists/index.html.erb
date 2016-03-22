@@ -27,7 +27,7 @@ Cyclists
         <td><%= cyclist.created_at.strftime('%m/%d/%Y') %></td>  
         <td><%= cyclist.ftp %></td>   
         <td><%= cyclist.premium %></td>  
-        <td><%= cyclist.weight.round(2) %></td> 
+        <td><%= cyclist.weight.round(2) unless cyclist.weight.nil? %></td> 
         <td><%= link_to 'Edit', edit_cyclist_path(cyclist) %></td>
         <td><%= link_to 'Destroy', cyclist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
