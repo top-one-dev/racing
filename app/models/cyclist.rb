@@ -33,7 +33,7 @@ class Cyclist < ActiveRecord::Base
     	    self.gender = 'Female' if result['sex'] == 'F'
           self.ftp = result['ftp']
           self.email = result['email']
-          self.premium = resut['premium']
+          self.premium = result['premium']
           self.weight = result['weight']
     	  end
       end
