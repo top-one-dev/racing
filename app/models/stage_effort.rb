@@ -23,23 +23,36 @@ class StageEffort < ActiveRecord::Base
           result_json = JSON.parse(result)
         rescue
         	self.elapsed_time = nil        
-        else              	
+        else
           self.elapsed_time = 0
+          pre_segment_strava_id = 0
+          pre_elapsed_times = []
           unless result_json['segment_efforts'].nil?
+
             self.stage.segments.each do |segment|
               elapsed_time = 0
               result_json['segment_efforts'].each do |segment_effort|
-                #start_date = Date.parse(segment_effort["start_date"])
-                #if self.stage.active_date <= start_date and self.stage.close_date >= start_date
-                  #print "==#{segment_effort['segment']['id']}--#{segment.strava_segment_id}=="
-                  if segment_effort['segment']['id'] == segment.strava_segment_id
+
+                if segment_effort['segment']['id'] == segment.strava_segment_id
+                  # same segments id
+                  if pre_segment_strava_id == segment.strava_segment_id
+                    if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
+                      if pre_elapsed_times.include?(segment_effort['elapsed_time']) 
+                        elapsed_time = segment_effort['elapsed_time']
+                        pre_elapsed_times << elapsed_time
+                      end
+                    end
+                  else
+                    pre_segment_strava_id = 0
+                    pre_elapsed_times = []
                     if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
                       elapsed_time = segment_effort['elapsed_time']
                     end
                   end
-                #end
+                end
               end
               self.elapsed_time += elapsed_time
+              pre_segment_strava_id = segment.strava_segment_id
             end
           end
         end
