@@ -39,7 +39,6 @@ class StageEffort < ActiveRecord::Base
                     if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
                       if pre_elapsed_times.include?(segment_effort['elapsed_time']) 
                         elapsed_time = segment_effort['elapsed_time']
-                        pre_elapsed_times << elapsed_time
                       end
                     end
                   else
@@ -53,6 +52,7 @@ class StageEffort < ActiveRecord::Base
               end
               self.elapsed_time += elapsed_time
               pre_segment_strava_id = segment.strava_segment_id
+              pre_elapsed_times << elapsed_time
             end
           end
         end
