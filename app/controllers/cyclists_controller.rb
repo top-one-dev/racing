@@ -6,14 +6,13 @@ class CyclistsController < ApplicationController
   def index
     @cyclists = Cyclist.all    
 =begin
-    #auth_param = 'Bearer ' + '9f874434ae7ac4498258620d1a9d3d663aa4e4b0'
-    @client = Strava::Api::V3::Client.new(:access_token => "9f874434ae7ac4498258620d1a9d3d663aa4e4b0")
-    result = @client.retrieve_current_athlete
-    #result = RestClient.get "https://www.strava.com/api/v3/activities/513157106?include_all_efforts=true", :Authorization => auth_param
+    auth_param = 'Bearer ' + '9f874434ae7ac4498258620d1a9d3d663aa4e4b0'
+    #@client = Strava::Api::V3::Client.new(:access_token => "9f874434ae7ac4498258620d1a9d3d663aa4e4b0")
+    #result = @client.retrieve_current_athlete
+    result = RestClient.get "https://www.strava.com/api/v3/activities/513157106?include_all_efforts=true", :Authorization => auth_param
     open('activity.json', 'w') do |f|
       f.puts result
     end
-    puts "--#{result['ftp'].class}"
 =end
   end
 
