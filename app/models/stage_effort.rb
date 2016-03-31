@@ -61,6 +61,7 @@ class StageEffort < ActiveRecord::Base
               pre_segment_strava_id = segment.strava_segment_id
               pre_elapsed_times << elapsed_time
             end
+            self.segment_avg_watts = self.segment_avg_watts / self.stage.segments.count if self.stage.segments.count > 0
           end
         end
       end
