@@ -15,6 +15,7 @@
       <th>Time</th>
       <th>Strava Activity URL</th>
       <th>Avg Watts</th>
+      <td>Avg Watts per Kg</td>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -28,6 +29,7 @@
           <td><%= Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') if stage_effort.elapsed_time %></td>
           <td><%= link_to stage_effort.strava_activity_url, stage_effort.strava_activity_url %></td>    
           <td><%= stage_effort.segment_avg_watts %>w</td>
+          <td><%= stage_effort.segment_avg_watts.to_f / cyclist.weight unless cyclist.weight.to_f == 0 %>w/kg</td>
           <td><%= link_to 'Update Result', edit_stage_effort_path(@race, @stage, cyclist, stage_effort) %></td>        
           <td><%= link_to 'Remove', destroy_stage_effort_path(@race, @stage, cyclist, stage_effort), method: :delete, data: { confirm: 'Are you sure?' } %></td>          
         <%else%>
