@@ -28,7 +28,7 @@
         <% if stage_effort %>
           <td><%= Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') if stage_effort.elapsed_time %></td>
           <td><%= link_to stage_effort.strava_activity_url, stage_effort.strava_activity_url %></td>    
-          <td><%= stage_effort.segment_avg_watts %>&nbsp;w</td>
+          <td><%= stage_effort.segment_avg_watts.to_f.round(2) %>&nbsp;w</td>
           <% temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0 %>
           <td><%= temp.to_f.round(2) %>&nbsp;w/kg</td>
           <td><%= link_to 'Update Result', edit_stage_effort_path(@race, @stage, cyclist, stage_effort) %></td>        
