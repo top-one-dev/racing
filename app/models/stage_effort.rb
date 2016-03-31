@@ -57,6 +57,7 @@ class StageEffort < ActiveRecord::Base
                 end
               end
               self.elapsed_time += elapsed_time
+              self.segment_avg_watts = self.segment_avg_watts.to_f + segment_avg_watts.to_f
               pre_segment_strava_id = segment.strava_segment_id
               pre_elapsed_times << elapsed_time
             end
