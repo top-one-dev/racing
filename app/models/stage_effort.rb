@@ -22,14 +22,15 @@ class StageEffort < ActiveRecord::Base
           result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
           result_json = JSON.parse(result)
         rescue
-        	self.elapsed_time = nil        
-          self.segment_avg_watts_per_kg = nil
-          self.segment_avg_watts = nil
+        	#self.elapsed_time = nil        
+          #self.segment_avg_watts_per_kg = nil
+          #self.segment_avg_watts = nil
+          print "Connecting strava.com failed"
         else
           self.elapsed_time = 0
           pre_segment_strava_id = 0
           pre_elapsed_times = []
-          segment_avg_watts = 0
+          self.segment_avg_watts = 0
 
           unless result_json['segment_efforts'].nil?
 
