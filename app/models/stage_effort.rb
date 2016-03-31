@@ -36,6 +36,7 @@ class StageEffort < ActiveRecord::Base
 
             self.stage.segments.each do |segment|
               elapsed_time = 0
+              segment_avg_watts = 0
               result_json['segment_efforts'].each do |segment_effort|
 
                 if segment_effort['segment']['id'] == segment.strava_segment_id
