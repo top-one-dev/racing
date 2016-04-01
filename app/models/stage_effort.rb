@@ -28,8 +28,8 @@ class StageEffort < ActiveRecord::Base
           print "Connecting strava.com failed"
         else
           self.elapsed_time = 0
-          pre_segment_strava_id = 0
-          pre_elapsed_times = []
+          segment_effort_id = 0
+          matched_segment_efforts = []
           self.segment_avg_watts = 0
 
           unless result_json['segment_efforts'].nil?
@@ -38,45 +38,17 @@ class StageEffort < ActiveRecord::Base
               elapsed_time = 0
               segment_avg_watts = 0
               result_json['segment_efforts'].each do |segment_effort|
-
                 if segment_effort['segment']['id'] == segment.strava_segment_id
-
-                  #processing lap segments
-                  if pre_segment_strava_id == 0 or pre_segment_strava_id == segment.strava_segment_id
-                    
-                    if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
-                      unless pre_elapsed_times.include?(segment_effort['elapsed_time']) 
-                        
-                        if self.cyclist.id == 67 and segment.strava_segment_id == 11307826
-                          print "-#{elapsed_time}-"
-                        end
-                        elapsed_time = segment_effort['elapsed_time']
-                        segment_avg_watts = segment_effort['average_watts']
-                      end
-                    end
-
-                    if elapsed_time == segment_effort['elapsed_time']
-                      if self.cyclist.id == 67 and segment.strava_segment_id == 11307826
-                        print "-#{elapsed_time}-"
-                      end
-                      elapsed_time = segment_effort['elapsed_time']
-                      segment_avg_watts = segment_effort['average_watts']                     
-                    end
-
-                  else
-                    pre_segment_strava_id = 0
-                    pre_elapsed_times = []
-                    if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
-                      elapsed_time = segment_effort['elapsed_time']
-                      segment_avg_watts = segment_effort['average_watts']
-                    end
+                  if elapsed_time == 0 or (elapsed_time > segment_effort['elapsed_time'] and not matched_segment_efforts.include?(segment_effort["id"]))
+                    elapsed_time = segment_effort['elapsed_time']
+                    segment_avg_watts = segment_effort['average_watts']
+                    segment_effort_id = segment_effort["id"]
                   end
                 end
               end
               self.elapsed_time += elapsed_time
               self.segment_avg_watts = self.segment_avg_watts.to_f + segment_avg_watts.to_f
-              pre_segment_strava_id = segment.strava_segment_id
-              pre_elapsed_times << elapsed_time
+              matched_segment_efforts << segment_effort_id
             end
             self.segment_avg_watts = self.segment_avg_watts / self.stage.segments.count if self.stage.segments.count > 0
           end
