@@ -40,10 +40,14 @@ class StageEffort < ActiveRecord::Base
               result_json['segment_efforts'].each do |segment_effort|
 
                 if segment_effort['segment']['id'] == segment.strava_segment_id
+
+                  #processing lap segments
                   if pre_segment_strava_id == 0 or pre_segment_strava_id == segment.strava_segment_id
+                    
                     if elapsed_time == 0 or elapsed_time > segment_effort['elapsed_time']
                       unless pre_elapsed_times.include?(segment_effort['elapsed_time']) 
-                        if self.cyclist.id == 67 and strava_segment_id == 11307826
+                        
+                        if self.cyclist.id == 67 and segment.strava_segment_id == 11307826
                           print "-#{elapsed_time}-"
                         end
                         elapsed_time = segment_effort['elapsed_time']
@@ -56,6 +60,7 @@ class StageEffort < ActiveRecord::Base
                       elapsed_time = segment_effort['elapsed_time']
                       segment_avg_watts = segment_effort['average_watts']                     
                     end
+
                   else
                     pre_segment_strava_id = 0
                     pre_elapsed_times = []
