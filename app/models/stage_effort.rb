@@ -42,6 +42,7 @@ class StageEffort < ActiveRecord::Base
                 if segment_effort['segment']['id'] == segment.strava_segment_id
                   if segment_effort['segment']['id'] == 11307826
                     print "--#{segment_effort['segment']['id']}--"
+                  end
                   if pre_segment_strava_id == 0 or pre_segment_strava_id == segment.strava_segment_id
                     if elapsed_time == 0 or elapsed_time >= segment_effort['elapsed_time']
                       unless pre_elapsed_times.include?(segment_effort['elapsed_time']) 
