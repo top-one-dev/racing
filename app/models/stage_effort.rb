@@ -56,7 +56,9 @@ class StageEffort < ActiveRecord::Base
                     end
 
                     if elapsed_time == segment_effort['elapsed_time']
-                      print "-#{elapsed_time}-"
+                      if self.cyclist.id == 67 and segment.strava_segment_id == 11307826
+                        print "-#{elapsed_time}-"
+                      end
                       elapsed_time = segment_effort['elapsed_time']
                       segment_avg_watts = segment_effort['average_watts']                     
                     end
