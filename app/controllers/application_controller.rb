@@ -67,10 +67,10 @@ class ApplicationController < ActionController::Base
   end
 
   def points_in_stage(place)
-    points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1, -1]
+    points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
     places_count = 16
     if place > places_count
-      points_array[16]
+      points_array[15]
     else
       points_array[place - 1]
     end
