@@ -49,6 +49,7 @@ class StageEffort < ActiveRecord::Base
               self.elapsed_time += elapsed_time
               self.segment_avg_watts = self.segment_avg_watts.to_f + segment_avg_watts.to_f
               matched_segment_efforts << segment_effort_id
+              print "-#{elapsed_time}-"
             end
             self.segment_avg_watts = self.segment_avg_watts / self.stage.segments.count if self.stage.segments.count > 0
           end

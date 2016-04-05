@@ -7,12 +7,17 @@ class CyclistsController < ApplicationController
     @cyclists = Cyclist.all    
 =begin
     auth_param = 'Bearer ' + '9f874434ae7ac4498258620d1a9d3d663aa4e4b0'
-    #@client = Strava::Api::V3::Client.new(:access_token => "9f874434ae7ac4498258620d1a9d3d663aa4e4b0")
-    #result = @client.retrieve_current_athlete
-    result = RestClient.get "https://www.strava.com/api/v3/activities/513157106?include_all_efforts=true", :Authorization => auth_param
-    open('activity.json', 'w') do |f|
+    @client = Strava::Api::V3::Client.new(:access_token => "9f874434ae7ac4498258620d1a9d3d663aa4e4b0")
+    result = @client.list_athlete_activities
+    open('list_athlete_activities.json', 'w') do |f|
       f.puts result
     end
+
+    auth_param = 'Bearer ' + '76c43e67e214d86876a854fb58f0a94e4e951c81'
+    result = RestClient.get "https://www.strava.com/api/v3/activities/532967080?include_all_efforts=true", :Authorization => auth_param
+    open('peter_activity_532967080.json', 'w') do |f|
+      f.puts result
+    end   
 =end
   end
 
