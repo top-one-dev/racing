@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
     return result
   end
 
+  # To use in Overall leaderboard
   def sort_cyclists_race(race)
     sorted_cyclists = []
     nil_cyclists = []
@@ -58,6 +59,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    sorted_cyclists.sort_by!{|k| k['total_time'].to_i}
     sorted_cyclists.sort_by!{|k| k['total_points'].to_i}.reverse!
     #nil_cyclists.each {|item| sorted_cyclists << item}
     #result = []
