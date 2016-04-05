@@ -28,7 +28,7 @@ class StageEffortsController < ApplicationController
 	def update				
 		respond_to do |format|
 	      if @stage_effort.update(stage_effort_params)	      		      	
-	      	#update_points1	      		      	
+	      	update_points1	      		      	
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @segment }
 	      else
@@ -41,7 +41,7 @@ class StageEffortsController < ApplicationController
 	def destroy
 		@stage_effort.destroy
 	    respond_to do |format|
-	      #update_points1
+	      update_points1
 	      format.html { redirect_to stage_results_path(@race, @stage), notice: 'Segment was successfully destroyed.' }
 	      format.json { head :no_content }
 	    end
@@ -63,7 +63,7 @@ class StageEffortsController < ApplicationController
 
 	    def update_points1
 	    	@cyclists = @race.cyclists
-			@cyclists = sort_cyclists_stage(@cyclists, @stage)			
+			#@cyclists = sort_cyclists_stage(@cyclists, @stage)			
 			index_temp = 0
 			elapsed_time_temp = 0
 	    	@cyclists.each_with_index do |cyclist, index|	  	    	  	
