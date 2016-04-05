@@ -1,8 +1,8 @@
 namespace :strava do
 	task :auto_update => :environment do
 		today = Time.now.to_date
-		#today = Date.new(2016, 4, 2)
-		#puts "Today is #{today}"
+		#today = Date.new(2016, 4, 4)
+		puts "Today is #{today}"
 		stages = Stage.all
 
 		stages.each do |stage|
@@ -20,7 +20,7 @@ namespace :strava do
 						#puts "#{cyclist.name} #{cyclist.strava_id}"
 						unless results.nil?
 							results.each do |r|
-								start_date = Date.parse(r["start_date"])
+								start_date = Date.parse(r["start_date_local"])
 								# the activity is on active days?
 								if stage.active_date <= start_date and stage.close_date >= start_date
 									#puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"

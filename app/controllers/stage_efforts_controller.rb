@@ -63,13 +63,13 @@ class StageEffortsController < ApplicationController
 
 	    def update_points1
 	    	@cyclists = @race.cyclists
-			#@cyclists = sort_cyclists_stage(@cyclists, @stage)			
+			@cyclists = sort_cyclists_stage(@cyclists, @stage)			
 			index_temp = 0
 			elapsed_time_temp = 0
 	    	@cyclists.each_with_index do |cyclist, index|	  	    	  	
 	    		stage_effort = cyclist.stage_efforts.find_by(stage_id: @stage)	    		
 	    		if stage_effort
-		    		elapsed_time = 0
+		    		#elapsed_time = 0
 		    		elapsed_time = stage_effort.elapsed_time.to_i #if stage_effort
 		    		#To dispaly 1,1, 3, 4, ..
 		    		if elapsed_time > elapsed_time_temp
