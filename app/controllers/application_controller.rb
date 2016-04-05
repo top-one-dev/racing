@@ -60,9 +60,9 @@ class ApplicationController < ActionController::Base
     end
 
     #sorted_cyclists.sort_by!{|k| k['total_points'].to_i}.reverse!
-    sorted_cyclists.sort do |a, b|
+    sorted_cyclists.sort! do |a, b|
       [b['total_points'], a['total_time']] <=> [a['total_points'], b['total_time']]
-    end 
+    end
 
     #nil_cyclists.each {|item| sorted_cyclists << item}
     #result = []
