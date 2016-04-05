@@ -59,8 +59,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    sorted_cyclists.sort_by!{|k| k['total_time'].to_i}
-    sorted_cyclists.sort_by!{|k| k['total_points'].to_i}.reverse!
+    sorted_cyclists.sort_by!{|k| [k['total_points'].to_i, k['total_time'].to_i]}
+    #sorted_cyclists.sort_by!{|k| k['total_points'].to_i}.reverse!
     #nil_cyclists.each {|item| sorted_cyclists << item}
     #result = []
     #sorted_cyclists.each {|item| result << item['cyclist']}
