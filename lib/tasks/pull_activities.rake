@@ -103,9 +103,11 @@ namespace :strava do
 								if stage.active_date <= start_date and stage.close_date >= start_date
 									#puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"
 									# request activities from strava.com
+									print "Today is #{start_date}"
 									activity_id = r["id"]
 									unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 										auth_param = 'Bearer ' + "110121abf5d6fb6165e26c48c69ea25cc8405d95"
+										print "Reading activity"
 								        begin
 									        result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
 									        result_json = JSON.parse(result)
@@ -114,17 +116,21 @@ namespace :strava do
 									    else 
 									        # match activities ids and stages segment ids
 									        matched_segment_effort_ids = []
+									        print "Matching activities"
 									        unless result_json['segment_efforts'].nil?
 									            stage.segments.each do |segment|
 									              result_json['segment_efforts'].each do |segment_effort|
 									                if segment_effort['segment']['id'] == segment.strava_segment_id	and not matched_segment_effort_ids.include?(segment_effort['id'])
 									                	matched_segment_effort_ids << segment_effort['id']
+									                	print "-#{segment_effort['id']}-"
 									                end
 									              end
 									            end
 									        end
 
 									        # If the activity includes segment efforts for segement of stage
+									        print matched_segment_effort_ids
+									        print "stage segment count is #{stage.segments.count}"
 									        if matched_segment_effort_ids.count == stage.segments.count 
 						                		puts "Stage-#{stage.name} #{stage.active_date}-#{stage.close_date}"
 						                		
