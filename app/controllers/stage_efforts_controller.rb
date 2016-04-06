@@ -41,7 +41,7 @@ class StageEffortsController < ApplicationController
 	def destroy
 		@stage_effort.destroy
 	    respond_to do |format|
-	      update_points1
+	      #update_points1
 	      format.html { redirect_to stage_results_path(@race, @stage), notice: 'Segment was successfully destroyed.' }
 	      format.json { head :no_content }
 	    end
