@@ -1,7 +1,7 @@
 namespace :strava do
 	task :auto_update => :environment do
-		today = Time.now.to_date
-		#today = Date.new(2016, 4, 5)
+		#today = Time.now.to_date
+		today = Date.new(2016, 4, 5)
 		puts "Today is #{today}"
 		stages = Stage.all
 
@@ -35,23 +35,24 @@ namespace :strava do
 									    	puts "the strava request failed."
 									    else 
 									        # match activities ids and stages segment ids
-									        matched_segment_effort_ids = []
+									        matched_segment_ids = []
 									        unless result_json['segment_efforts'].nil?
 									            stage.segments.each do |segment|
 									              result_json['segment_efforts'].each do |segment_effort|
-									                if segment_effort['segment']['id'] == segment.strava_segment_id	and not matched_segment_effort_ids.include?(segment_effort['id'])
-									                	matched_segment_effort_ids << segment_effort['id']
+									                if segment_effort['segment']['id'] == segment.strava_segment_id
+									                	matched_segment_ids << segment.strava_segment_id
+									                	break
 									                end
 									              end
 									            end
 									        end
 
 									        # If the activity includes segment efforts for segement of stage
-									        if matched_segment_effort_ids.count == stage.segments.count 
+									        if matched_segment_ids.count == stage.segments.count 
 						                		puts "Stage-#{stage.name} #{stage.active_date}-#{stage.close_date}"
 						                		puts "Joined cyclist-#{cyclist.name} #{cyclist.strava_id}"
 							                	puts "Found a new activity-start date #{r["start_date"]}, #{r["id"]}"
-							                	puts "The activity's segment is #{matched_segment_effort_ids}"
+							                	puts "The activity's segment is #{matched_segment_ids}"
 
 							                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 												stage_effort.cyclist = cyclist
