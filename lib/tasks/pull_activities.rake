@@ -120,18 +120,19 @@ namespace :strava do
 									        unless result_json['segment_efforts'].nil?
 									            stage.segments.each do |segment|
 									              result_json['segment_efforts'].each do |segment_effort|
-									                if segment_effort['segment']['id'] == segment.strava_segment_id	and not matched_segment_effort_ids.include?(segment_effort['id'])
-									                	matched_segment_effort_ids << segment_effort['id']
+									                if segment_effort['segment']['id'] == segment.strava_segment_id
+									                	matched_segment_ids << segment.strava_segment_id
 									                	print "-#{segment_effort['id']}-"
+									                	break
 									                end
 									              end
 									            end
 									        end
 
 									        # If the activity includes segment efforts for segement of stage
-									        print matched_segment_effort_ids
+									        print matched_segment_ids
 									        print "stage segment count is #{stage.segments.count}"
-									        if matched_segment_effort_ids.count == stage.segments.count 
+									        if matched_segment_ids.count == stage.segments.count 
 						                		puts "Stage-#{stage.name} #{stage.active_date}-#{stage.close_date}"
 						                		
 							                	puts "Found a new activity-start date #{r["start_date"]}, #{r["id"]}"
