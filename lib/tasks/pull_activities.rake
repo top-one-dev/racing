@@ -115,7 +115,7 @@ namespace :strava do
 									    	puts "the strava request failed."
 									    else 
 									        # match activities ids and stages segment ids
-									        matched_segment_effort_ids = []
+									        matched_segment_ids = []
 									        print "Matching activities"
 									        unless result_json['segment_efforts'].nil?
 									            stage.segments.each do |segment|
