@@ -36,11 +36,13 @@ namespace :strava do
 									    else 
 									        # match activities ids and stages segment ids
 									        matched_segment_ids = []
+									        matched_segment_effort_ids = []
 									        unless result_json['segment_efforts'].nil?
 									            stage.segments.each do |segment|
 									              result_json['segment_efforts'].each do |segment_effort|
-									                if segment_effort['segment']['id'] == segment.strava_segment_id
+									                if segment_effort['segment']['id'] == segment.strava_segment_id and not matched_segment_effort_ids.include?(segment_effort['id'])
 									                	matched_segment_ids << segment.strava_segment_id
+									                	matched_segment_effort_ids << segment_effort['id']
 									                	break
 									                end
 									              end
@@ -114,11 +116,13 @@ namespace :strava do
 									    else 
 									        # match activities ids and stages segment ids
 									        matched_segment_ids = []
+									        matched_segment_effort_ids = []
 									        unless result_json['segment_efforts'].nil?
 									            stage.segments.each do |segment|
 									              result_json['segment_efforts'].each do |segment_effort|
-									                if segment_effort['segment']['id'] == segment.strava_segment_id
+									                if segment_effort['segment']['id'] == segment.strava_segment_id and not matched_segment_effort_ids.include?(segment_effort['id'])
 									                	matched_segment_ids << segment.strava_segment_id
+									                	matched_segment_effort_ids << segment_effort['id']
 									                	break
 									                end
 									              end
