@@ -25,8 +25,8 @@ namespace :strava do
 								if stage.active_date <= start_date and stage.close_date >= start_date
 									#puts "-----matched activity start on #{r["start_date"]}, #{r["id"]}------"
 									# request activities from strava.com
+									activity_id = r["id"]
 									unless stage.stage_efforts.exists?(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
-										activity_id = r["id"]
 										auth_param = 'Bearer ' + cyclist.access_token
 								        begin
 									        result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
