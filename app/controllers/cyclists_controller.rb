@@ -6,19 +6,18 @@ class CyclistsController < ApplicationController
   def index
     @cyclists = Cyclist.all    
 =begin
-    auth_param = 'Bearer ' + '9f874434ae7ac4498258620d1a9d3d663aa4e4b0'
-    @client = Strava::Api::V3::Client.new(:access_token => "9f874434ae7ac4498258620d1a9d3d663aa4e4b0")
+    @client = Strava::Api::V3::Client.new(:access_token => "f4d2110fa049267d3d49a4e2fea2d8b51329fb6c")
     result = @client.list_athlete_activities
-    open('list_athlete_activities.json', 'w') do |f|
+    open('list_athlete_activities_donald.json', 'w') do |f|
       f.puts result
     end
-
-    auth_param = 'Bearer ' + '76c43e67e214d86876a854fb58f0a94e4e951c81'
-    result = RestClient.get "https://www.strava.com/api/v3/activities/532967080?include_all_efforts=true", :Authorization => auth_param
-    open('peter_activity_532967080.json', 'w') do |f|
+=end
+    auth_param = 'Bearer ' + '110121abf5d6fb6165e26c48c69ea25cc8405d95'
+    result = RestClient.get "https://www.strava.com/api/v3/activities/536457093?include_all_efforts=true", :Authorization => auth_param
+    open('fred_activity_536457093.json', 'w') do |f|
       f.puts result
     end   
-=end
+
   end
 
   # GET /cyclists/1
