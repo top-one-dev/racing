@@ -51,7 +51,7 @@ namespace :strava do
 						                		puts "Stage-#{stage.name} #{stage.active_date}-#{stage.close_date}"
 						                		puts "Joined cyclist-#{cyclist.name} #{cyclist.strava_id}"
 							                	puts "Found a new activity-start date #{r["start_date"]}, #{r["id"]}"
-							                	puts "The activity's segment is #{segment_effort['segment']['id']}"
+							                	puts "The activity's segment is #{matched_segment_effort_ids}"
 
 							                  	stage_effort = stage.stage_efforts.build(:strava_activity_url => "https://www.strava.com/activities/" + activity_id.to_s)
 												stage_effort.cyclist = cyclist
