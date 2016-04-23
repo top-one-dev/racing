@@ -27,10 +27,12 @@ class StageEffort < ActiveRecord::Base
           #self.segment_avg_watts = nil
           print "Connecting strava.com failed"
         else
-          self.elapsed_time = 0
+          #self.elapsed_time = 0
+          elapsed_time_sum = 0
           segment_effort_id = 0
           matched_segment_efforts = []
-          self.segment_avg_watts = 0
+          #self.segment_avg_watts = 0
+          segment_avg_watts_sum = 0
 
           unless result_json['segment_efforts'].nil?
 
@@ -49,13 +51,19 @@ class StageEffort < ActiveRecord::Base
                   end
                 end
               end
-              self.elapsed_time += elapsed_time
-              self.segment_avg_watts = self.segment_avg_watts.to_f + segment_avg_watts.to_f
+              elapsed_time_sum += elapsed_time
+              segment_avg_watts_sum = segment_avg_watts_sum.to_f + segment_avg_watts.to_f
               matched_segment_efforts << segment_effort_id
-              #print "-#{elapsed_time}-"
-              #print "-#{segment_effort_id}-"
             end
-            self.segment_avg_watts = self.segment_avg_watts / self.stage.segments.count if self.stage.segments.count > 0
+
+            if matched_segment_efforts.count == self.stage.segments.count
+              self.elapsed_time = elapsed_time_sum
+              self.segment_avg_watts = segment_avg_watts_sum
+              self.segment_avg_watts = self.segment_avg_watts / self.stage.segments.count if self.stage.segments.count > 0
+            else
+              self.elapsed_time = 0
+              self.segment_avg_watts = 0
+            end            
           end
         end
       end
