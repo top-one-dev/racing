@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
       total_points = 0
       stage_effort = nil
 
-      race.stages.each do |stage, ix_stage|
+      race.stages.each_with_index do |stage, ix_stage|
         stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
         if stage_effort
           total_time = total_time + stage_effort.elapsed_time.to_i
