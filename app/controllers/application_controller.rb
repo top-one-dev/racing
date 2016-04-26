@@ -71,17 +71,19 @@ class ApplicationController < ActionController::Base
       if total_time > 0
         sorted_cyclists << { 'cyclist' => cyclist, 'total_time' => total_time, 'total_points' => total_points} 
       else
-        nil_cyclists <<  { 'cyclist' => cyclist,  'total_time' => 0, 'total_points' => nil} 
+        nil_cyclists <<  { 'cyclist' => cyclist,  'total_time' => 'DNF', 'total_points' => total_points} 
       end
     end
+
+    nil_cyclists.sort_by!{|a| a['total_points']}
 
     #sorted_cyclists.sort_by!{|k| k['total_points'].to_i}.reverse!
     sorted_cyclists.sort! do |a, b|
       [a['total_points'], a['total_time']] <=> [b['total_points'], b['total_time']]
     end
 
-    return sorted_cyclists
-  end
+    return sorted_cyclists + nil_cyclists
+  end 
 
   def points_in_stage(place)
     points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
