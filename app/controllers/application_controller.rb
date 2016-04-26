@@ -43,15 +43,14 @@ class ApplicationController < ActionController::Base
   def sort_cyclists_race(race)
     sorted_cyclists = []
     nil_cyclists = []
-    max_points = 0
+    stage_max_points = []
 
-    race.cyclists.each_with_index do |cyclist, index|      
-      race.stages.each do |stage|
+    race.stages.each do |stage, index|
+      stage_max_points[index] = 1
+      race.cyclists.each_with_index do |cyclist|      
         stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
-        if stage_effort
-          max_points = max_points + 1
-        end
-      end      
+        stage_max_points[index] = stage_max_points[index] + 1 if stage_effort
+      end
     end
 
     race.cyclists.each_with_index do |cyclist, index|      
@@ -59,18 +58,15 @@ class ApplicationController < ActionController::Base
       total_points = 0
       stage_effort = nil
 
-      race.stages.each do |stage|
+      race.stages.each do |stage, ix_stage|
         stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
         if stage_effort
           total_time = total_time + stage_effort.elapsed_time.to_i
           total_points = total_points + stage_effort.points.to_i
         else
-          break
+          #break
+          total_points = total_points + stage_max_points[ix_stage]
         end
-      end      
-
-      if stage_effort.nil?
-        total_points = total_points + max_points
       end
 
       if total_time > 0
