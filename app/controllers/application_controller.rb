@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   def sort_cyclists_race(race)
     sorted_cyclists = []
     nil_cyclists = []
-    stage_max_points = []
+    stage_max_points = Array.new(race.stages.count)
 
     race.stages.each do |stage, index|
       stage_max_points[index] = 1
