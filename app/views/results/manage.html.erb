@@ -57,17 +57,6 @@
       %>
         <td><%= index + 1 %></td>
         <td>
-        <%
-=begin        
-          total_time = 0
-          total_points = 0
-          @race.stages.each do |stage|
-            stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
-            total_time = total_time + stage_effort.elapsed_time.to_i if stage_effort
-            total_points = total_points + stage_effort.points.to_i if stage_effort
-          end      
-=end          
-        %>
         <%= item['total_points'] %>
         </td>      
         <td><%= item['cyclist'].name %></td>
