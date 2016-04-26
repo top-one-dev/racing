@@ -43,10 +43,9 @@ class ApplicationController < ActionController::Base
   def sort_cyclists_race(race)
     sorted_cyclists = []
     nil_cyclists = []
-    stage_max_points = Array.new(10)
+    stage_max_points = Array.new(10, 1)
 
     race.stages.each do |stage, index|
-      stage_max_points[index] = 1
       race.cyclists.each_with_index do |cyclist|      
         stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
         stage_max_points[index] = stage_max_points[index] + 1 if stage_effort
