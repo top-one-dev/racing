@@ -61,7 +61,7 @@
         </td>      
         <td><%= item['cyclist'].name %></td>
         <td>
-          <%= Time.at(item['total_time']).utc.strftime('%H:%M:%S') %>
+          <%= Time.at(item['total_time']).utc.strftime('%H:%M:%S') if item['total_time'] != "DNF" %>
         </td>  
       </tr>
     <% end %>
