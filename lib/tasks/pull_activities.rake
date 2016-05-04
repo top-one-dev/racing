@@ -81,7 +81,7 @@ namespace :strava do
 
 	task :manual_update => :environment do
 		#today = Time.now.to_date
-		today = Date.new(2016, 4, 1)
+		today = Date.new(2016, 5, 1)
 		puts "Today is #{today}"
 		stages = Stage.all
 
