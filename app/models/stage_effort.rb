@@ -25,7 +25,7 @@ class StageEffort < ActiveRecord::Base
         	#self.elapsed_time = nil        
           #self.segment_avg_watts_per_kg = nil
           #self.segment_avg_watts = nil
-          print "Connecting strava.com failed"
+          print "Connecting strava.com failed."
         else
           #self.elapsed_time = 0
           elapsed_time_sum = 0
