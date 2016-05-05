@@ -1,12 +1,14 @@
 namespace :strava do
 	task :auto_update => :environment do
 		today = Time.now.to_date
+
 		#today = Date.new(2016, 4, 5)
 		puts "Today is #{today}"
 		stages = Stage.all
 
 		stages.each do |stage|
-			if stage.active_date <= today and stage.close_date >= today
+			# check if stage is open by now
+			if stage.active_date <= today and (Time.now - stage.close_date.to_time) / 3600 <= 8 
 				cyclists = stage.race.cyclists
 				segments = stage.segments
 				#puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
@@ -86,7 +88,7 @@ namespace :strava do
 		stages = Stage.all
 
 		stages.each do |stage|
-			if stage.active_date <= today and stage.close_date >= today
+			if stage.active_date <= today and (Time.now - stage.close_date.to_time) / 3600 <= 8 
 				cyclists = stage.race.cyclists
 				segments = stage.segments
 				#puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
