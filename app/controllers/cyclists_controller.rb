@@ -12,12 +12,13 @@ class CyclistsController < ApplicationController
       f.puts result
     end
 =end
-    auth_param = 'Bearer ' + '110121abf5d6fb6165e26c48c69ea25cc8405d95'
-    result = RestClient.get "https://www.strava.com/api/v3/activities/536457093?include_all_efforts=true", :Authorization => auth_param
-    open('fred_activity_536457093.json', 'w') do |f|
+=begin
+    auth_param = 'Bearer ' + 'b9405ea739177180f34b207826b64e801a024ca6'
+    result = RestClient.get "https://www.strava.com/api/v3/activities/565825056?include_all_efforts=true", :Authorization => auth_param
+    open('tyler_activity_565825056.json', 'w') do |f|
       f.puts result
     end   
-
+=end
   end
 
   # GET /cyclists/1
