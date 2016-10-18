@@ -41,10 +41,10 @@
 	<div class="container">
 		<%= yield %>
 	</div>
-
+<%= current_time = DateTime.now %>
   <footer>
     <div class="container">
-      GPS Racing 2015
+      Hammerfest &copy; <%= current_time.strftime "%Y" %>
     </div>
   </footer>
 </body>
