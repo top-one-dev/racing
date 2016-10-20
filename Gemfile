@@ -29,8 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'simple_form'
 gem 'bootstrap-sass'
-# gem 'strava-api-v3', '~> 0.1.0'
-# gem 'omniauth-strava'
+gem 'strava-api-v3', '~> 0.1.0'
+gem 'omniauth-strava'
 gem 'rest-client'
 gem 'json'
 gem 'bcrypt-ruby', :require => 'bcrypt' 
