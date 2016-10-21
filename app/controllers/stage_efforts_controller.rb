@@ -11,7 +11,9 @@ class StageEffortsController < ApplicationController
 
 	    respond_to do |format|
 	      if @stage_effort.save
-	      	update_points1
+	      	unless @race.start_date.nil? && @race.end_date.nil?
+		      	update_points1
+		    end
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully created.' }
 	        format.json { render :show, status: :created, location: @segment }
 	      else
@@ -27,8 +29,11 @@ class StageEffortsController < ApplicationController
 
 	def update				
 		respond_to do |format|
-	      if @stage_effort.update(stage_effort_params)	      		      	
-	      	update_points1	      		      	
+	      if @stage_effort.update(stage_effort_params)
+	      unless @race.start_date.nil? && @race.end_date.nil?
+	      	update_points1		      	      		      		
+	      end	      		      	
+	      	      		      	
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @segment }
 	      else
