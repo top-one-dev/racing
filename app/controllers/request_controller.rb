@@ -6,6 +6,8 @@ class RequestController < ApplicationController
 	  	 unless @url.nil?	  		
 		 	@result = RestClient.get URI.decode(@url), :Authorization => auth_param		  	
 	  	 end
-  		end 		
+  		end
+
+  		 		
 	end
 end

@@ -8,5 +8,5 @@
   </div>
 <% end %>
 <div>
-	<%= @result.to_s unless @result.nil? %>
+	<%=render json: @result unless @result.nil? %>
 </div>
