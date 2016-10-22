@@ -5,7 +5,7 @@ class StaticsController < ApplicationController
   end
 
   def request
-  	@url = params[:request][:request_url] unless params[:request][:request_url].nil? 	
+  	@url = params[:request][:request_url] if defined? params[:request][:request_url]
   	@url = URI.decode(@url) unless @url.nil?
   	auth_param = "Bearer #{session[:access_token]}"
   	begin
