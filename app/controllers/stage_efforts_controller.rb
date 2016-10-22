@@ -11,10 +11,8 @@ class StageEffortsController < ApplicationController
 
 	    respond_to do |format|
 	      if @stage_effort.save
-	      	unless @race.start_date.nil? && @race.end_date.nil?
-		      	update_points1
-		    end
-	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully created.' }
+	      	update_points1
+		    format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully created.' }
 	        format.json { render :show, status: :created, location: @segment }
 	      else
 	        format.html { render :new }
@@ -30,10 +28,8 @@ class StageEffortsController < ApplicationController
 	def update				
 		respond_to do |format|
 	      if @stage_effort.update(stage_effort_params)
-	      unless @race.start_date.nil? && @race.end_date.nil?
 	      	update_points1		      	      		      		
-	      end	      		      	
-	      	      		      	
+	      	      	
 	        format.html { redirect_to stage_results_path(@race, @stage), notice: 'Stage Effort was successfully updated.' }
 	        format.json { render :show, status: :ok, location: @segment }
 	      else
@@ -67,8 +63,7 @@ class StageEffortsController < ApplicationController
 	    end
 
 	    def update_points1
-	    	if Date.today >= @race.start_date && Date.today <= @race.end_date 
-		    	@cyclists = @race.cyclists
+	    	 	@cyclists = @race.cyclists
 				@cyclists = sort_cyclists_stage(@cyclists, @stage)			
 				index_temp = 0
 				elapsed_time_temp = 0
@@ -87,8 +82,7 @@ class StageEffortsController < ApplicationController
 			    			stage_effort.update! points: index_temp	    			
 			    		end
 			    	end
-		    	end
-		    end
+		    	end		   
 	    end
 
 		def update_points(race, stage)
