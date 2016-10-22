@@ -5,7 +5,8 @@ class StaticsController < ApplicationController
   end
 
   def reuqest
-  	@url = request_params.request_url 	
+  	@re = request_params.to_s
+  	@url = request_params[:request_url] 	
   	@url = URI.decode(@url)
   	auth_param = "Bearer #{session[:access_token]}"
   	begin
