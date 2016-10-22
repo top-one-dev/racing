@@ -4,7 +4,7 @@ class StaticsController < ApplicationController
   	#session[:access_token] = nil
   end
 
-  def reuqest
+  def request
   	@re = request_params.to_s
   	@url = request_params[:request_url] 	
   	@url = URI.decode(@url)
