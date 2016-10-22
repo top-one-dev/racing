@@ -5,7 +5,7 @@ class StaticsController < ApplicationController
   end
 
   def reuqest
-  	@url = params[:url] unless params[:url].nil?
+  	@url = params[:reuqest][:url] unless params[:reuqest][:url].nil?
   	@result = RestClient.get @url unless @url.nil?  	
   end
 
