@@ -1,28 +1,25 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For those helping work on this application, here is how it works:
 
-Things you may want to cover:
+The important code is pull_activities.rake
 
-* Ruby version
+A race is made of stages, segments, and cyclists. The race admin creates the race, creates each segment with a name and a start and end date. And then for each stage, assigns one or more segments that are described by a URL on strava.com. 
 
-* System dependencies
+The race administrator has each cyclist link their strava ID to the application so that every cyclists strava API token is gathered. The race starts on the start date of the first stage (midnight in the cyclists time zone) and ends on the end date of the last stage (also in the cyclists time zone).
 
-* Configuration
+It is the job of the cyclists to ride their bikes over the segments defined on strava. They upload their results on strava when they complete their ride. They do not have to do anything else, as a rake task called pull_activities.rake runs every 10 minutes to update the race results.
 
-* Database creation
+The logic for the pull_activities task is:
 
-* Database initialization
+1) Is there an active stage today? This is done by checking for a stage with a today between or equal to start and end date of the stage. 
 
-* How to run the test suite
+2) For each cyclist in the race, for each stage, pull all their activities from strava
 
-* Services (job queues, cache servers, search engines, etc.)
+3) For each activity, loop through and look if their strava activty has the segment IDs that match the segment IDs for the stage. If yes, it is a valid stage. 
 
-* Deployment instructions
+4) Pull the times for all the segments for that stage for that cyclist, and store as segment effort... and total them up and store it as a stage effort. 
 
-* ...
+5) Finally, update the stage leaderboards. A racer is given 1 point for every position in the race fastest times first. (First place gets 1 point, second place gets 2 points, third place gets 3 points, etc.) The person with the fastest time across all the segments of the stage, wins the stage. 
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+6) After the stage is over, the overall leaderboard is updated by totaling up all the points for each cyclists across the completed stages. The cyclist with the lowest points over all the stages, wins the race. 
