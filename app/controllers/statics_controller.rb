@@ -5,13 +5,16 @@ class StaticsController < ApplicationController
   end
 
   def request
-  	@url = params[:request][:request_url] if defined? params[:request][:request_url]
-  	@url = URI.decode(@url) unless @url.nil?
-  	auth_param = "Bearer #{session[:access_token]}"
-  	begin
-  		@result = RestClient.get @url, :Authorization => auth_param
-  	rescue 
-  		puts "the strava request failed."
+  	if defined? params[:request][:request_url]
+	  	@url = params[:request][:request_url] 
+	  	auth_param = "Bearer #{session[:access_token]}"
+	  	unless @url.nil?
+	  		begin
+		  		@result = RestClient.get URI.decode(@url), :Authorization => auth_param
+		  	rescue 
+		  		puts "the strava request failed."
+		  	end
+	  	end
   	end  		
   end  
 end
