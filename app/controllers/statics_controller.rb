@@ -5,16 +5,18 @@ class StaticsController < ApplicationController
   end
 
   def reuqest
-  	@url = params[:request][:request_url]
-  	
+  	@url = request_params.request_url 	
   	@url = URI.decode(@url)
   	auth_param = "Bearer #{session[:access_token]}"
   	begin
   		@result = RestClient.get @url, :Authorization => auth_param
   	rescue 
   		puts "the strava request failed."
-  	end
-  		
+  	end  		
+  end
+
+  def request_params
+      params.require(:request).permit(:request_url)
   end
 
 end

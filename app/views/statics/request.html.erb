@@ -10,7 +10,7 @@
 <hr>
 <div>
 <%= session[:access_token].to_s %>
-<%= @url %>
+<%= "url = #{@url}" %>
 <hr>
 	<%= @result.to_s unless @result.nil? %>
 </div>
