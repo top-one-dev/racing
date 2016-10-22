@@ -1,0 +1,13 @@
+<%= simple_form_for() do |f| %>
+  <div class="form-inputs">
+    <%= f.input :url %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, value: "Send Request" %>
+  </div>
+<% end %>
+<hr>
+<div>
+	<%= @result if @result.nil? %>
+</div>
