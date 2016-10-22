@@ -103,7 +103,12 @@ class StageEffortsController < ApplicationController
 				        end
 				        if index_temp > 0           
 				          #stage_effort.update! points: points_in_stage(index_temp)
-				          stage_effort.update! points: index_temp       
+				          if stage_effort.update! points: index_temp
+				          		puts "success to update"
+				          	else
+				          		puts "failure to update"
+				          end
+
 				        end
 				      end
 				    end
