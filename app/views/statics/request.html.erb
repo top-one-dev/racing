@@ -7,10 +7,6 @@
     <%= f.button :submit, value: "Send Request" %>
   </div>
 <% end %>
-<hr>
 <div>
-<%= session[:access_token].to_s %>
-<%= @re %>
-<hr>
 	<%= @result.to_s unless @result.nil? %>
 </div>
