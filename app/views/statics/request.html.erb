@@ -9,5 +9,7 @@
 <% end %>
 <hr>
 <div>
+<%= session[:access_token].to_s %>
+<hr>
 	<%= @result.to_s unless @result.nil? %>
 </div>
