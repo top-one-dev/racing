@@ -5,9 +5,9 @@ class StaticsController < ApplicationController
   end
 
   def reuqest
-  	@url = params[:reuqest][:request_url] unless params[:reuqest][:request_url].nil?
+  	@url = params[:request][:request_url] unless params[:request][:request_url].nil? 
   	
-  	@url = URI.decode(@url)
+  	@url = URI.decode(@url) unless @url.nil?
   	auth_param = "Bearer #{session[:access_token]}"
   	begin
   		@result = RestClient.get @url, :Authorization => auth_param
