@@ -88,7 +88,7 @@ class StageEffortsController < ApplicationController
 		def update_points(race, stage)
 			# unless race.start_date.nil? && race.end_date.nil?
 			# 	if Date.today >= race.start_date && Date.today <= race.end_date
-			# 	    cyclists = race.cyclists
+			 	    cyclists = race.cyclists
 				    cyclists = sort_cyclists_stage(cyclists, stage)      
 				    index_temp = 0
 				    elapsed_time_temp = 0
