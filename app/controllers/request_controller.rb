@@ -4,7 +4,7 @@ class RequestController < ApplicationController
 	end
 
 	def athlet
-		@title = 'Athlet JSON Preview'
+		@title = 'Athlete JSON Preview'
 		if defined? params[:request][:request_url]
 	  	@url = params[:request][:request_url] 
 	  	auth_param = "Bearer #{session[:access_token]}"
