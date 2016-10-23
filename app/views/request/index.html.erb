@@ -9,6 +9,6 @@
 <% end %>
 <div style="padding-top: 10px; overflow-wrap: break-word;">
 	<p style="border-radius: 10px; background: #D6D6D6; padding: 10px; box-shadow: 0 0 3px gray;">
-	<%= @result.as_json unless @result.nil? %>
+	<%= json_render @result unless @result.nil? %>
 	</p>
 </div>
