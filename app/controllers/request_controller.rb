@@ -4,7 +4,8 @@ class RequestController < ApplicationController
 	  	@url = params[:request][:request_url] 
 	  	auth_param = "Bearer #{session[:access_token]}"
 	  	 unless @url.nil?	  		
-		 	@result = RestClient.get URI.decode(@url), :Authorization => auth_param		  	
+		 	@result = RestClient.get URI.decode(@url), :Authorization => auth_param
+		 	@result = json_render @result unless @request.nil?	  	
 	  	 end
   		end  		 		
 	end
