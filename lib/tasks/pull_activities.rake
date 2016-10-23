@@ -1,7 +1,6 @@
 namespace :strava do
 	task :auto_update => :environment do
 		today = Time.now.to_date
-
 		#today = Date.new(2016, 4, 5)
 		puts "Today is #{today}"
 		stages = Stage.all

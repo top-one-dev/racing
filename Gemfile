@@ -33,7 +33,8 @@ gem 'strava-api-v3', '~> 0.1.0'
 gem 'omniauth-strava'
 gem 'rest-client'
 gem 'json'
-gem 'bcrypt-ruby', :require => 'bcrypt' 
+gem 'bcrypt-ruby', :require => 'bcrypt'
+ 
 #gem 'whenever', :require => false
 
 # Use ActiveModel has_secure_password

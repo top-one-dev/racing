@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/deauth', to: 'sessions#deauth'
   #get '/deauth', to: 'sessions#reset_token'
   #resources :stage_efforts
+  
   get '/request', to: 'request#index', as: 'request'
   
   resources :races, path: '/admin/races' do
