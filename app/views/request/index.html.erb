@@ -1,14 +1,3 @@
-<%= simple_form_for(:request, :method => :get) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :request_url %>
-  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, value: "Send Request" %>
-  </div>
-<% end %>
-<div style="padding-top: 10px; overflow-wrap: break-word;">
-	<p style="border-radius: 10px; background: #D6D6D6; padding: 10px 20px; box-shadow: 0 0 3px gray;">
-	<%= raw(@result.gsub(',"', ',<br>"').gsub('{"', '{<br>"')) unless @result.nil? %>
-	</p>
-</div>
+
+
