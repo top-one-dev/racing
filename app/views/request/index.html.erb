@@ -9,6 +9,6 @@
 <% end %>
 <div style="padding-top: 10px; overflow-wrap: break-word;">
 	<p style="border-radius: 10px; background: #D6D6D6; padding: 10px; box-shadow: 0 0 3px gray;">
-	<%= @result.to_s.gsub('",', '",<br>') unless @result.nil? %>
+	<%= @result.to_s.gsub('",', '",<br>'.html_safe) unless @result.nil? %>
 	</p>
 </div>
