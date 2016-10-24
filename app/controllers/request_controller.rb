@@ -6,7 +6,7 @@ class RequestController < ApplicationController
 	def athlet
 		@title = 'Athlete JSON Preview'
 		if defined? params[:request][:request_url]
-	  	@url = params[:request][:request_url] 
+	  	@url = params[:request][:request_url].gsub('.com', '.com/api/v3') 
 	  	auth_param = "Bearer #{session[:access_token]}"
 	  	 unless @url.nil?	  		
 		 	@result = RestClient.get URI.decode(@url), :Authorization => auth_param		
@@ -17,7 +17,7 @@ class RequestController < ApplicationController
 	def activity
 		@title = 'Activity JSON Preview'
 		if defined? params[:request][:request_url]
-	  	@url = params[:request][:request_url] 
+	  	@url = params[:request][:request_url].gsub('.com', '.com/api/v3') 
 	  	auth_param = "Bearer #{session[:access_token]}"
 	  	 unless @url.nil?	  		
 		 	@result = RestClient.get URI.decode(@url), :Authorization => auth_param		
