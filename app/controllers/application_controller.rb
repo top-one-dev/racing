@@ -59,16 +59,16 @@ class ApplicationController < ActionController::Base
 
       race.stages.each_with_index do |stage, ix_stage|
         today = Time.now.to_date
-        if stage.close_date >= today
+        # if stage.close_date >= today
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
           if stage_effort
-            total_time = total_time + stage_effort.elapsed_time.to_i unless stage_effort.elapsed_time.nil?
-            total_points = total_points + stage_effort.points.to_i unless stage_effort.elapsed_time.nil?
+            total_time = total_time + stage_effort.elapsed_time.to_i
+            total_points = total_points + stage_effort.points.to_i
           else
             #break
             total_points = total_points + stage_max_points[ix_stage]
           end
-        end
+        # end
       end
 
       if total_time > 0
