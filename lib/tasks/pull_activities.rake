@@ -6,8 +6,8 @@ namespace :strava do
 		stages = Stage.all
 
 		stages.each do |stage|
-			# check if stage is open by now
-			if stage.active_date <= today and (Time.now - stage.close_date.to_time) / 3600 <= 8 
+			# check if stage is open by now // and (Time.now - stage.close_date.to_time) / 3600 <= 8 
+			if stage.active_date <= today and today <= stage.close_date
 				cyclists = stage.race.cyclists
 				segments = stage.segments
 				#puts "#{stage.name} #{stage.active_date} #{stage.close_date} "
