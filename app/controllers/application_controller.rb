@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
 
       race.stages.each_with_index do |stage, ix_stage|
         today = Time.now.to_date
-        if end_date >= today
+        if end_date.to_date >= today
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
           if stage_effort
             total_time = total_time + stage_effort.elapsed_time.to_i
