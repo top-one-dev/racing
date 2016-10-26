@@ -62,10 +62,8 @@ class ApplicationController < ActionController::Base
         if stage.close_date >= today
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
           if stage_effort
-            total_time = total_time + stage_effort.elapsed_time.to_i unless stage_effort.elapsed_time == 'DNF'
-            total_points = total_points + stage_effort.points.to_i unless stage_effort.elapsed_time == 'DNF'
-            total_time = total_time if stage_effort.elapsed_time == 'DNF'
-            total_points = total_points if stage_effort.elapsed_time == 'DNF'
+            total_time = total_time + stage_effort.elapsed_time.to_i
+            total_points = total_points + stage_effort.points.to_i
           else
             #break
             total_points = total_points + stage_max_points[ix_stage]
