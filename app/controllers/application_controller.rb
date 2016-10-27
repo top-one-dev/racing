@@ -58,8 +58,8 @@ class ApplicationController < ActionController::Base
       stage_effort = nil
 
       race.stages.each_with_index do |stage, ix_stage|
-        today = Time.now.to_date
-        if race.stages.last.close_date >= today
+        today = Time.now.to_date # race.stages.last.close_date
+        if stage.close_date >= today
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
           if stage_effort
             total_time = total_time + stage_effort.elapsed_time.to_i
@@ -86,7 +86,66 @@ class ApplicationController < ActionController::Base
     end
 
     return sorted_cyclists + nil_cyclists
-  end 
+  end
+
+  # To use in Overall leaderboard by Tom Jean
+  def sort_cyclists_race_stage(race, current_stage)
+    sorted_cyclists = []
+    nil_cyclists = []
+    stage_max_points = Array.new(race.stages.count, 1)
+
+    race.stages.each_with_index do |stage, index|
+      race.cyclists.each do |cyclist|      
+        stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
+        stage_max_points[index] = stage_max_points[index] + 1 if stage_effort
+      end
+      break if stage == current_stage # condition to determine which stage is 
+    end
+
+    race.cyclists.each_with_index do |cyclist, index|      
+      total_time = 0
+      total_points = 0
+      stage_effort = nil
+
+      race.stages.each_with_index do |stage, ix_stage|
+        today = Time.now.to_date # race.stages.last.close_date
+        if race.stages.last.close_date >= today
+          stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
+          if stage_effort
+            total_time = total_time + stage_effort.elapsed_time.to_i
+            total_points = total_points + stage_effort.points.to_i
+          else
+            #break
+            total_points = total_points + stage_max_points[ix_stage]
+          end
+        end
+        break if stage == current_stage # condition to determine which stage is 
+      end
+
+      if total_time > 0
+        sorted_cyclists << { 'cyclist' => cyclist, 'total_time' => total_time, 'total_points' => total_points} 
+      else
+        nil_cyclists <<  { 'cyclist' => cyclist,  'total_time' => 'DNF', 'total_points' => total_points} 
+      end
+    end
+
+    nil_cyclists.sort_by!{|a| a['total_points']}
+
+    #sorted_cyclists.sort_by!{|k| k['total_points'].to_i}.reverse!
+    sorted_cyclists.sort! do |a, b|
+      [a['total_points'], a['total_time']] <=> [b['total_points'], b['total_time']]
+    end
+
+    return sorted_cyclists + nil_cyclists
+  end
+
+  # Overall leaderboard result for each stage... by Tom Jean
+  def sort_cyclists_race_stage(race)
+    sorted_cyclists_stage = [] 
+    race.stages.each do |stage|
+      sorted_cyclists_stage << sort_cyclists_race_stage (race, stage)
+    end
+  end  
 
   def points_in_stage(place)
     points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1]

@@ -32,42 +32,57 @@
 <br>
 <h3>Overall Leaderboard</h3>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Place</th>
-      <th>Points</th>
-      <th>Name</th>
-      <th>Total time</th>
-    </tr>
-  </thead>
+<ul class="nav nav-tabs">
+  <% @sorted_cyclists_race_stage.each_with_index do |index| %>
+    <li><a data-toggle="tab" href="#stage<%= index %>" class = "<% if index == 0 %> active <% end %>" >Stage <%= index %></a></li>
+  <% end %>
+</ul>
 
-  <tbody>
-    <% 
-      index_tmp = 0
-      total_points_temp = 0
-    %>
-    <% @sorted_cyclists_race.each_with_index do |item, index| %>    
-      <tr>      
-      <%
-      if total_points_temp == 0 or total_points_temp > item['total_points']
-        total_points_temp = item['total_points']
-        index_tmp = index + 1
-      end
-      %>
-        <td><%= index + 1 %></td>
-        <td>
-        <%= item['total_points'] %>
-        </td>      
-        <td><%= item['cyclist'].name %></td>
-        <td>
-          <% if item['total_time'] != "DNF" %>
-          <%= Time.at(item['total_time']).utc.strftime('%H:%M:%S')  %>
-          <% else %>
-          <%= "DNF" %>
+<div class="tab-content">
+  <% @sorted_cyclists_race_stage.each_with_index do |item, index| %>
+    <div id="stage<%= index %>" class="tab-pane fade in <% if index == 0 %> active <% end %>">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th>Points</th>
+            <th>Name</th>
+            <th>Total time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% 
+            index_tmp = 0
+            total_points_temp = 0
+          %>
+          <% item.each_with_index do |item_x, index_x| %>    
+            <tr>      
+            <%
+            if total_points_temp == 0 or total_points_temp > item_x['total_points']
+              total_points_temp = item_x['total_points']
+              index_tmp = index_x + 1
+            end
+            %>
+              <td><%= index_x + 1 %></td>
+              <td>
+              <%= item_x['total_points'] %>
+              </td>      
+              <td><%= item_x['cyclist'].name %></td>
+              <td>
+                <% if item_x['total_time'] != "DNF" %>
+                <%= Time.at(item_x['total_time']).utc.strftime('%H:%M:%S')  %>
+                <% else %>
+                <%= "DNF" %>
+                <% end %>
+              </td>  
+            </tr>
           <% end %>
-        </td>  
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </tbody>
+      </table>
+    </div>
+  <% end %>  
+</div>
+
+
+
