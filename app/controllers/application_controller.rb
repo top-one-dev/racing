@@ -92,15 +92,14 @@ class ApplicationController < ActionController::Base
   def sort_cyclists_race_stage(race, current_stage)
     sorted_cyclists = []
     nil_cyclists = []
-    stage_max_points = Array.new(race.stages.count, 1)
+    stage_max_points = Array.new(race.stages.count, 0)
 
     race.stages.each_with_index do |stage, index|
-      break if stage == current_stage # condition to determine which stage is 
       race.cyclists.each do |cyclist|      
         stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
         stage_max_points[index] = stage_max_points[index] + 1 if stage_effort
       end
-      
+      break if stage == current_stage # condition to determine which stage is 
     end
 
     race.cyclists.each_with_index do |cyclist, index|      
