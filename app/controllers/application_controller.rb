@@ -95,11 +95,12 @@ class ApplicationController < ActionController::Base
     stage_max_points = Array.new(race.stages.count, 1)
 
     race.stages.each_with_index do |stage, index|
+      break if stage == current_stage # condition to determine which stage is 
       race.cyclists.each do |cyclist|      
         stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
         stage_max_points[index] = stage_max_points[index] + 1 if stage_effort
       end
-      break if stage == current_stage # condition to determine which stage is 
+      
     end
 
     race.cyclists.each_with_index do |cyclist, index|      
