@@ -34,7 +34,7 @@
 
 <ul class="nav nav-tabs">
   <% @sorted_cyclists_race_stage.each_with_index do |item, index| %>
-    <li><a data-toggle="tab" href="#stage<%= index %>" class = "<% if index == 0 %> active <% end %>" >Stage <%= index %></a></li>
+    <li><a data-toggle="tab" href="#stage<%= index %>" class = "<% if index == 0 %> active <% end %>" >Stage <%= index + 1 %></a></li>
   <% end %>
 </ul>
 
