@@ -143,7 +143,8 @@ class ApplicationController < ActionController::Base
   def sort_cyclists_race_stage_list(race)
     sorted_cyclists_stage = [] 
     race.stages.each do |stage|
-      sorted_cyclists_stage << sort_cyclists_race_stage (race, stage)
+      item = sort_cyclists_race_stage(race, stage)
+      sorted_cyclists_stage << item
     end
   end  
 
