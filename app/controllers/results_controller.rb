@@ -7,7 +7,7 @@ class ResultsController < ApplicationController
   	@race = Race.find(params[:id])
     #@cyclists = sort_cyclists_race(@race)
     #@sorted_cyclists_race = sort_cyclists_race(@race)
-    @sorted_cyclists_race_stage = sorted_cyclists_race_stage_list(@race)
+    @sorted_cyclists_race_stage = sort_cyclists_race_stage_list(@race)
   end
 
   def stage_results
