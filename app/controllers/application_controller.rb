@@ -140,7 +140,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Overall leaderboard result for each stage... by Tom Jean
-  def sort_cyclists_race_stage(race)
+  def sort_cyclists_race_stage_list(race)
     sorted_cyclists_stage = [] 
     race.stages.each do |stage|
       sorted_cyclists_stage << sort_cyclists_race_stage (race, stage)
