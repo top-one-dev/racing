@@ -146,6 +146,7 @@ class ApplicationController < ActionController::Base
       item = sort_cyclists_race_stage(race, stage)
       sorted_cyclists_stage << item
     end
+    return sorted_cyclists_stage
   end  
 
   def points_in_stage(place)
