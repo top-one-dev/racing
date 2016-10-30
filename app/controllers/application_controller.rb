@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
 
       race.stages.each_with_index do |stage, ix_stage|
         today = Time.now.to_date # race.stages.last.close_date
-        if race.stages.last.close_date >= today
+        # if race.stages.last.close_date >= today
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
           if stage_effort
             total_time = total_time + stage_effort.elapsed_time.to_i
@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
             #break
             total_points = total_points + stage_max_points[ix_stage]
           end
-        end
+        # end
         break if stage == current_stage # condition to determine which stage is 
       end
 
