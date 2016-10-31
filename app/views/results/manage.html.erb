@@ -55,6 +55,8 @@
           <% 
             index_tmp = 0
             total_points_temp = 0
+            index_dnf = 0
+            flag = 0
           %>
           <% item.each_with_index do |item_x, index_x| %>    
             <tr>      
@@ -63,12 +65,18 @@
               total_points_temp = item_x['total_points']
               index_tmp = index_x + 1
             end
+
+            if if item_x['total_time'] == "DNF" and flag == 0
+              index_dnf = index_x + 1
+              flag = 1
+            end
+
             %>
               <td>
               <% if item_x['total_time'] != "DNF" %>
                 <%= index_x + 1 %>
               <% else %>
-                <%= index_x %>
+                <%= index_dnf %>
               <% end %>
               </td>
               <td>
