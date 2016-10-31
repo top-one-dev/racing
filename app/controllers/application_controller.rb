@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
           if stage_effort
             total_time = total_time + stage_effort.elapsed_time.to_i
             total_points = total_points + stage_effort.points.to_i
-            stage_count += 1            
+            stage_count -= 1            
           else
             #break
             total_points = total_points + stage_max_points[ix_stage]
