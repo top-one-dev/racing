@@ -64,7 +64,13 @@
               index_tmp = index_x + 1
             end
             %>
-              <td><%= index_x + 1 %></td>
+              <td>
+              <% if item_x['total_time'] != "DNF" %>
+                <%= index_x + 1 %>
+              <% else %>
+                <%= index_tmp %>
+              <% end %>
+              </td>
               <td>
               <%= item_x['total_points'] %>
               </td>      
