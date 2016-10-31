@@ -106,6 +106,7 @@ class ApplicationController < ActionController::Base
       total_time = 0
       total_points = 0
       stage_effort = nil
+      stage_count = 0
 
       race.stages.each_with_index do |stage, ix_stage|
         today = Time.now.to_date # race.stages.last.close_date
@@ -114,6 +115,7 @@ class ApplicationController < ActionController::Base
           if stage_effort
             total_time = total_time + stage_effort.elapsed_time.to_i
             total_points = total_points + stage_effort.points.to_i
+            stage_count += 1            
           else
             #break
             total_points = total_points + stage_max_points[ix_stage]
@@ -123,9 +125,9 @@ class ApplicationController < ActionController::Base
       end
 
       if total_time > 0
-        sorted_cyclists << { 'cyclist' => cyclist, 'total_time' => total_time, 'total_points' => total_points} 
+        sorted_cyclists << { 'cyclist' => cyclist, 'total_time' => total_time, 'total_points' => total_points, 'stage_count' => stage_count} 
       else
-        nil_cyclists <<  { 'cyclist' => cyclist,  'total_time' => 'DNF', 'total_points' => total_points} 
+        nil_cyclists <<  { 'cyclist' => cyclist,  'total_time' => 'DNF', 'total_points' => total_points, 'stage_count' => stage_count} 
       end
     end
 
@@ -133,7 +135,7 @@ class ApplicationController < ActionController::Base
 
     #sorted_cyclists.sort_by!{|k| k['total_points'].to_i}.reverse!
     sorted_cyclists.sort! do |a, b|
-      [a['total_points'], a['total_time']] <=> [b['total_points'], b['total_time']]
+      [a['total_points'], a['stage_count'], a['total_time']] <=> [b['total_points'], b['stage_count'], b['total_time']]
     end
 
     return sorted_cyclists + nil_cyclists
