@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
             stage_count -= 1            
           else
             #break
-            total_points = total_points + stage_max_points[ix_stage]
+            total_points = total_points + stage_max_points[ix_stage] + 1
           end
         # end
         break if stage == current_stage # condition to determine which stage is 
