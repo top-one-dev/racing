@@ -43,7 +43,7 @@ class SessionsController < ApplicationController
 				#print "=====#{access_token}====="
 				session[:token_type] = resp_json["token_type"]
 				session[:athlete_id] = resp_json["athlete_id"]
-				@available_race = available_race;
+				@available_race = available_race();
 			end
 		end
 		render template: 'statics/home'
