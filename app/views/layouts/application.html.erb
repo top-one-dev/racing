@@ -13,7 +13,7 @@
 </head>
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-   <div class="container-fluid">
+   <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -22,8 +22,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/"><%= image_tag 'logo.png', class: 'img-responsive logo-img' %></a>
-        </div>
-    
+        </div>    
       
       <% #if session[:access_token] or session[:admin_user]%>
       <% if session[:admin_user] %>
