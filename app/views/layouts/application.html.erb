@@ -43,7 +43,7 @@
         <% else %>
           <% if session[:cyclist_name] %>          
                 <ul class="nav navbar-nav navbar-right">
-                  <li>Hi, <%= session[:cyclist_name] %></li>
+                  <li><a>Hi, <%= session[:cyclist_name] %></a></li>
                   <li><%= link_to "Sign out", deauth_path %></li>
                 </ul>       
           <% end %>
