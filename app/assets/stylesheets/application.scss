@@ -21,9 +21,13 @@ footer { margin-top: 100px; }
 table, td, th { vertical-align: middle; border: none; }
 th { border-bottom: 1px solid #DDD; }
 .btn-new {
-	margin-left : 20px
+	margin-left : 20px;
 }
 
 .btn-cancel{
-	margin-left : 10px
+	margin-left : 10px;
+}
+.panel-custom div.panel-heading{
+	background: red;
+	color: white;
 }

@@ -1,5 +1,3 @@
-<h1>GPS Cycling Race</h1>
-
 <% flash.each do |key, value| %>	
 	<% if key == 'notice' %>
 		<div class="alert alert-success"><%= value %> </div>		
@@ -9,11 +7,31 @@
 <% end %>
 
 <% if session[:access_token].nil? %>
-	<%= link_to (image_tag "ConnectWithStrava2x.png"), '/auth' %>
+	<center>
+		<h1>Hammerfest is flexible racing for busy athletes. Link your Strava account and join a hammerfest today!</h1>
+		<%= link_to (image_tag "ConnectWithStrava2x.png"), '/auth' %>
+	</center>
 <% else %>
-	<h1>
-	Thanks for your linking your account
-	<p><%= session[:cyclist_name] %></p>
-	</h1>
-	<p><%= link_to "Deauthorize", deauth_path %></p>	
+	<div class="panel panel-custom">
+	  <div class="panel-heading">Available races</div>
+	  <div class="panel-body">
+	  	<% if @available_races.nil? %>
+	  		No races available to join
+	  	<% else %>
+	  		<table>
+	  			<% @available_races.each do |race| %>
+	  			<tr>
+	  				<td><%= race.name %></td>
+	  				<td><%= race.stages.first.active_date if race.stages.first %> - <%= race.stages.last.close_date if race.stages.last %></td>
+	  				<td><%= link_to 'Join this race', '#' %></td>
+	  			</tr>
+	  			<% end %>	
+	  		</table>
+	  	<% end %>
+	  </div>
+	</div>
+	<div class="panel panel-custom">
+	  <div class="panel-heading">My result</div>
+	  <div class="panel-body">My result content</div>
+	</div>
 <% end %>

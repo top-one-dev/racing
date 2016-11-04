@@ -149,7 +149,24 @@ class ApplicationController < ActionController::Base
       sorted_cyclists_stage << item
     end
     return sorted_cyclists_stage
-  end  
+  end
+
+  # Available races by Tom Jean
+  def available_races
+    available_races = []
+    Race.all.each do |race|
+      today = Time.now.to_date
+      if today <= race.stages.first.close_date
+        available_races << race
+      end
+    end
+    return available_races    
+  end
+
+  # My result by Tom Jean...
+  def cyclist_result (cyclist)
+    
+  end
 
   def points_in_stage(place)
     points_array = [50, 30, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
