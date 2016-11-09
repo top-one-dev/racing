@@ -19,7 +19,7 @@ class RostersController < ApplicationController
       else
         format.html { render :new, notice: 'Roster could not be created.'  }
         format.json { render json: @roster.errors, status: :unprocessable_entity }
-        format.js { notice: 'Sorry, Something wrong! Try again.'}
+        format.js { redirect_to root_path notice: 'Sorry, Something wrong! Try again.'}
       end
     end
   end
