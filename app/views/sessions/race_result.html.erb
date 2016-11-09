@@ -16,9 +16,9 @@
 	  					<%= @race.name unless @race.rosters.find(cyclist_id: session[:cyclist_id]) %>	  					
 	  				</td>
 	  				<td><%= @race.stages.first.active_date if @race.stages.first %> - <%= @race.stages.last.close_date if @race.stages.last %></td>
-	  				<td><%= link_to 'Leave this race', race_roster_path(@race, @roster), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ajax', remote: true if race.stages.first.active_date <= today %>
-	  				<div class="loader"></div>	  				
+	  				<td><%= link_to 'Leave this race', race_roster_path(@race, @roster), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ajax', remote: true if race.stages.first.active_date <= today %>	  					  				
 	  				</td>
+	  				<td><div class="loader"></div></td>
 	  				<script type="text/javascript">
 	  					$('.ajax').bind('ajax:beforeSend', function(){
 	  						index = $(this).index()
@@ -31,8 +31,7 @@
 	  				</script>
 	  			</tr>
 	  		
-	  		</table>
-	  	<% end %>
+	  		</table>	  
 	  </div>
 	</div>
 	<div class="panel panel-custom">
