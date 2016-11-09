@@ -189,15 +189,15 @@ class ApplicationController < ActionController::Base
          end       
       else
         race.stages.each_with_index do |stage, index|
-          stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
-          race = "#{stage_effort.stage.race.name} - #{stage_effort.stage.name}"
+          stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
+          race = "#{race.name} - #{stage.name}"
           stage = stage.stage_no
-          time = stage_effort.elapsed_time.to_i
-          strava_url = stage_effort.strava_activity_url
-          avg_watts = "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w"
+          time = stage_effort.elapsed_time.to_i if stage_effort
+          strava_url = stage_effort.strava_activity_url if stage_effort
+          avg_watts = "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" if stage_effort
           temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
-          watts_per_k = "#{temp.to_f.round(2)}&nbsp;w/kg"
-          time_stamp = stage_effort.create_date.to_i
+          watts_per_k = "#{temp.to_f.round(2)}&nbsp;w/kg" if stage_effort
+          time_stamp = stage_effort.create_date.to_i if stage_effort
           cyclist_result << { 
                               'race'        => race,
                               'stage'       => stage, 
