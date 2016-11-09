@@ -31,7 +31,7 @@
 	  				<td><%= link_to 'Join this race', rosters_path(:roster => {race_id: race.id, cyclist_id: session[:cyclist_id]}), method: :create, remote: true, :class => 'ajax' unless race.stages.first.active_date <= today and race.rosters.find_by(cyclist_id: session[:cyclist_id]) %>
 	  				</td>
 	  				<td>
-	  					&nbsp;&nbsp;&nbsp;<div class="loader"></div>	  				
+	  					&nbsp;&nbsp;&nbsp;&nbsp;<div class="loader"></div>	  				
 	  				</td>
 	  				<script type="text/javascript">
 	  					$('.ajax').bind('ajax:beforeSend', function(){
