@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     end
     resources :rosters, only: [:index, :create, :destroy]
   end
+
+  resources :rosters, only: [:create, :destroy]
   
   root 'statics#home'
 end
