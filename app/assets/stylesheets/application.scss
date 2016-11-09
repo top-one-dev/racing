@@ -43,7 +43,7 @@ th { border-bottom: 1px solid #DDD; }
 	animation: spin 1.5s linear inifinite;
 }
 
-@keyframe spin{
-	0%{ transition: rotate(0deg); }
-	100%{ transition: rotate(360deg); }
+@keyframes spin{
+	0% { transition: rotate(0deg); }
+	100% { transition: rotate(360deg); }
 }
