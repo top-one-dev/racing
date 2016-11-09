@@ -27,7 +27,7 @@
 	  					<%= link_to race.name, race_result_path(race_id: race) if race.rosters.find_by(cyclist_id: session[:cyclist_id]) %>
 	  					&nbsp;&nbsp;&nbsp;
 	  				</td>
-	  				<td><%= race.stages.first.active_date.to_formatted_s(:short) if race.stages.first %> - <%= race.stages.last.close_date.to_formatted_s(:short) if race.stages.last %>&nbsp;&nbsp;&nbsp;</td>
+	  				<td><%= race.stages.first.active_date.to_formatted_s(:long) if race.stages.first %> - <%= race.stages.last.close_date.to_formatted_s(:long) if race.stages.last %>&nbsp;&nbsp;&nbsp;</td>
 	  				<td><%= link_to 'Join this race', rosters_path(:roster => {race_id: race.id, cyclist_id: session[:cyclist_id]}), :method => :post, remote: true, :class => 'ajax' unless race.stages.first.active_date <= today and race.rosters.find_by(cyclist_id: session[:cyclist_id]) %>
 	  				<div class="loader"></div>	  				
 	  				</td>
@@ -50,7 +50,7 @@
 	<div class="panel panel-custom">
 	  <div class="panel-heading">My result</div>
 	  <div class="panel-body">
-	  <% if @cyclist_result.nil? %>
+	  <% if @cyclist_result.nil? or @cyclist_result.length <= 0 %>
 	  	No results...
 	  <% else %>
 	  	<table>
