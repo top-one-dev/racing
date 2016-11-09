@@ -27,8 +27,7 @@
 	  					<%= link_to race.name, race_result_path(race_id: race.id) if race.rosters.find(cyclist_id: session[:cyclist_id]) %>
 	  				</td>
 	  				<td><%= race.stages.first.active_date if race.stages.first %> - <%= race.stages.last.close_date if race.stages.last %></td>
-	  				<td><%= link_to 'Join this race', race_rosters_path(:roster => {race_id: race, cyclist_id: session[:cyclist_id]}), class: 'ajax', method: :create, remote: true
-			  				if race.stages.first.active_date <= today %>
+	  				<td><%= link_to 'Join this race', race_rosters_path(:roster => {race_id: race, cyclist_id: session[:cyclist_id]}), class: 'ajax', method:create, remote: true if race.stages.first.active_date <= today %>
 	  				<div class="loader"></div>	  				
 	  				</td>
 	  				<script type="text/javascript">
