@@ -53,13 +53,13 @@
   			</tr>
 		<% @cyclist_result.each do |result| %>
 			<tr>
-				<td><%= @cyclist_result.race %></td>
-				<td><%= @cyclist_result.stage %></td>
-				<td><%= @cyclist_result.time %></td>
-				<td><%= @cyclist_result.starva_url%></td>
-				<td><%= @cyclist_result.avg_watts %></td>
-				<td><%= @cyclist_result.watts_per_k %></td>
-				<td><%= @cyclist_result.time_stamp %></td>
+				<td><%= result.race %></td>
+				<td><%= result.stage %></td>
+				<td><%= result.time %></td>
+				<td><%= result.starva_url%></td>
+				<td><%= result.avg_watts %></td>
+				<td><%= result.watts_per_k %></td>
+				<td><%= result.time_stamp %></td>
 			</tr>
 		<% end %>
 		</table>
