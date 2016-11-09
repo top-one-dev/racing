@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get '/request/athlet', to: 'request#athlet', as: 'request_athlet'
   get '/request/activity', to: 'request#activity', as: 'request_activity'
+
+  get '/sessions/race_result/:race_id', to: 'sessions#race_result', as: 'race_result'
   
   resources :races, path: '/admin/races' do
     resources :stages, except: :index do

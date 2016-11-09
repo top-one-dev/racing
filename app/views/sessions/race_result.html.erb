@@ -6,28 +6,17 @@
 	<% end %>
 <% end %>
 
-<% if session[:access_token].nil? %>
-	<center>
-		<h1>Hammerfest is flexible racing for busy athletes. Link your Strava account and join a hammerfest today!</h1>
-		<%= link_to (image_tag "ConnectWithStrava2x.png"), '/auth' %>
-	</center>
-<% else %>
 <% today = Time.now.to_date %>
 	<div class="panel panel-custom">
-	  <div class="panel-heading">Available races</div>
+	  <div class="panel-heading">Current race</div>
 	  <div class="panel-body">
-	  	<% if @available_races.nil? %>
-	  		No races available to join
-	  	<% else %>
-	  		<table>	  			
-	  			<% @available_races.each do |race| %>
+	  	<table>	  			
 	  			<tr>
 	  				<td>
-	  					<%= race.name unless race.rosters.find(cyclist_id: session[:cyclist_id]) %>
-	  					<%= link_to race.name, race_result_path(race_id: race.id) if race.rosters.find(cyclist_id: session[:cyclist_id]) %>
+	  					<%= @race.name unless @race.rosters.find(cyclist_id: session[:cyclist_id]) %>	  					
 	  				</td>
-	  				<td><%= race.stages.first.active_date if race.stages.first %> - <%= race.stages.last.close_date if race.stages.last %></td>
-	  				<td><%= link_to 'Join this race', race_rosters_path(:roster => {race_id: race, cyclist_id: session[:cyclist_id]}), class: 'ajax', method: :create, remote: true
+	  				<td><%= @race.stages.first.active_date if @race.stages.first %> - <%= @race.stages.last.close_date if @race.stages.last %></td>
+	  				<td><%= link_to 'Leave this race', race_roster_path(@race, @roster), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ajax', remote: true
 			  				if race.stages.first.active_date <= today %>
 	  				<div class="loader"></div>	  				
 	  				</td>
@@ -42,7 +31,7 @@
 	  					});
 	  				</script>
 	  			</tr>
-	  			<% end %>	
+	  		
 	  		</table>
 	  	<% end %>
 	  </div>

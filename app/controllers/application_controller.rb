@@ -163,9 +163,53 @@ class ApplicationController < ActionController::Base
     return available_races    
   end
 
-  # My result by Tom Jean...
-  def cyclist_result (cyclist)
-    
+  # Cyclist result by Tom Jean...
+  def cyclist_result (cyclist, race)
+    cyclist_result = []
+
+    if race.nil?
+       cyclist.stage_efforts.each do |stage_effort|
+          race = "#{stage_effort.stage.race.name} - #{stage_effort.stage.name}"
+          stage = stage_effort.stage.stage_no
+          time = stage_effort.elapsed_time.to_i
+          strava_url = stage_effort.strava_activity_url
+          avg_watts = "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w"
+          temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
+          watts_per_k = "#{temp.to_f.round(2)}&nbsp;w/kg"
+          time_stamp = stage_effort.create_date.to_i
+          cyclist_result << { 
+                              'race'        => race,
+                              'stage'       => stage, 
+                              'time'        => time, 
+                              'strava_url'  => strava_url, 
+                              'avg_watts'   => avg_watts, 
+                              'watts_per_k' => watts_per_k, 
+                              'time_stamp'  => time_stamp
+                            }
+       end       
+    else
+      race.stages.each_with_index do |stage, index|
+        stage_effort = cyclist.stage_efforts.find_by(stage_id: stage)
+        race = "#{stage_effort.stage.race.name} - #{stage_effort.stage.name}"
+        stage = stage.stage_no
+        time = stage_effort.elapsed_time.to_i
+        strava_url = stage_effort.strava_activity_url
+        avg_watts = "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w"
+        temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
+        watts_per_k = "#{temp.to_f.round(2)}&nbsp;w/kg"
+        time_stamp = stage_effort.create_date.to_i
+        cyclist_result << { 
+                            'race'        => race,
+                            'stage'       => stage, 
+                            'time'        => time, 
+                            'strava_url'  => strava_url, 
+                            'avg_watts'   => avg_watts, 
+                            'watts_per_k' => watts_per_k, 
+                            'time_stamp'  => time_stamp
+                          }
+      end
+    end
+    return cyclist_result
   end
 
   def points_in_stage(place)

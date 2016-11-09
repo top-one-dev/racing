@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
 	end
 
 	def get_token
-
 		if session[:access_token].nil?
 			code = params[:code]			
 			client_id = Rails.application.secrets[:strava_client_id]	
@@ -43,10 +42,23 @@ class SessionsController < ApplicationController
 				#print "=====#{access_token}====="
 				session[:token_type] = resp_json["token_type"]
 				session[:athlete_id] = resp_json["athlete_id"]
-				@available_race = available_races();
+				session[:cyclist_id] = @cyclist.id
 			end
 		end
+		@available_races = available_races()
+		@cyclist_result = cyclist_result(@cyclist, nil)
 		render template: 'statics/home'
+	end
+
+	def race_result
+		if race.nil? or session[:cyclist_id].nil? or params[:race_id].nil?
+			redirect_to action: :get_token
+		else
+			@race = Race.find(params[:race_id])
+			@cyclist = Cyclist.find(session[:cyclist_id])
+			@roster = Roster.find_by(cyclist_id: session[:cyclist_id])
+			@cyclist_result = cyclist_result(@cyclist, @race)
+		end
 	end
 
 	def deauth		
@@ -67,6 +79,7 @@ class SessionsController < ApplicationController
 			session[:access_token] = nil
 			session[:token_type] = nil
 			session[:athlete_id] = nil
+			session[:cyclist_id] = nil
 		end
 		render template: 'statics/home'
 		#redirect root_path

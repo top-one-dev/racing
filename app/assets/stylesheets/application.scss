@@ -31,3 +31,19 @@ th { border-bottom: 1px solid #DDD; }
 	background: #FC4C02;
 	color: white;
 }
+.loader{
+	display: none;
+	border: 5px solid #f3f3f3;
+	border-top: 5px solid #FC4C02;
+	border-bottom: 5px solid #FC4C02;
+	border-bottom: 5px solid #FC4C02;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	animation: spin 1.5s linear inifinite;
+}
+
+@keyframe spin{
+	0%{ transition: rotate(0deg); }
+	100%{ transition: rotate(360deg); }
+}
