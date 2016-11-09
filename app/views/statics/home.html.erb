@@ -28,7 +28,7 @@
 	  					&nbsp;&nbsp;&nbsp;
 	  				</td>
 	  				<td><%= race.stages.first.active_date.to_formatted_s(:short) if race.stages.first %> - <%= race.stages.last.close_date.to_formatted_s(:short) if race.stages.last %>&nbsp;&nbsp;&nbsp;</td>
-	  				<td><%= link_to 'Join this race', race_rosters_path(:roster => {race_id: race, cyclist_id: session[:cyclist_id]}), class: 'ajax', method:create, remote: true if race.stages.first.active_date >= today %>
+	  				<td><%= link_to 'Join this race', race_rosters_path(:roster => {race_id: race.id, cyclist_id: session[:cyclist_id]}), class: 'ajax', method:create, remote: true if race.stages.first.active_date >= today %>
 	  				<div class="loader"></div>	  				
 	  				</td>
 	  				<script type="text/javascript">
