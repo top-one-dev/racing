@@ -45,6 +45,7 @@ class SessionsController < ApplicationController
 				session[:cyclist_id] = @cyclist.id
 			end
 		end
+		@cyclist = Cyclist.find_by(cyclist_id: session[:cyclist_id])
 		@available_races = available_races()
 		@cyclist_result = cyclist_result(@cyclist, nil)
 		render template: 'statics/home'
