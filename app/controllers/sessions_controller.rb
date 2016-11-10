@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
 	end
 
 	def race_result
-		if session[:cyclist_id].nil? or params[:race_id].nil?
+		if session[:access_token].nil? or params[:race_id].nil?
 			redirect_to action: :get_token
 		else
 			@race = Race.find(params[:race_id])

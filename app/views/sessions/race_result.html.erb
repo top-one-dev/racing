@@ -17,7 +17,7 @@
 	  					&nbsp;&nbsp;&nbsp;  					
 	  				</td>
 	  				<td><%= @race.stages.first.active_date.to_formatted_s(:long) if @race.stages.first %> - <%= @race.stages.last.close_date.to_formatted_s(:long) if @race.stages.last %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-	  				<td><%= link_to 'Leave this race', race_roster_path(@race, @roster), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ajax', remote: true if @race.stages.first.active_date >= today %>	  					  				
+	  				<td><%= link_to 'Leave this race', roster_path(@race, @roster), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ajax', remote: true if @race.stages.first.active_date >= today %>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  					  				
 	  				</td>
 	  				<td><div class="loader"></div></td>
 	  				<script type="text/javascript">
