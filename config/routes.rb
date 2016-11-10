@@ -40,5 +40,5 @@ Rails.application.routes.draw do
   delete 'rosters/:race_id/cyclist/:id', to: 'rosters#destroy', as: 'delete_roster'
   post 'rosters/:race_id/cyclist/:cyclist_id', to: 'rosters#create', as: 'create_roster'
    
-  root 'sessions#get_token'
+  root 'statics#home'
 end
