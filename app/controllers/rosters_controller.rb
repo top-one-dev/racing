@@ -35,7 +35,7 @@ class RostersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to race_rosters_path(@race), notice: 'Roster was successfully removed.' }
       format.json { head :no_content }
-      format.js { redirect_to action: :get_token, notice: 'You was successfully left.'}
+      format.js { redirect_to root_path, notice: 'You was successfully left.'}
     end
   end
 
