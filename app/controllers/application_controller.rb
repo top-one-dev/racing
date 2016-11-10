@@ -193,6 +193,7 @@ class ApplicationController < ActionController::Base
         race.stages.each do |stage|
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
           race_name = "#{race.name} - #{stage.name}"
+          puts race_name
           time = stage_effort ? stage_effort.elapsed_time.to_i : 'DNF'
           strava_url = stage_effort ? stage_effort.strava_activity_url : 'DNF'
           avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" : 'DNF'
