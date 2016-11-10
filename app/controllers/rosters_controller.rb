@@ -16,8 +16,8 @@ class RostersController < ApplicationController
         puts 'success to save'
         format.html { redirect_to race_rosters_path(@race), notice: 'Roster was successfully created.' }
         format.json { render :show, status: :created, location: @roster }
-        format.js { redirect_to race_result_path(roster_params[:roster][:race_id]), notice: 'You was successfully joined.'}
-        
+        format.js { redirect_to request.original_url, notice: 'You was successfully joined.'}        
+        # format.js { redirect_to race_result_path(@race), notice: 'You was successfully joined.'}        
       else
         puts "fail to save #{@roster.errors}"
         format.html { render :new, notice: 'Roster could not be created.'  }
