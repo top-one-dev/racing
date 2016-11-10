@@ -175,7 +175,7 @@ class ApplicationController < ActionController::Base
               time = stage_effort ? stage_effort.elapsed_time.to_i : 'DNF'
               strava_url = stage_effort ? stage_effort.strava_activity_url : 'DNF'
               avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" : 'DNF'
-              temp = stage_effort ? stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0 : nil
+              temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0 and !stage_effort
               watts_per_k = temp ? "#{temp.to_f.round(2)}&nbsp;w/kg" : 'DNF'
               time_stamp = stage_effort ? stage_effort.create_date.to_i : 'DNF'
               cyclist_result << { 
@@ -196,7 +196,7 @@ class ApplicationController < ActionController::Base
           time = stage_effort ? stage_effort.elapsed_time.to_i : 'DNF'
           strava_url = stage_effort ? stage_effort.strava_activity_url : 'DNF'
           avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" : 'DNF'
-          temp = stage_effort ? stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0 : nil
+          temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0 and !stage_effort
           watts_per_k = temp ? "#{temp.to_f.round(2)}&nbsp;w/kg" : 'DNF'
           time_stamp = stage_effort ? stage_effort.create_date.to_i : 'DNF'
           cyclist_result << { 
