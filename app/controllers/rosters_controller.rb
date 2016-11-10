@@ -22,8 +22,7 @@ class RostersController < ApplicationController
         puts "fail to save #{@roster.errors}"
         format.html { render :new, notice: 'Roster could not be created.'  }
         format.json { render json: @roster.errors, status: :unprocessable_entity }
-        format.js { redirect_to root_path notice: 'Sorry, Something wrong! Try again.'}
-        
+        format.js { redirect_to root_path notice: 'Sorry, Something wrong! Try again.'}        
       end
     end
   end
@@ -31,7 +30,7 @@ class RostersController < ApplicationController
   # DELETE /rosters/1
   # DELETE /rosters/1.json
   def destroy
-    @roster.destroy
+    puts 'success to delete' if @roster.destroy
     respond_to do |format|
       format.html { redirect_to race_rosters_path(@race), notice: 'Roster was successfully removed.' }
       format.json { head :no_content }
