@@ -190,7 +190,7 @@ class ApplicationController < ActionController::Base
             end
           end            
       else
-        race.stages.each_with_index do |stage, index|
+        race.stages.each do |stage|
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
           race_name = "#{race.name} - #{stage.name}"
           time = stage_effort ? stage_effort.elapsed_time.to_i : 'DNF'
