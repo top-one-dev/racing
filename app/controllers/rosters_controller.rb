@@ -16,13 +16,13 @@ class RostersController < ApplicationController
         puts 'success to save'
         format.html { redirect_to race_rosters_path(@race), notice: 'Roster was successfully created.' }
         format.json { render :show, status: :created, location: @roster }
-        format.js { redirect_to request.original_url, notice: 'You was successfully joined.'}        
+        format.js { redirect_to root_path, notice: 'You was successfully joined.'}        
         # format.js { redirect_to race_result_path(@race), notice: 'You was successfully joined.'}        
       else
         puts "fail to save #{@roster.errors}"
         format.html { render :new, notice: 'Roster could not be created.'  }
         format.json { render json: @roster.errors, status: :unprocessable_entity }
-        format.js { redirect_to request.original_url notice: 'Sorry, Something wrong! Try again.'}
+        format.js { redirect_to root_path notice: 'Sorry, Something wrong! Try again.'}
         
       end
     end
@@ -35,7 +35,7 @@ class RostersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to race_rosters_path(@race), notice: 'Roster was successfully removed.' }
       format.json { head :no_content }
-      format.js { redirect_to get_token_url, notice: 'You was successfully left.'}
+      format.js { redirect_to root_path, notice: 'You was successfully left.'}
     end
   end
 
