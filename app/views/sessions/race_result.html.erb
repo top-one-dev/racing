@@ -40,27 +40,31 @@
 	  <% if @cyclist_result.nil? %>
 	  	No results...
 	  <% else %>
-	  	<table>
-	  		<tr>
-  				<td>Race</td>
-  				<td>Stage</td>
-  				<td>Time</td>
-  				<td>Starava URL</td>
-  				<td>Avg Watts</td>
-  				<td>W/kg</td>
-  				<td>Time stamp</td>
-  			</tr>
-		<% @cyclist_result.each do |result| %>
-			<tr>
-				<td><%= result[:race] %></td>
-				<td><%= result[:stage] %></td>
-				<td><%= result[:time] %></td>
-				<td><%= result[:starva_url] %></td>
-				<td><%= result[:avg_watts] %></td>
-				<td><%= result[:watts_per_k] %></td>
-				<td><%= result[:time_stamp] %></td>
-			</tr>
-		<% end %>
+	  	<table class="table">
+	  		<thead>
+		  		<tr>
+	  				<th>Race</th>
+	  				<th>Stage</th>
+	  				<th>Time</th>
+	  				<th>Starava URL</th>
+	  				<th>Avg Watts</th>
+	  				<th>W/kg</th>
+	  				<th>Time stamp</th>
+	  			</tr>
+  			</thead>
+  			<tbody>
+				<% @cyclist_result.each do |result| %>
+					<tr>
+						<td><%= result[:race] %></td>
+						<td><%= result[:stage] %></td>
+						<td><%= result[:time] %></td>
+						<td><%= result[:starva_url] %></td>
+						<td><%= result[:avg_watts] %></td>
+						<td><%= result[:watts_per_k] %></td>
+						<td><%= result[:time_stamp] %></td>
+					</tr>
+				<% end %>
+			</tbody>
 		</table>
 	  <% end %>	  	
 	  </div>
