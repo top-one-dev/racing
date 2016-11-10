@@ -70,13 +70,13 @@
   			<tbody>
 				<% @cyclist_result.each do |result| %>
 					<tr>
-						<td><%= result[:race].to_s %></td>
-						<td><%= result[:stage].to_s %></td>
-						<td><%= result[:time].to_s %></td>
-						<td><%= result[:starva_url].to_s %></td>
-						<td><%= result[:avg_watts].to_s %></td>
-						<td><%= result[:watts_per_k].to_s %></td>
-						<td><%= result[:time_stamp].to_s %></td>
+						<td><%= result['race'].to_s %></td>
+						<td><%= result['stage'].to_s %></td>
+						<td><%= result['time'].to_s %></td>
+						<td><%= result['starva_url'].to_s %></td>
+						<td><%= result['avg_watts'].to_s %></td>
+						<td><%= result['watts_per_k'].to_s %></td>
+						<td><%= result['time_stamp'].to_s %></td>
 					</tr>
 				<% end %>
 			</tbody>
