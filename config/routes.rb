@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     resources :rosters, only: [:index, :create, :destroy]
   end
 
-  delete 'rosters/:race_id/cyclist/:cyclist_id', to: 'rosters#destroy', as: 'delete_roster'
+  delete 'rosters/:roster[:race_id]/cyclist/:roster[:cyclist_id]', to: 'rosters#destroy', as: 'delete_roster'
   post 'rosters/:race_id/cyclist/:cyclist_id', to: 'rosters#create', as: 'create_roster'
    
   root 'sessions#get_token'
