@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :cyclists
   get '/auth', to: 'sessions#create'
-  get '/token_exchange', to: 'sessions#get_token'
+  get '/token_exchange', to: 'sessions#get_token', as: 'get_token'
   get '/deauth', to: 'sessions#deauth'
   #get '/deauth', to: 'sessions#reset_token'
   #resources :stage_efforts
