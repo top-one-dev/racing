@@ -41,8 +41,10 @@ class RostersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_roster      
+      unless params[:roster][:race_id].present?
+        params[:roster][:race_id] = params[:race_id] 
+      end
       @race = Race.find(params[:race_id]) if params[:race_id].present?
-      @race = Race.find(params[:roster][:race_id]) unless params[:race_id].present?
       if params[:id].present?
         @roster = @race.rosters.find(params[:id])
       end
