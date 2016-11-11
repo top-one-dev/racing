@@ -40,15 +40,11 @@ class RostersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_roster
-      if params[:race_id].present?
-          @race = Race.find(params[:race_id])
-      end
-      puts @race.name
+    def set_roster      
+      @race = Race.find(params[:race_id])
       if params[:id].present?
         @roster = @race.rosters.find(params[:id])
       end
-      puts @roster.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
