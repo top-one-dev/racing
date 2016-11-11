@@ -192,7 +192,7 @@ class ApplicationController < ActionController::Base
                               }
             end
           end          
-          cyclist_result.reverse           
+          cyclist_result.reverse!          
       else
         race.stages.each do |stage|
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
