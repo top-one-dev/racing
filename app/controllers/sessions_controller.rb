@@ -45,13 +45,13 @@ class SessionsController < ApplicationController
 				session[:cyclist_id] = @cyclist.id
 			end
 		end
-		@cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
-		# if session[:cyclist_id] == 270
-		# 	session[:cyclist_id] = 4
-		# 	session[:cyclist_name] = 'Tom Jean'
-		# end 
-		# @cyclist = Cyclist.find(session[:cyclist_id]) 
-		# if @cyclist.nil?
+		# @cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
+		if session[:cyclist_id] == 270
+			session[:cyclist_id] = 4
+			session[:cyclist_name] = 'Tom Jean'
+		end 
+		@cyclist = Cyclist.find(session[:cyclist_id])
+		 
 		@available_races = available_races()
 		@cyclist_result = cyclist_result(@cyclist, nil)
 		render template: 'statics/home'
