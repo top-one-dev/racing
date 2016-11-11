@@ -63,7 +63,7 @@ class SessionsController < ApplicationController
 		else
 			@race = Race.find(params[:race_id])
 			@cyclist = Cyclist.find(session[:cyclist_id])
-			@roster = @race.rosters.find(cyclist_id: session[:cyclist_id])
+			@roster = @race.rosters.find_by(cyclist_id: session[:cyclist_id])
 			@cyclist_result = cyclist_result(@cyclist, @race)
 		end
 	end
