@@ -178,7 +178,7 @@ class ApplicationController < ActionController::Base
               avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" : 'DNF'
               temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0 and !stage_effort
               watts_per_k = temp ? "#{temp.to_f.round(2)}&nbsp;w/kg" : 'DNF'
-              time_stamp = stage_effort ? stage_effort.create_date.to_i : 'DNF'
+              time_stamp = stage_effort ? stage_effort.created_at.strftime('%m/%d/%Y') : 'DNF'
               cyclist_result << { 
                                 'race'        => race_name,
                                 'stage'       => stage.stage_no, 
@@ -199,7 +199,7 @@ class ApplicationController < ActionController::Base
           avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" : 'DNF'
           temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0 and !stage_effort
           watts_per_k = temp ? "#{temp.to_f.round(2)}&nbsp;w/kg" : 'DNF'
-          time_stamp = stage_effort ? stage_effort.create_date.to_i : 'DNF'
+          time_stamp = stage_effort ? stage_effort.created_at.strftime('%m/%d/%Y') : 'DNF'
           puts "#{race_name}-#{time}-#{strava_url}-#{avg_watts}-#{watts_per_k}-#{time_stamp}"
           cyclist_result << { 'race'=> race_name, 'stage'=> stage.stage_no, 'time'=> time, 'strava_url'=> strava_url, 'avg_watts'=> avg_watts, 'watts_per_k' => watts_per_k, 'time_stamp'  => time_stamp }
         end
