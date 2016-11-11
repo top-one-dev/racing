@@ -175,11 +175,11 @@ class ApplicationController < ActionController::Base
               race_name = "#{race.name} - #{stage.name}"
               time = stage_effort ? Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') : 'DNF'
               strava_url = stage_effort ? stage_effort.strava_activity_url : 'DNF'
-              avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" : 'DNF'
+              avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}w" : 'DNF'
               unless stage_effort.nil?
                  temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
               end 
-              watts_per_k = temp ? "#{temp.to_f.round(2)}&nbsp;w/kg" : 'DNF'
+              watts_per_k = temp ? "#{temp.to_f.round(2)}w/kg" : 'DNF'
               time_stamp = stage_effort ? stage_effort.created_at.to_formatted_s(:db) : 'DNF'
               cyclist_result << { 
                                 'race'        => race_name,
@@ -198,11 +198,11 @@ class ApplicationController < ActionController::Base
           race_name = "#{race.name} - #{stage.name}"
           time = stage_effort ? Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') : 'DNF'
           strava_url = stage_effort ? stage_effort.strava_activity_url : 'DNF'
-          avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}&nbsp;w" : 'DNF'
+          avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}w" : 'DNF'
           unless stage_effort.nil?
             temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
           end          
-          watts_per_k = temp ? "#{temp.to_f.round(2)}&nbsp;w/kg" : 'DNF'
+          watts_per_k = temp ? "#{temp.to_f.round(2)}w/kg" : 'DNF'
           time_stamp = stage_effort ? stage_effort.created_at.to_formatted_s(:db) : 'DNF'
           # puts "#{race_name}-#{time}-#{strava_url}-#{avg_watts}-#{watts_per_k}-#{time_stamp}"
           cyclist_result << { 'race'=> race_name, 'stage'=> stage.stage_no, 'time'=> time, 'strava_url'=> strava_url, 'avg_watts'=> avg_watts, 'watts_per_k' => watts_per_k, 'time_stamp'  => time_stamp }
