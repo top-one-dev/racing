@@ -43,7 +43,7 @@ class RostersController < ApplicationController
     def set_roster      
       @race = Race.find(params[:race_id]) if params[:race_id].present?
       @race = Race.find(params[:roster][:race_id]) unless params[:race_id].present?
-      puts "#{@race.name} - #{params[:race_id]} - #{params[:id]}"
+      # puts "#{@race.name} - #{params[:race_id]} - #{params[:id]}"
       if params[:id].present?
         @roster = @race.rosters.find(params[:id])
       end
