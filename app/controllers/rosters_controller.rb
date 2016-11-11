@@ -43,12 +43,12 @@ class RostersController < ApplicationController
     def set_roster
       if params[:race_id].present?
           @race = Race.find(params[:race_id])
-      else
-          #@race = Race.find(params[:roster][:race_id])
       end
+      puts @race.name
       if params[:id].present?
         @roster = @race.rosters.find(params[:id])
       end
+      puts @roster.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
