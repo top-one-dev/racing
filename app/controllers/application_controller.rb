@@ -192,7 +192,7 @@ class ApplicationController < ActionController::Base
                               }
             end
           end
-          cyclist_result.sort_by!{|a| a['time_stamp']}           
+          cyclist_result.sort_by{|a| a['time_stamp']}           
       else
         race.stages.each do |stage|
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
