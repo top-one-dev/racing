@@ -59,7 +59,10 @@
 						<td><%= result['race'] %></td>
 						<td><%= result['stage'] %></td>
 						<td><%= result['time'] %></td>
-						<td><%= link_to result['strava_url'], result['strava_url'] %></td>
+						<td>
+							<%= link_to result['strava_url'], result['strava_url'] unless result['strava_url'] == 'DNF' %>
+							<%= result['strava_url'] if result['strava_url'] == 'DNF' %>								
+						</td>
 						<td><%= result['avg_watts'] %></td>
 						<td><%= result['watts_per_k'] %></td>
 						<td><%= result['time_stamp'] %></td>
