@@ -44,7 +44,9 @@ class RostersController < ApplicationController
       @race = Race.find(params[:race_id]) if params[:race_id].present?
       @race = Race.find(params[:roster][:race_id]) unless params[:race_id].present?
       if params[:id].present?
-        @roster = @race.rosters.find(params[:id])
+        unless @roster = @race.rosters.find(params[:id])
+          @roster = Roster.find(params[:id]).where(:race_id => @race.id)
+        end
       end
     end
 
