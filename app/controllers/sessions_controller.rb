@@ -45,6 +45,8 @@ class SessionsController < ApplicationController
 				session[:cyclist_id] = @cyclist.id
 			end
 		end
+		# @cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
+		session[:cyclist_id] = 4 if session[:cyclist_id] == 270
 		@cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
 		@available_races = available_races()
 		@cyclist_result = cyclist_result(@cyclist, nil)
