@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
 		end 
 		@cyclist = Cyclist.find(session[:cyclist_id])
 		@available_races = available_races()
-		@available_races.each { |race| redirect_to race_result_path(race_id: race) ? race.rosters.find_by(cyclist_id: session[:cyclist_id]) }
+		@available_races.each { |race| if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end }
 		@cyclist_result = cyclist_result(@cyclist, nil)
 		render template: 'statics/home'
 	end
