@@ -38,7 +38,7 @@
 	<div class="panel panel-custom">
 	  <div class="panel-heading">My result</div>
 	  <div class="panel-body">
-	  <% if @cyclist_result.nil? %>
+	  <% if @cyclist_result.nil? or @cyclist_result.length <= 0 %>
 	  	No results...
 	  <% else %>
 	  	<table class="table">
