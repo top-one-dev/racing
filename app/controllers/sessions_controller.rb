@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
 		@available_races = available_races()
 		@available_races.each do |race| if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end end
 		@cyclist_result = cyclist_result(@cyclist, nil)
-		render template: 'statics/home'
+		# render template: 'statics/home'
 	end
 
 	def race_result
@@ -88,12 +88,12 @@ class SessionsController < ApplicationController
 			session[:athlete_id] = nil
 			session[:cyclist_id] = nil
 		end
-		render template: 'statics/home'
-		#redirect root_path
+		# render template: 'statics/home'
+		redirect root_path
 	end
 
 	def reset_token
 		ssession[:access_token] = nil
-		render template: 'statics/home'
+		redirect_to root_path
 	end
 end

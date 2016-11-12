@@ -1,10 +1,92 @@
-<h1>GPS Cycling Race</h1>
+<% flash.each do |key, value| %>	
+	<% if key == 'notice' %>
+		<div class="alert alert-success"><%= value %> </div>		
+	<% else %>
+		<div class="alert alert-<%= key %>"><%= value %> </div>		
+	<% end %>
+<% end %>
+
 <% if session[:access_token].nil? %>
-	<%= link_to (image_tag "ConnectWithStrava2x.png"), '/auth' %>
+	<center>
+		<h1>Hammerfest is flexible racing for busy athletes. Link your Strava account and join a hammerfest today!</h1>
+		<%= link_to (image_tag "ConnectWithStrava2x.png"), '/auth' %>
+	</center>
 <% else %>
-	<h1>
-	Thanks for your linking your account
-	<p><%= session[:cyclist_name] %></p>
-	</h1>
-	<%= link_to "Deauthorize", deauth_path %>
+<% today = Time.now.to_date %>
+	<div class="panel panel-custom">
+	  <div class="panel-heading">Available races</div>
+	  <div class="panel-body">
+	  	<% if @available_races.nil? %>
+	  		No races available to join
+	  	<% else %>
+	  		<table>	  			
+	  			<% @available_races.each do |race| %>
+	  			<tr>
+	  				<td>
+	  					<%= race.name unless race.rosters.find_by(cyclist_id: session[:cyclist_id]) %>
+	  					<%= link_to race.name, race_result_path(race_id: race) if race.rosters.find_by(cyclist_id: session[:cyclist_id]) %>
+	  					&nbsp;&nbsp;&nbsp;
+	  				</td>
+	  				<td><%= race.stages.first.active_date.to_formatted_s(:long) if race.stages.first %> - <%= race.stages.last.close_date.to_formatted_s(:long) if race.stages.last %>&nbsp;&nbsp;&nbsp;</td>
+	  				<td><%= link_to 'Join this race', create_roster_path(:roster => {race_id: race.id, cyclist_id: session[:cyclist_id]}), data: { confirm: 'By joining this Hammerfest you agree to race in your correct division with an accurate setup?' }, method: :post, remote: true, :class => 'ajax' if race.stages.first.active_date >= today and race.rosters.find_by(cyclist_id: session[:cyclist_id]).nil? %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	  				</td>
+	  				<td>
+	  					<div class="loader"></div>	  				
+	  				</td>
+	  				<script type="text/javascript">
+	  					$('.ajax').bind('ajax:beforeSend', function(){
+	  						// index = $(this).index()
+	  						// $('.loader').eq(index).show();
+	  					});
+
+	  					$('.ajax').bind('ajax:complete', function(){
+	  						// $('.loader').eq(index).hide();
+	  					});
+	  				</script>
+	  			</tr>
+	  			<% end %>	
+	  		</table>
+	  	<% end %>
+	  </div>
+	</div>
+	<div class="panel panel-custom">
+	  <div class="panel-heading">My result</div>
+	  <div class="panel-body">
+	  <% if @cyclist_result.nil? or @cyclist_result.length <= 0 %>
+	  	No results...
+	  <% else %>
+	  	<table class="table">
+	  		<thead>
+		  		<tr>
+	  				<th width="30%">Race</th>
+	  				<th>Stage</th>
+	  				<th>Time</th>
+	  				<th>Starava URL</th>
+	  				<th>Avg Watts</th>
+	  				<th>W/kg</th>
+	  				<th>Time stamp</th>
+	  			</tr>
+  			</thead>
+  			
+  			<tbody>
+				<% @cyclist_result.each do |result| %>
+					<tr>
+						<td><%= result['race'] %></td>
+						<td><%= result['stage'] %></td>
+						<td><%= result['time'] %></td>
+						<td>
+							<%= link_to result['strava_url'], result['strava_url'] unless result['strava_url'] == 'DNF' %>
+							<%= result['strava_url'] if result['strava_url'] == 'DNF' %>
+						</td>
+						<td><%= result['avg_watts'] %></td>
+						<td><%= result['watts_per_k'] %></td>
+						<td><%= result['time_stamp'] %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	  <% end %>
+	  	
+	  </div>
+	</div>
 <% end %>
