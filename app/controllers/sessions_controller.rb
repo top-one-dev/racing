@@ -50,10 +50,12 @@ class SessionsController < ApplicationController
 			session[:cyclist_id] = 4
 			session[:cyclist_name] = 'Tom Jean'
 		end 
-		@cyclist = Cyclist.find(session[:cyclist_id])
-		@available_races = available_races()
-		@available_races.each do |race| if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end end
-		@cyclist_result = cyclist_result(@cyclist, nil)
+		unless session[:access_token].nil?
+			@cyclist = Cyclist.find(session[:cyclist_id])	
+			@available_races = available_races()
+			@available_races.each do |race| if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end end
+			@cyclist_result = cyclist_result(@cyclist, nil)
+		end
 		# render template: 'statics/home'
 	end
 
