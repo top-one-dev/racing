@@ -89,7 +89,7 @@ class SessionsController < ApplicationController
 			session[:cyclist_id] = nil
 		end
 		# render template: 'statics/home'
-		redirect root_path
+		redirect_to root_path
 	end
 
 	def reset_token
