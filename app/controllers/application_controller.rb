@@ -157,8 +157,10 @@ class ApplicationController < ActionController::Base
     available_races = []
     Race.all.each do |race|
       today = Time.now.to_date
-      if today <= race.stages.first.close_date
-        available_races << race
+      unless race.stages.first.nil?
+        if today <= race.stages.first.close_date
+          available_races << race
+        end
       end
     end
     return available_races    
