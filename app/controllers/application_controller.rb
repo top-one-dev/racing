@@ -194,7 +194,8 @@ class ApplicationController < ActionController::Base
               end
             end
           end          
-          cyclist_result.sort{|a, b| [ a['time_stamp'] ] <=> [ b['time_stamp'] ] }.reverse! unless cyclist_result.nil?          
+          cyclist_result.sort!{|a, b| [ a['time_stamp'] ] <=> [ b['time_stamp'] ] } unless cyclist_result.nil?
+          cyclist_result.reverse! unless cyclist_result.nil?          
       else
         race.stages.each do |stage|
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
