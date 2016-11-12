@@ -173,40 +173,44 @@ class ApplicationController < ActionController::Base
             race.stages.each do |stage|
               stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
               race_name = "#{race.name} - #{stage.name}"
-              time = stage_effort ? Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') : 'DNF'
-              strava_url = stage_effort ? stage_effort.strava_activity_url : 'DNF'
-              avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}w" : 'DNF'
-              unless stage_effort.nil?
-                 temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
-              end 
-              watts_per_k = temp ? "#{temp.to_f.round(2)}w/kg" : 'DNF'
-              time_stamp = stage_effort ? stage_effort.created_at.to_formatted_s(:db) : 'DNF'
-              cyclist_result << { 
-                                'race'        => race_name,
-                                'stage'       => stage.stage_no, 
-                                'time'        => time, 
-                                'strava_url'  => strava_url, 
-                                'avg_watts'   => avg_watts, 
-                                'watts_per_k' => watts_per_k, 
-                                'time_stamp'  => time_stamp
-                              }
+              if stage_effort
+                time = stage_effort.elapsed_time ? Time.at(stage_effort.elapsed_time).utc.strftime('%M:%S') : 'DNF'
+                strava_url = stage_effort.strava_activity_url ? stage_effort.strava_activity_url : 'DNF'
+                avg_watts = stage_effort.segment_avg_watts ? "#{stage_effort.segment_avg_watts.to_f.round(1)}w" : 'DNF'
+                unless stage_effort.nil?
+                   temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
+                end 
+                watts_per_k = temp ? "#{temp.to_f.round(1)}" : 'DNF'
+                time_stamp = stage_effort.created_at.to_formatted_s(:db)
+                cyclist_result << { 
+                                  'race'        => race_name,
+                                  'stage'       => stage.stage_no, 
+                                  'time'        => time, 
+                                  'strava_url'  => strava_url, 
+                                  'avg_watts'   => avg_watts, 
+                                  'watts_per_k' => watts_per_k, 
+                                  'time_stamp'  => time_stamp
+                                }
+              end
             end
           end          
-          cyclist_result.reverse!          
+          cyclist_result.sort_by{|a| a['time_stamp']}.reverse!          
       else
         race.stages.each do |stage|
           stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
           race_name = "#{race.name} - #{stage.name}"
-          time = stage_effort ? Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') : 'DNF'
-          strava_url = stage_effort ? stage_effort.strava_activity_url : 'DNF'
-          avg_watts = stage_effort ? "#{stage_effort.segment_avg_watts.to_f.round(2)}w" : 'DNF'
-          unless stage_effort.nil?
-            temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
-          end          
-          watts_per_k = temp ? "#{temp.to_f.round(2)}w/kg" : 'DNF'
-          time_stamp = stage_effort ? stage_effort.created_at.to_formatted_s(:db) : 'DNF'
-          # puts "#{race_name}-#{time}-#{strava_url}-#{avg_watts}-#{watts_per_k}-#{time_stamp}"
-          cyclist_result << { 'race'=> race_name, 'stage'=> stage.stage_no, 'time'=> time, 'strava_url'=> strava_url, 'avg_watts'=> avg_watts, 'watts_per_k' => watts_per_k, 'time_stamp'  => time_stamp }
+          if stage_effort
+            time = stage_effort.elapsed_time ? Time.at(stage_effort.elapsed_time).utc.strftime('%M:%S') : 'DNF'
+            strava_url = stage_effort.strava_activity_url ? stage_effort.strava_activity_url : 'DNF'
+            avg_watts = stage_effort.segment_avg_watts ? "#{stage_effort.segment_avg_watts.to_f.round(1)}w" : 'DNF'
+            unless stage_effort.nil?
+              temp = stage_effort.segment_avg_watts.to_f / cyclist.weight.to_f unless cyclist.weight.to_f == 0
+            end          
+            watts_per_k = temp ? "#{temp.to_f.round(1)}" : 'DNF'
+            time_stamp = stage_effort.created_at.to_formatted_s(:db)
+            # puts "#{race_name}-#{time}-#{strava_url}-#{avg_watts}-#{watts_per_k}-#{time_stamp}"
+            cyclist_result << { 'race'=> race_name, 'stage'=> stage.stage_no, 'time'=> time, 'strava_url'=> strava_url, 'avg_watts'=> avg_watts, 'watts_per_k' => watts_per_k, 'time_stamp'  => time_stamp }
+          end
         end
       end
     
