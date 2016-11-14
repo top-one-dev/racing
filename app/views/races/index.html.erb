@@ -4,7 +4,11 @@
 <span>Races</span>
 <%= link_to 'New Race', new_race_path, class: 'btn btn-default btn-new' %>
 </h3>
-
+<%
+@races.sort! do |a, b|
+  [a['created_date']] <=> [b['created_date']]
+end
+%>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -16,7 +20,6 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @races.each do |race| %>
       <tr>
