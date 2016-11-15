@@ -31,8 +31,8 @@
 <%= link_to 'Refresh', request.original_url, class: 'btn btn-default' %>
 <br>
 <div class="row">
-  <div class="col-md-4"><h3>Overall Leaderboard</h3></div>
-  <div class="col-md-8">
+  <div class="col-md-3"><h3>Overall Leaderboard</h3></div>
+  <div class="col-md-9">
     <h3>
       <button type="button" class="btn btn-default export-btn" data-toggle="modal" data-target="#myModal">
         Export
@@ -60,8 +60,8 @@
 <script type="text/javascript">
   $('.export-btn').click(function(){
     var table_data = $('div.tab-pane.active table').html();
-    var custom_style = "<style>\n .hftable {width:100%;\n border-collapse: collapse;}\n th, td {text-align: left;\n border: 1px solid gray;\n padding: 5px;}\n </style>\n";
-    table_data = custom_style + "<table class='hftable'>\n" + table_data + "\n</table>"
+    var custom_style = "<style>\n .hftable \n{\nwidth:100%;\n border-collapse: collapse;\n}\n th, td \n{\ntext-align: left;\n border: 1px solid gray;\n padding: 5px;\n}\n</style>\n";
+    table_data = custom_style + "<table class='hftable'>" + table_data + "</table>"
     $('.export-textarea').text(table_data);
   });
 </script>
