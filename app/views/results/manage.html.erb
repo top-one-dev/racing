@@ -61,7 +61,7 @@
   $('.export-btn').click(function(){
     var table_data = $('div.tab-pane.active table').html();
     var custom_style = "<style>\n .hftable { width:100%; border-collapse: collapse;}\n  th, td { text-align: left; border: 1px solid gray; padding: 5px; }\n</style>\n";
-    table_data = custom_style + "<table class='hftable'>" + table_data + "</table>"
+    table_data = custom_style + "<table class='hftable'>" + table_data + "</table>";
     $('.export-textarea').text(table_data);
   });
 </script>
