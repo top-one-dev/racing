@@ -50,7 +50,7 @@
         <h4 class="modal-title">Leaderboard Export</h4>
       </div>
       <div class="modal-body">
-        <textarea class="export-textarea" rows="80" cols="78">
+        <textarea class="export-textarea" rows="50" cols="78">
           
         </textarea>
       </div>      
@@ -60,8 +60,8 @@
 <script type="text/javascript">
   $('.export-btn').click(function(){
     var table_data = $('div.tab-pane.active table').html();
-    var custom_style = <%= raw(" <style><br> .hftable {width:100%;<br> border-collapse: collapse;}<br> th, td {text-align: left;<br> border: 1px solid gray;<br> padding: 5px;}<br> </style><br>") %>;
-    table_data = custom_style + <%= raw("<table class='hftable'><br>") %> + table_data + <%= raw("<br></table>") %>;
+    var custom_style = "<style>\n .hftable {width:100%;\n border-collapse: collapse;}\n th, td {text-align: left;\n border: 1px solid gray;\n padding: 5px;}\n </style>\n";
+    table_data = custom_style + "<table class='hftable'>\n" + table_data + "\n</table>"
     $('.export-textarea').text(table_data);
   });
 </script>
