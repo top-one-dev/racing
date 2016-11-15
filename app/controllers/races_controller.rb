@@ -4,8 +4,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    # @races = Race.order(created_at: :desc)
-    @races = Race.all.order(created_at: :asc)
+    @races = Race.order('created_at DESC').all   
   end
 
   # GET /races/1
