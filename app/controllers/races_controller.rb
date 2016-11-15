@@ -4,7 +4,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    @races = Race.all   
+    @races = Race.all.order('created_at DESC').reverse_order!   
   end
 
   # GET /races/1

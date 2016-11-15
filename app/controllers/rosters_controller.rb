@@ -4,7 +4,7 @@ class RostersController < ApplicationController
   # GET /rosters
   # GET /rosters.json
   def index
-    @rosters = @race.rosters      
+    @rosters = @race.rosters     
   end
 
   # POST /rosters
