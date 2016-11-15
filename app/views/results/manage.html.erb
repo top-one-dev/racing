@@ -33,9 +33,11 @@
 <div class="row">
   <div class="col-md-4"><h3>Overall Leaderboard</h3></div>
   <div class="col-md-8">
-    <button type="button" class="btn export-btn" data-toggle="modal" data-target="#myModal">
-      Launch demo modal
-    </button>
+    <h3>
+      <button type="button" class="btn btn-default export-btn" data-toggle="modal" data-target="#myModal">
+        Export
+      </button>
+    </h3>
   </div>
 </div>
 <div class="modal fade" id="myModal">
@@ -48,7 +50,7 @@
         <h4 class="modal-title">Leaderboard Export</h4>
       </div>
       <div class="modal-body">
-        <textarea class="export-textarea">
+        <textarea class="export-textarea" rows="20" cols="20">
           
         </textarea>
       </div>      
@@ -58,8 +60,8 @@
 <script type="text/javascript">
   $('.export-btn').click(function(){
     var table_data = $('div.tab-pane.active table').html();
-    var custom_style = " <style> .hftable {width:100%; border-collapse: collapse;} th, td {text-align: left; border: 1px solid gray; padding: 5px;} </style>";
-    table_data = custom_style + "<table class='hftable'>" + table_data + "</table>"
+    var custom_style = " <style><br> .hftable {width:100%;<br> border-collapse: collapse;}<br> th, td {text-align: left;<br> border: 1px solid gray;<br> padding: 5px;}<br> </style><br>";
+    table_data = custom_style + "<table class='hftable'><br>" + table_data + "<br></table>"
     $('.export-textarea').text(table_data);
   });
 </script>
