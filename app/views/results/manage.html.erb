@@ -30,8 +30,39 @@
 </table>
 <%= link_to 'Refresh', request.original_url, class: 'btn btn-default' %>
 <br>
-<h3>Overall Leaderboard</h3>
-
+<div class="row">
+  <div class="col-md-4"><h3>Overall Leaderboard</h3></div>
+  <div class="col-md-8">
+    <button type="button" class="btn export-btn" data-toggle="modal" data-target="#myModal">
+      Launch demo modal
+    </button>
+  </div>
+</div>
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Leaderboard Export</h4>
+      </div>
+      <div class="modal-body">
+        <textarea class="export-textarea">
+          
+        </textarea>
+      </div>      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+  $('.export-btn').click(function(){
+    var table_data = $('div.tab-pane.active table').html();
+    var custom_style = " <style> .hftable {width:100%; border-collapse: collapse;} th, td {text-align: left; border: 1px solid gray; padding: 5px;} </style>";
+    table_data = custom_style + "<table class='hftable'>" + table_data + "</table>"
+    $('.export-textarea').text(table_data);
+  });
+</script>
 <ul class="nav nav-tabs">
   <% @sorted_cyclists_race_stage.each_with_index do |item, index| %>
     <li class = "<% if index == 0 %>active<% end %>"><a data-toggle="tab" href="#stage<%= index %>" >Stage <%= index + 1 %></a></li>
