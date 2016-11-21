@@ -38,7 +38,7 @@
   </thead>
 
   <tbody>
-  <% all_cyclists = Cyclist.all.order!('name ASC') %>
+  <% all_cyclists = Cyclist.all.order('name DESC').reverse_order! %>
     <% all_cyclists.each do |cyclist| %>    
       <% unless cyclist.races.include?(@race) %>
         <tr>
