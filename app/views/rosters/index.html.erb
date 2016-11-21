@@ -38,8 +38,7 @@
   </thead>
 
   <tbody>
-  <% all_cyclists = Cyclist.order('name') %>
-    <% all_cyclists.each do |cyclist| %>    
+   <% Cyclist.order(:name).each do |cyclist| %>    
       <% unless cyclist.races.include?(@race) %>
         <tr>
           <td><%= cyclist.name %></td>        
