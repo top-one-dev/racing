@@ -4,7 +4,7 @@ class RostersController < ApplicationController
   # GET /rosters
   # GET /rosters.json
   def index
-    @rosters = @race.rosters.order('"rosters"."cyclists"."name" ASC')   
+    @rosters = @race.rosters.order('cyclist_id.name ASC')   
   end
 
   # POST /rosters
