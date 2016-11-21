@@ -4,7 +4,7 @@ class RostersController < ApplicationController
   # GET /rosters
   # GET /rosters.json
   def index
-    @rosters = @race.rosters.order('cyclist.name ASC')   
+    @rosters = @race.rosters.joins(:cyclist).order('cyclists.name ASC')   
   end
 
   # POST /rosters
