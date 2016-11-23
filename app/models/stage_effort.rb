@@ -19,14 +19,20 @@ class StageEffort < ActiveRecord::Base
         begin          
         	auth_param = 'Bearer ' + self.cyclist.access_token
           #auth_param = 'Bearer ' + '8b4cf48c943d70868b1224d23268e19ed8e80c2d'
-          result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param
-          puts auth_param
+          result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param          
           result_json = JSON.parse(result)
         rescue
         	#self.elapsed_time = nil        
           #self.segment_avg_watts_per_kg = nil
           #self.segment_avg_watts = nil
-          print "Connecting strava.com failed."
+          # print "Connecting strava.com failed."
+          begin
+            auth_param = 'Bearer ' + session[:access_token]
+            result = RestClient.get "https://www.strava.com/api/v3/activities/#{activity_id}?include_all_efforts=true", :Authorization => auth_param
+            result_json = JSON.parse(result)          
+          rescue 
+            print "Connecting strava.com failed"
+          end
         else
           #self.elapsed_time = 0
           elapsed_time_sum = 0
