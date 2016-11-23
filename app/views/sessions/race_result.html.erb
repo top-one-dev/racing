@@ -65,11 +65,10 @@
 						</td>
 						<td><%= result['avg_watts'] %></td>
 						<td><%= result['watts_per_k'] %></td>
-						<td><%= result['time_stamp'] %> </td>
-						<% if result['strava_url'] != 'DNF' and result['time'] == 'DNF' %>
+						<td><%= result['time_stamp'] %> </td>													
+						<!-- <% if result['strava_url'] != 'DNF' and result['time'] == 'DNF' %>
 							<td><%= link_to 'Check Result', deauth_path, class:'btn btn-danger' %></td>
-						<% end %>							
-						</td>
+						<% end %> -->
 					</tr>
 				<% end %>
 			</tbody>
