@@ -49,7 +49,7 @@ class SessionsController < ApplicationController
 		end
 		# @cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
 		if session[:cyclist_id] == 270
-			session[:cyclist_id] = 4
+			session[:cyclist_id] = 222
 			session[:cyclist_name] = 'Tom Jean'
 		end 
 		unless session[:access_token].nil?
