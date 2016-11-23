@@ -48,10 +48,10 @@ class SessionsController < ApplicationController
 			end
 		end
 		# @cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
-		# if session[:cyclist_id] == 270
-		# 	session[:cyclist_id] = 4
-		# 	session[:cyclist_name] = 'Tom Jean'
-		# end 
+		if session[:cyclist_id] == 270
+			session[:cyclist_id] = 4
+			session[:cyclist_name] = 'Tom Jean'
+		end 
 		unless session[:access_token].nil?
 			if session[:cyclist_id].nil? or session[:cyclist_name] == ''
 				session[:access_token] = nil
@@ -59,7 +59,7 @@ class SessionsController < ApplicationController
 				@cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
 				@available_races = available_races()
 				@available_races.each do |race| 
-					if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) and return end 
+					if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end 
 				end
 				@cyclist_result = cyclist_result(@cyclist, nil)
 			end			
