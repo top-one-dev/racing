@@ -58,9 +58,15 @@ class SessionsController < ApplicationController
 			else				
 				@cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
 				@available_races = available_races()
-				@available_races.each do |race| 
-					if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end 
+				Race.all.each do |race|
+					today = Time.now.to_date
+					if race.stages.last.close_date >= today
+						if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end
+					end
 				end
+				# @available_races.each do |race| 
+				# 	if race.rosters.find_by(cyclist_id: session[:cyclist_id]) then redirect_to race_result_path(race_id: race) end 
+				# end
 				@cyclist_result = cyclist_result(@cyclist, nil)
 			end			
 		end
