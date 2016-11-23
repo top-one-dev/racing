@@ -19,7 +19,8 @@ Cyclists
   </thead>
 
   <tbody>
-    <% Cyclist.all.each do |cyclist| %>
+  <% all_cyclists = Cyclist.all.sort_by {|cyclist| cyclist.name} %>
+    <% all_cyclists.each do |cyclist| %>
       <tr>
         <td><%= link_to cyclist.name, cyclist.strava_athlete_url %></td>
         <td><%= cyclist.gender %></td>

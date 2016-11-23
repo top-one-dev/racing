@@ -4,7 +4,7 @@ class CyclistsController < ApplicationController
   # GET /cyclists
   # GET /cyclists.json
   def index
-    @cyclists = Cyclist.order('name ASC')
+    @cyclists = Cyclist.all    
 =begin
     @client = Strava::Api::V3::Client.new(:access_token => "f4d2110fa049267d3d49a4e2fea2d8b51329fb6c")
     result = @client.list_athlete_activities
