@@ -24,17 +24,19 @@ class SessionsController < ApplicationController
 			else
 				resp_json = JSON.parse(resp)
 				access_token = resp_json["access_token"]				
-				athlete = resp_json["athlete"]						
+				athlete = resp_json["athlete"]
+
+				gender = "Male"
+			    gender = "Male" if athlete["sex"] == "M"
+			    gender = "Female" if athlete["sex"] == "F"
+			    name = athlete["firstname"] + " " + athlete["lastname"]
+			    email = athlete["email"]					
 
 				@cyclist = Cyclist.find_by(strava_id: athlete['id'])			
-				if @cyclist.nil?
-					gender = "Male"
-				    gender = "Male" if athlete["sex"] == "M"
-				    gender = "Female" if athlete["sex"] == "F"
-				    name = athlete["firstname"] + " " + athlete["lastname"]
+				if @cyclist.nil?					
 					@cyclist = Cyclist.create access_token: access_token, name: name, strava_id: athlete['id'], gender: gender, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
 				else
-					@cyclist.update access_token: access_token
+					@cyclist.update access_token: access_token, name: name, strava_id: athlete['id'], gender: gender, email: email, strava_athlete_url: 'https://www.strava.com/athletes/' + athlete['id'].to_s
 				end
 
 				session[:cyclist_name] = athlete['firstname'] + ' ' + athlete['lastname']
@@ -51,7 +53,7 @@ class SessionsController < ApplicationController
 		# 	session[:cyclist_name] = 'Tom Jean'
 		# end 
 		unless session[:access_token].nil?
-			if session[:cyclist_id].nil?
+			if session[:cyclist_id].nil? or session[:cyclist_name] == ''
 				session[:access_token] = nil
 			else				
 				@cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
