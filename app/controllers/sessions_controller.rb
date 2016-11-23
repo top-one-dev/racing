@@ -79,6 +79,10 @@ class SessionsController < ApplicationController
 		else
 			@race = Race.find(params[:race_id])
 			@cyclist = Cyclist.find(session[:cyclist_id])
+			if session[:access_token] != @cyclist.access_token
+				@cyclist.update access_token: session[:access_token]
+				@cyclist = Cyclist.find(session[:cyclist_id])
+			end
 			@roster = @race.rosters.find_by(cyclist_id: session[:cyclist_id])
 			# @cyclist_result = cyclist_result(@cyclist, @race)
 			@cyclist_result = cyclist_result(@cyclist, nil)
