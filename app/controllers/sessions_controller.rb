@@ -47,10 +47,10 @@ class SessionsController < ApplicationController
 				session[:cyclist_id] = @cyclist.id
 			end
 		end
-		if session[:cyclist_id] == 270
-			session[:cyclist_id] = 309
-			session[:cyclist_name] = 'Beverly Spence'
-		end 
+		# if session[:cyclist_id] == 270
+		# 	session[:cyclist_id] = 309
+		# 	session[:cyclist_name] = 'Beverly Spence'
+		# end 
 		unless session[:access_token].nil?
 			if session[:cyclist_id].nil? or session[:cyclist_name] == ''
 				session[:access_token] = nil
