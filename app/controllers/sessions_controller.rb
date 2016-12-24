@@ -47,11 +47,10 @@ class SessionsController < ApplicationController
 				session[:cyclist_id] = @cyclist.id
 			end
 		end
-		# @cyclist = Cyclist.find(session[:cyclist_id]) if @cyclist.nil?
-		# if session[:cyclist_id] == 270
-		# 	session[:cyclist_id] = 222
-		# 	session[:cyclist_name] = 'Tom Jean'
-		# end 
+		if session[:cyclist_id] == 270
+			session[:cyclist_id] = 309
+			session[:cyclist_name] = 'Beverly Spence'
+		end 
 		unless session[:access_token].nil?
 			if session[:cyclist_id].nil? or session[:cyclist_name] == ''
 				session[:access_token] = nil
@@ -79,10 +78,10 @@ class SessionsController < ApplicationController
 		else
 			@race = Race.find(params[:race_id])
 			@cyclist = Cyclist.find(session[:cyclist_id])
-			if session[:access_token] != @cyclist.access_token
-				@cyclist.update access_token: session[:access_token]
-				@cyclist = Cyclist.find(session[:cyclist_id])
-			end
+			# if session[:access_token] != @cyclist.access_token
+			# 	@cyclist.update access_token: session[:access_token]
+			# 	@cyclist = Cyclist.find(session[:cyclist_id])
+			# end
 			@roster = @race.rosters.find_by(cyclist_id: session[:cyclist_id])
 			# @cyclist_result = cyclist_result(@cyclist, @race)
 			@cyclist_result = cyclist_result(@cyclist, nil)
