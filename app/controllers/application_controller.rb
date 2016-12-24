@@ -176,7 +176,7 @@ class ApplicationController < ActionController::Base
               stage_effort = cyclist.stage_efforts.find_by(stage_id: stage.id)
               race_name = "#{race.name} - #{stage.name}"
               if stage_effort
-                time = stage_effort.elapsed_time ? Time.at(stage_effort.elapsed_time).utc.strftime('%M:%S') : 'DNF'
+                time = stage_effort.elapsed_time ? Time.at(stage_effort.elapsed_time).utc.strftime('%H:%M:%S') : 'DNF'
                 strava_url = stage_effort.strava_activity_url ? stage_effort.strava_activity_url : 'DNF'
                 avg_watts = stage_effort.segment_avg_watts ? "#{stage_effort.segment_avg_watts.to_f.round(1)}w" : 'DNF'
                 unless stage_effort.nil?
